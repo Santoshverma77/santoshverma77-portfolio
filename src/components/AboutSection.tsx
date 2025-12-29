@@ -11,7 +11,7 @@ const AboutSection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -27,64 +27,143 @@ const AboutSection = () => {
       ref={sectionRef}
       className="relative py-32 overflow-hidden"
     >
-      {/* Background Accent */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1/3 h-[500px] bg-gradient-to-r from-primary/10 to-transparent blur-3xl" />
+      {/* Background glow */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px]" />
 
       <div className="container mx-auto px-6">
+        {/* Section Title */}
         <div
-          className={`max-w-4xl mx-auto transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+          className={`flex items-center gap-4 mb-16 transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          {/* Section Title */}
-          <div className="flex items-center gap-4 mb-12">
-            <div className="w-16 h-1 bg-gradient-fire" />
-            <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
-              ABOUT ME
-            </h2>
+          <div className="w-16 h-1 bg-gradient-fire" />
+          <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
+            ABOUT ME
+          </h2>
+        </div>
+
+        {/* Content */}
+        <div
+          className={`grid md:grid-cols-12 gap-12 transition-all duration-700 delay-200 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          {/* Profile Picture with Anime Frame */}
+          <div className="md:col-span-4 flex justify-center">
+            <div className="relative group">
+              {/* Outer rotating ring */}
+              <div className="absolute -inset-4 rounded-full border-2 border-dashed border-primary/30 animate-spin" 
+                   style={{ animationDuration: "20s" }} />
+              
+              {/* Chakra glow effect */}
+              <div className="absolute -inset-2 rounded-full bg-gradient-fire opacity-50 blur-xl animate-pulse" />
+              
+              {/* Anime-style frame */}
+              <div className="relative w-64 h-64 md:w-72 md:h-72">
+                {/* Corner accents */}
+                <div className="absolute -top-2 -left-2 w-8 h-8 border-t-4 border-l-4 border-primary rounded-tl-lg" />
+                <div className="absolute -top-2 -right-2 w-8 h-8 border-t-4 border-r-4 border-primary rounded-tr-lg" />
+                <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-4 border-l-4 border-primary rounded-bl-lg" />
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-4 border-r-4 border-primary rounded-br-lg" />
+                
+                {/* Main image container */}
+                <div className="w-full h-full rounded-2xl overflow-hidden border-2 border-primary/50 bg-gradient-to-br from-primary/20 to-secondary/20">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-naruto-dark to-background">
+                    {/* Placeholder with Konoha symbol */}
+                    <div className="text-center">
+                      <div className="text-8xl mb-2">🍃</div>
+                      <span className="font-naruto text-primary text-sm">SANTOSH</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Floating particles */}
+                <div className="absolute top-0 left-0 w-2 h-2 bg-primary rounded-full animate-float opacity-70" />
+                <div className="absolute bottom-4 right-0 w-1.5 h-1.5 bg-secondary rounded-full animate-float opacity-60" 
+                     style={{ animationDelay: "0.5s" }} />
+                <div className="absolute top-1/2 -right-4 w-2 h-2 bg-accent rounded-full animate-float opacity-50" 
+                     style={{ animationDelay: "1s" }} />
+              </div>
+            </div>
           </div>
 
-          {/* Content Card */}
-          <div className="card-scroll rounded-2xl p-8 md:p-12">
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-              {/* Avatar/Symbol */}
-              <div className="relative flex-shrink-0">
-                <div className="w-40 h-40 rounded-full bg-gradient-fire p-1 animate-pulse-glow">
-                  <div className="w-full h-full rounded-full bg-card flex items-center justify-center">
-                    <span className="font-naruto text-6xl text-gradient-fire">忍</span>
+          {/* About Text */}
+          <div className="md:col-span-8 space-y-6">
+            <h3 className="font-naruto text-3xl text-foreground">
+              Hello! I'm <span className="text-gradient-fire">Santosh Kumar Verma</span> 👋
+            </h3>
+            
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              I'm a <span className="text-primary font-semibold">BS in Data Science student at IIT Madras</span>, 
+              deeply passionate about Artificial Intelligence, Full-Stack Development, and Visual Storytelling 
+              through Photography & Videography.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed">
+              Currently enrolled in <span className="text-secondary">Apna College's Sigma 7.0</span>, I'm honing my skills 
+              in Java, Data Structures & Algorithms (DSA), and MERN Stack Development to build optimized and scalable solutions.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed">
+              As a <span className="text-primary">Core Team Member at GDG Ranchi</span> and an active contributor 
+              to various tech communities, I thrive on collaboration, knowledge sharing, and empowering fellow developers.
+            </p>
+
+            {/* What I Do */}
+            <div className="pt-4">
+              <h4 className="font-naruto text-xl text-primary mb-4">🎯 What I Do:</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  "Full-Stack Development (MERN Stack)",
+                  "Data Science & Artificial Intelligence",
+                  "Java & Data Structures & Algorithms",
+                  "Photography & Videography",
+                  "Tech Community Building",
+                ].map((skill) => (
+                  <div 
+                    key={skill}
+                    className="flex items-center gap-2 text-muted-foreground"
+                  >
+                    <span className="text-primary">▸</span>
+                    {skill}
                   </div>
-                </div>
-                <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-secondary rounded-full flex items-center justify-center border-4 border-card">
-                  <svg className="w-6 h-6 text-secondary-foreground" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" />
-                  </svg>
-                </div>
+                ))}
               </div>
+            </div>
 
-              {/* Text Content */}
-              <div className="flex-1 text-center md:text-left">
-                <p className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-6">
-                  Hello! I'm <span className="text-primary font-bold">Santosh Kumar Verma</span> — a BS in Data Science student at <span className="text-secondary font-bold">IIT Madras</span>, passionate about building intelligent & dynamic web applications and immersive UI experiences.
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  Like a true ninja of code, I believe in continuous learning and mastering new techniques. My journey combines the precision of data science with the creativity of full-stack development.
-                </p>
+            {/* Creative Side */}
+            <div className="pt-4 card-scroll rounded-xl p-6">
+              <h4 className="font-naruto text-xl text-secondary mb-3">📸 Creative Side:</h4>
+              <p className="text-muted-foreground">
+                Beyond coding, I'm passionate about capturing moments and telling stories through my lens. 
+                I combine my technical skills with creative vision to document tech events, create educational content, 
+                and bring ideas to life visually.
+              </p>
+            </div>
 
-                {/* Stats */}
-                <div className="flex flex-wrap gap-6 mt-8 justify-center md:justify-start">
-                  <div className="text-center">
-                    <div className="font-naruto text-4xl text-gradient-fire">6+</div>
-                    <div className="text-muted-foreground text-sm">Projects</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-naruto text-4xl text-gradient-chakra">10+</div>
-                    <div className="text-muted-foreground text-sm">Certifications</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-naruto text-4xl text-gradient-sunset">3+</div>
-                    <div className="text-muted-foreground text-sm">Experiences</div>
-                  </div>
-                </div>
+            {/* What Drives Me */}
+            <div className="pt-2">
+              <h4 className="font-naruto text-xl text-accent mb-3">💡 What Drives Me:</h4>
+              <p className="text-muted-foreground">
+                I'm passionate about solving real-world problems through technology and creating meaningful visual content. 
+                My goal is to continuously upskill in both technical and creative domains to make a lasting impact.
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 pt-6">
+              <div className="text-center">
+                <div className="font-naruto text-4xl text-gradient-fire">10+</div>
+                <div className="text-muted-foreground text-sm">Projects</div>
+              </div>
+              <div className="text-center">
+                <div className="font-naruto text-4xl text-gradient-fire">25+</div>
+                <div className="text-muted-foreground text-sm">Certifications</div>
+              </div>
+              <div className="text-center">
+                <div className="font-naruto text-4xl text-gradient-fire">5+</div>
+                <div className="text-muted-foreground text-sm">Communities</div>
               </div>
             </div>
           </div>
