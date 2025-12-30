@@ -2,25 +2,52 @@ import { useEffect, useRef, useState } from "react";
 
 const experiences = [
   {
-    title: "Google Student Ambassador",
-    company: "Google",
-    description: "Representing Google technologies and building student communities.",
+    title: "Google Cloud Arcade Facilitator",
+    company: "Google Cloud",
+    duration: "Aug 2024 - Present",
+    description: "As a Program Facilitator, I guide and support students in completing hands-on cloud labs and earning Google Cloud skill badges. I host sessions, answer queries, and foster a collaborative learning environment to help participants build cloud computing skills.",
+    icon: "☁️",
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    title: "Google Developer Groups Organizer",
+    company: "GDG Ranchi (On Campus - BIT Mesra)",
+    duration: "Aug 2024 - Present",
+    description: "As a GDG Organizer, I contribute to a vibrant developer community fostering learning, innovation, and collaboration. I plan and execute events like study groups, tech talks, and hands-on workshops while connecting developers with industry experts.",
     icon: "🌟",
     color: "from-blue-500 to-green-500",
   },
   {
-    title: "Head of Partnerships",
-    company: "GDG Ranchi",
-    description: "Leading partnership initiatives and community engagement.",
-    icon: "🤝",
+    title: "Java Full Stack Intern",
+    company: "Zidio Development",
+    duration: "Dec 2024 - Present",
+    description: "Developing full-stack applications using Java and modern frameworks. Building scalable solutions and working on real-world projects.",
+    icon: "💻",
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    title: "Photography & Videography Head",
+    company: "Cynaptics Club, BIT Mesra",
+    duration: "Sep 2024 - Present",
+    description: "Leading photography and videography initiatives for the AI/ML Club. Capturing events, creating visual content, and managing the creative team.",
+    icon: "📸",
     color: "from-orange-500 to-red-500",
   },
   {
-    title: "Java Full Stack Intern",
-    company: "Zidio Development",
-    description: "Developing full-stack applications using Java and modern frameworks.",
-    icon: "💻",
-    color: "from-purple-500 to-pink-500",
+    title: "Student Ambassador",
+    company: "IIT Madras BS Degree Programme",
+    duration: "Aug 2024 - Present",
+    description: "Representing IIT Madras BS Degree Programme and helping prospective students learn about the program. Organizing awareness sessions and community building.",
+    icon: "🎓",
+    color: "from-indigo-500 to-purple-500",
+  },
+  {
+    title: "Campus Ambassador",
+    company: "Unstop",
+    duration: "Oct 2024 - Present",
+    description: "Promoting opportunities and competitions on campus. Building awareness about career development resources and connecting students with industry.",
+    icon: "🚀",
+    color: "from-teal-500 to-green-500",
   },
 ];
 
@@ -101,6 +128,7 @@ const ExperienceSection = () => {
                     {exp.title}
                   </h3>
                   <p className="text-primary font-bold mt-1">{exp.company}</p>
+                  <p className="text-secondary text-sm mt-0.5">{exp.duration}</p>
                   <p className="text-muted-foreground mt-3">{exp.description}</p>
                 </div>
               </div>
