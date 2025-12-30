@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Instagram, Twitter } from "lucide-react";
+import profilePhoto from "@/assets/profile-photo.jpg";
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -69,13 +71,11 @@ const AboutSection = () => {
                 
                 {/* Main image container */}
                 <div className="w-full h-full rounded-2xl overflow-hidden border-2 border-primary/50 bg-gradient-to-br from-primary/20 to-secondary/20">
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-naruto-dark to-background">
-                    {/* Placeholder with Konoha symbol */}
-                    <div className="text-center">
-                      <div className="text-8xl mb-2">🍃</div>
-                      <span className="font-naruto text-primary text-sm">SANTOSH</span>
-                    </div>
-                  </div>
+                  <img 
+                    src={profilePhoto} 
+                    alt="Santosh Kumar Verma" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 
                 {/* Floating particles */}
@@ -101,7 +101,8 @@ const AboutSection = () => {
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
-              Currently enrolled in <span className="text-secondary">Apna College's Sigma 7.0</span>, I'm honing my skills 
+              Currently enrolled in <span className="text-secondary">Apna College's Sigma 7.0</span> and{" "}
+              <span className="text-secondary">Harkirat Singh's Cohort 4.0</span>, I'm honing my skills 
               in Java, Data Structures & Algorithms (DSA), and MERN Stack Development to build optimized and scalable solutions.
             </p>
 
@@ -165,6 +166,35 @@ const AboutSection = () => {
                 <div className="font-naruto text-4xl text-gradient-fire">5+</div>
                 <div className="text-muted-foreground text-sm">Communities</div>
               </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-4 pt-6">
+              <span className="text-muted-foreground text-sm">🤝 Let's Connect:</span>
+              <a 
+                href="https://www.instagram.com/santoshverma_77/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <Instagram className="w-5 h-5 text-white" />
+              </a>
+              <a 
+                href="https://twitter.com/santoshverma_77" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-foreground flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <Twitter className="w-5 h-5 text-background" />
+              </a>
+              <a 
+                href="https://snapchat.com/add/santoshverma_77" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <span className="text-xl">👻</span>
+              </a>
             </div>
           </div>
         </div>
