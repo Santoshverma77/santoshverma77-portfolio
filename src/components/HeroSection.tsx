@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 import narutoHeroBg from "@/assets/naruto-hero-bg.png";
 
 const HeroSection = () => {
@@ -120,6 +121,17 @@ const HeroSection = () => {
             >
               <a href="https://www.linkedin.com/in/santoshverma77" target="_blank" rel="noopener noreferrer">
                 LinkedIn
+              </a>
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="border-accent text-accent hover:bg-accent hover:text-background"
+            >
+              <a href="/resume.pdf" download="Santosh_Kumar_Verma_Resume.pdf">
+                <Download className="w-4 h-4 mr-2" />
+                Resume
               </a>
             </Button>
           </div>
