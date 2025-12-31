@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import RasenganLoader from "./RasenganLoader";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -42,12 +43,29 @@ const ContactSection = () => {
 
     setIsSubmitting(true);
 
-    // Simulate sending
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+      });
 
-    toast.success("Message sent successfully! I'll get back to you soon. 🍃");
-    setFormData({ name: "", email: "", message: "" });
-    setIsSubmitting(false);
+      if (error) {
+        console.error("Error sending message:", error);
+        toast.error("Failed to send message. Please try again.");
+        return;
+      }
+
+      toast.success("Message sent successfully! I'll get back to you soon. 🍃");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const socialLinks = [
