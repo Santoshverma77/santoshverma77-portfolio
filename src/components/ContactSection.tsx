@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -104,91 +105,132 @@ const ContactSection = () => {
       ref={sectionRef}
       className="relative py-32 overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
+      {/* Animated Background Elements */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-pulse-glow" />
+      <div className="absolute left-0 bottom-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px] animate-float" />
+      
+      {/* Floating particles */}
+      {isVisible && (
+        <>
+          <div className="absolute top-20 left-[10%] w-2 h-2 bg-primary/40 rounded-full animate-float" style={{ animationDelay: '0s' }} />
+          <div className="absolute top-40 right-[15%] w-3 h-3 bg-primary/30 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-40 left-[20%] w-2 h-2 bg-secondary/40 rounded-full animate-float" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-60 right-[25%] w-4 h-4 bg-primary/20 rounded-full animate-float" style={{ animationDelay: '0.5s' }} />
+        </>
+      )}
 
       <div className="container mx-auto px-6">
-        {/* Section Title */}
+        {/* Section Title with animation */}
         <div
           className={`flex items-center gap-4 mb-16 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="w-16 h-1 bg-gradient-fire" />
+          <div className={`w-16 h-1 bg-gradient-fire ${isVisible ? 'animate-shimmer' : ''}`} 
+               style={{ background: 'linear-gradient(90deg, hsl(25 100% 50%), hsl(0 70% 55%), hsl(25 100% 50%))' }} />
           <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
             CONTACT
           </h2>
+          <div className={`text-4xl ${isVisible ? 'animate-bounce-in' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
+            🍃
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
+          {/* Contact Form with enhanced animations */}
           <div
             className={`transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              isVisible ? "opacity-100 translate-y-0 animate-fade-in-up" : "opacity-0 translate-y-10"
             }`}
           >
-            <div className="card-scroll rounded-2xl p-8">
-              <h3 className="font-naruto text-2xl text-foreground mb-6">
-                Send a Message 🍃
+            <div className="card-scroll rounded-2xl p-8 hover-lift group relative overflow-hidden">
+              {/* Animated border gradient */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                   style={{ 
+                     background: 'linear-gradient(135deg, hsl(25 100% 50% / 0.1), transparent, hsl(0 70% 55% / 0.1))',
+                   }} />
+              
+              <h3 className="font-naruto text-2xl text-foreground mb-6 flex items-center gap-2">
+                Send a Message 
+                <span className={`${isVisible ? 'animate-float' : ''}`}>🍃</span>
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
+                <div className={`transition-all duration-300 ${focusedField === 'name' ? 'scale-[1.02]' : ''}`}>
                   <Input
                     placeholder="Your Name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="bg-background/50 border-primary/20 focus:border-primary"
+                    onFocus={() => setFocusedField('name')}
+                    onBlur={() => setFocusedField(null)}
+                    className={`bg-background/50 border-primary/20 focus:border-primary transition-all duration-300 ${
+                      focusedField === 'name' ? 'shadow-[0_0_20px_hsl(25_100%_50%/0.3)]' : ''
+                    }`}
                     disabled={isSubmitting}
                   />
                 </div>
-                <div>
+                <div className={`transition-all duration-300 ${focusedField === 'email' ? 'scale-[1.02]' : ''}`}>
                   <Input
                     type="email"
                     placeholder="Your Email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="bg-background/50 border-primary/20 focus:border-primary"
+                    onFocus={() => setFocusedField('email')}
+                    onBlur={() => setFocusedField(null)}
+                    className={`bg-background/50 border-primary/20 focus:border-primary transition-all duration-300 ${
+                      focusedField === 'email' ? 'shadow-[0_0_20px_hsl(25_100%_50%/0.3)]' : ''
+                    }`}
                     disabled={isSubmitting}
                   />
                 </div>
-                <div>
+                <div className={`transition-all duration-300 ${focusedField === 'message' ? 'scale-[1.02]' : ''}`}>
                   <Textarea
                     placeholder="Your Message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="bg-background/50 border-primary/20 focus:border-primary min-h-[150px]"
+                    onFocus={() => setFocusedField('message')}
+                    onBlur={() => setFocusedField(null)}
+                    className={`bg-background/50 border-primary/20 focus:border-primary min-h-[150px] transition-all duration-300 ${
+                      focusedField === 'message' ? 'shadow-[0_0_20px_hsl(25_100%_50%/0.3)]' : ''
+                    }`}
                     disabled={isSubmitting}
                   />
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-fire hover:opacity-90 font-naruto text-lg"
+                  className="w-full bg-gradient-fire hover:opacity-90 font-naruto text-lg group/btn relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_hsl(25_100%_50%/0.5)]"
                   disabled={isSubmitting}
                 >
+                  {/* Animated shine effect */}
+                  <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                  
                   {isSubmitting ? (
                     <div className="flex items-center gap-3">
                       <RasenganLoader size="sm" />
                       <span>Sending...</span>
                     </div>
                   ) : (
-                    "Send Message"
+                    <span className="flex items-center gap-2">
+                      Send Message
+                      <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                    </span>
                   )}
                 </Button>
               </form>
             </div>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact Info with staggered animations */}
           <div
             className={`transition-all duration-700 delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
             <div className="space-y-8">
-              <div>
-                <h3 className="font-naruto text-2xl text-foreground mb-4">
-                  Let's Connect! 🤝
+              <div className={`${isVisible ? 'animate-fade-in-up stagger-1' : 'opacity-0'}`}>
+                <h3 className="font-naruto text-2xl text-foreground mb-4 flex items-center gap-2">
+                  Let's Connect! 
+                  <span className="animate-pulse">🤝</span>
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Whether it's collaborating on tech projects, discussing photography techniques, 
@@ -196,56 +238,67 @@ const ContactSection = () => {
                 </p>
               </div>
 
-              <div className="space-y-4">
-                <p className="text-muted-foreground">
+              <div className={`space-y-4 ${isVisible ? 'animate-fade-in-up stagger-2' : 'opacity-0'}`}>
+                <p className="text-muted-foreground group">
                   <span className="text-primary font-semibold">📧 Email:</span>{" "}
-                  <a href="mailto:santoshskv2005@gmail.com" className="hover:text-primary transition-colors">
+                  <a href="mailto:santoshskv2005@gmail.com" 
+                     className="hover:text-primary transition-all duration-300 hover:tracking-wide">
                     santoshskv2005@gmail.com
                   </a>
                 </p>
               </div>
 
-              {/* Social Links */}
-              <div className="flex gap-4">
-                {socialLinks.map((link) => (
+              {/* Social Links with hover animations */}
+              <div className={`flex gap-4 ${isVisible ? 'animate-fade-in-up stagger-3' : 'opacity-0'}`}>
+                {socialLinks.map((link, index) => (
                   <a
                     key={link.name}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative p-4 rounded-xl bg-card border border-primary/20 hover:border-primary transition-all duration-300 hover:scale-110"
+                    className="group relative p-4 rounded-xl bg-card border border-primary/20 hover:border-primary transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover-glow"
+                    style={{ animationDelay: `${0.4 + index * 0.1}s` }}
                   >
-                    <div className="text-muted-foreground group-hover:text-primary transition-colors">
+                    <div className="text-muted-foreground group-hover:text-primary transition-all duration-300 group-hover:rotate-12">
                       {link.icon}
                     </div>
                     {/* Glow effect */}
                     <div className="absolute inset-0 rounded-xl bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
+                    
+                    {/* Tooltip */}
+                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-card border border-primary/30 rounded text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
+                      {link.name}
+                    </span>
                   </a>
                 ))}
               </div>
 
-              {/* Decorative Quote */}
-              <div className="card-scroll rounded-xl p-6 mt-8">
+              {/* Decorative Quote with animation */}
+              <div className={`card-scroll rounded-xl p-6 mt-8 hover-lift ${isVisible ? 'animate-fade-in-up stagger-4' : 'opacity-0'}`}>
                 <p className="font-naruto text-lg text-primary italic">
                   "I'm not gonna run away, I never go back on my word! That's my nindo: my ninja way!"
                 </p>
-                <p className="text-muted-foreground text-sm mt-2">— Naruto Uzumaki</p>
+                <p className="text-muted-foreground text-sm mt-2 flex items-center gap-2">
+                  — Naruto Uzumaki 
+                  <span className="animate-pulse">🍥</span>
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Footer */}
+        {/* Footer with animation */}
         <div
           className={`mt-20 pt-8 border-t border-border/50 text-center transition-all duration-1000 delay-700 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
         >
           <p className="text-muted-foreground">
-            © 2024 <span className="text-primary">Santosh Kumar Verma</span>. Built with passion.
+            © 2024 <span className="text-primary hover:animate-pulse cursor-default">Santosh Kumar Verma</span>. Built with passion.
           </p>
-          <p className="text-sm text-muted-foreground mt-2">
-            "Believe it! 信じろ!" 🍥
+          <p className="text-sm text-muted-foreground mt-2 flex items-center justify-center gap-2">
+            "Believe it! 信じろ!" 
+            <span className="animate-spin-slow inline-block">🍥</span>
           </p>
         </div>
       </div>
