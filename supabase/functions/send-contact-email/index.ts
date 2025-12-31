@@ -47,13 +47,20 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Portfolio Contact <onboarding@resend.dev>",
         to: ["santoshskv2005@gmail.com"],
-        subject: `New Contact Form Message from ${name}`,
+        subject: `🍃 New Message from ${name}`,
         html: `
-          <h1>New Contact Form Submission</h1>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message.replace(/\n/g, '<br>')}</p>
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%); color: #fff; padding: 30px; border-radius: 15px;">
+            <h1 style="color: #f97316; border-bottom: 2px solid #f97316; padding-bottom: 10px;">🍥 New Contact Form Submission</h1>
+            <div style="background: rgba(249, 115, 22, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+              <p style="margin: 10px 0;"><strong style="color: #f97316;">👤 Name:</strong> ${name}</p>
+              <p style="margin: 10px 0;"><strong style="color: #f97316;">📧 Email:</strong> <a href="mailto:${email}" style="color: #60a5fa;">${email}</a></p>
+            </div>
+            <div style="background: rgba(96, 165, 250, 0.1); padding: 20px; border-radius: 10px;">
+              <p style="color: #f97316; margin-bottom: 10px;"><strong>💬 Message:</strong></p>
+              <p style="line-height: 1.6;">${message.replace(/\n/g, '<br>')}</p>
+            </div>
+            <p style="color: #888; font-size: 12px; margin-top: 20px; text-align: center;">"Believe it! 信じろ!" 🍥</p>
+          </div>
         `,
       }),
     });
@@ -61,44 +68,13 @@ const handler = async (req: Request): Promise<Response> => {
     if (!notificationRes.ok) {
       const error = await notificationRes.text();
       console.error("Failed to send notification email:", error);
-      throw new Error(`Failed to send notification email: ${error}`);
+      throw new Error(`Failed to send email: ${error}`);
     }
 
-    console.log("Notification email sent successfully");
-
-    // Send confirmation email to the sender
-    const confirmationRes = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: "Santosh Kumar Verma <onboarding@resend.dev>",
-        to: [email],
-        subject: "Thank you for reaching out! 🍃",
-        html: `
-          <h1>Thank you for contacting me, ${name}!</h1>
-          <p>I have received your message and will get back to you as soon as possible.</p>
-          <p>Here's a copy of your message:</p>
-          <blockquote style="border-left: 3px solid #f97316; padding-left: 15px; color: #666;">
-            ${message.replace(/\n/g, '<br>')}
-          </blockquote>
-          <p>Best regards,<br>Santosh Kumar Verma</p>
-          <p style="color: #888; font-style: italic;">"Believe it! 信じろ!" 🍥</p>
-        `,
-      }),
-    });
-
-    if (!confirmationRes.ok) {
-      console.error("Failed to send confirmation email:", await confirmationRes.text());
-      // Don't throw here, notification was sent successfully
-    } else {
-      console.log("Confirmation email sent successfully");
-    }
+    console.log("Notification email sent successfully to santoshskv2005@gmail.com");
 
     return new Response(
-      JSON.stringify({ success: true, message: "Emails sent successfully" }),
+      JSON.stringify({ success: true, message: "Message sent successfully!" }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
