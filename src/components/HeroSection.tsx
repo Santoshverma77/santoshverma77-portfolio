@@ -129,7 +129,7 @@ const HeroSection = () => {
               asChild
               className="border-accent text-accent hover:bg-accent hover:text-background"
             >
-              <a href="/resume.pdf" download="Santosh_Kumar_Verma_Resume.pdf">
+              <a href="https://drive.google.com/file/d/1zpv8uhFt0Bu4uwMS-JYuJAgqwWXsc8ub/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                 <Download className="w-4 h-4 mr-2" />
                 Resume
               </a>
