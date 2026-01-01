@@ -1,32 +1,51 @@
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import LeafParticles from "@/components/LeafParticles";
 import NarutoEffects from "@/components/NarutoEffects";
+import LoadingScreen from "@/components/LoadingScreen";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    // Hide loader after animation completes
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <main className="relative min-h-screen bg-background overflow-hidden">
-      {/* Background gradient */}
-      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-naruto-darker pointer-events-none" />
-      
-      {/* Animated particles */}
-      <LeafParticles />
-      
-      {/* Naruto themed effects */}
-      <NarutoEffects />
-      
-      {/* Navigation */}
-      <Navbar />
-      
-      {/* Main content */}
-      <div className="relative z-10">
-        {children}
-      </div>
-    </main>
+    <>
+      {showLoader && <LoadingScreen />}
+      <main className="relative min-h-screen bg-background overflow-hidden flex flex-col">
+        {/* Background gradient */}
+        <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-naruto-darker pointer-events-none" />
+        
+        {/* Animated particles */}
+        <LeafParticles />
+        
+        {/* Naruto themed effects */}
+        <NarutoEffects />
+        
+        {/* Navigation */}
+        <Navbar />
+        
+        {/* Main content */}
+        <div className="relative z-10 flex-1">
+          {children}
+        </div>
+
+        {/* Footer */}
+        <Footer />
+      </main>
+    </>
   );
 };
 

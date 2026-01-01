@@ -1,10 +1,13 @@
 import CertificationsSection from "@/components/CertificationsSection";
+import PageTransition from "@/components/PageTransition";
 
 const CertificationsPage = () => {
   return (
-    <div className="pt-20">
-      <CertificationsSection />
-    </div>
+    <PageTransition>
+      <div className="pt-20">
+        <CertificationsSection showAllByDefault />
+      </div>
+    </PageTransition>
   );
 };
 

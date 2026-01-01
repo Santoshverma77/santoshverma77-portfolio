@@ -1,10 +1,13 @@
 import AboutSection from "@/components/AboutSection";
+import PageTransition from "@/components/PageTransition";
 
 const AboutPage = () => {
   return (
-    <div className="pt-20">
-      <AboutSection />
-    </div>
+    <PageTransition>
+      <div className="pt-20">
+        <AboutSection />
+      </div>
+    </PageTransition>
   );
 };
 
