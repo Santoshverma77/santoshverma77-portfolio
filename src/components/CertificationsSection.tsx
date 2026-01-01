@@ -185,12 +185,21 @@ const certifications = [
   },
 ];
 
-const CertificationsSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [showAll, setShowAll] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
+interface CertificationsSectionProps {
+  showAllByDefault?: boolean;
+}
+
+const CertificationsSection = ({ showAllByDefault = false }: CertificationsSectionProps) => {
+  const [isVisible, setIsVisible] = useState(showAllByDefault);
+  const [showAll, setShowAll] = useState(showAllByDefault);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (showAllByDefault) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -205,110 +214,111 @@ const CertificationsSection = () => {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [showAllByDefault]);
 
   const displayedCerts = showAll ? certifications : certifications.slice(0, 8);
 
   return (
     <section
       id="certifications"
-      ref={sectionRef}
       className="relative py-32 overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute right-0 bottom-0 w-1/2 h-[600px] bg-gradient-to-tl from-accent/10 to-transparent blur-3xl" />
-      <div className="absolute left-0 top-1/4 w-1/3 h-[400px] bg-gradient-to-r from-primary/10 to-transparent blur-3xl" />
+      <div ref={sectionRef}>
+        {/* Background */}
+        <div className="absolute right-0 bottom-0 w-1/2 h-[600px] bg-gradient-to-tl from-accent/10 to-transparent blur-3xl" />
+        <div className="absolute left-0 top-1/4 w-1/3 h-[400px] bg-gradient-to-r from-primary/10 to-transparent blur-3xl" />
 
-      <div className="container mx-auto px-6">
-        {/* Section Title */}
-        <div
-          className={`flex items-center justify-between mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-1 bg-gradient-fire" />
-            <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
-              CERTIFICATIONS
-            </h2>
-          </div>
-          <div className="hidden md:block">
-            <span className="text-4xl font-naruto text-gradient-sunset">{certifications.length}+</span>
-            <span className="text-muted-foreground ml-2">Achievements</span>
-          </div>
-        </div>
-
-        {/* Certifications Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {displayedCerts.map((cert, index) => (
-            <div
-              key={cert.name + index}
-              className={`group card-scroll rounded-xl p-5 transition-all duration-500 hover:scale-[1.03] hover:glow-fire cursor-default ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${(index % 8) * 50}ms` }}
-            >
-              {/* Icon & Date Header */}
-              <div className="flex items-center justify-between mb-3">
-                <div className="text-3xl group-hover:scale-125 transition-transform duration-300">
-                  {cert.icon}
-                </div>
-                <span className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded-full">
-                  {cert.date}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3 className="font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2 min-h-[48px]">
-                {cert.name}
-              </h3>
-
-              {/* Issuer */}
-              <p className="text-sm text-muted-foreground mb-3">
-                {cert.issuer}
-              </p>
-
-              {/* Skills Tags */}
-              <div className="flex flex-wrap gap-1.5">
-                {cert.skills.slice(0, 2).map((skill) => (
-                  <span
-                    key={skill}
-                    className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full border border-primary/20"
-                  >
-                    {skill}
-                  </span>
-                ))}
-                {cert.skills.length > 2 && (
-                  <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground rounded-full">
-                    +{cert.skills.length - 2}
-                  </span>
-                )}
-              </div>
+        <div className="container mx-auto px-6">
+          {/* Section Title */}
+          <div
+            className={`flex items-center justify-between mb-16 transition-all duration-700 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-1 bg-gradient-fire" />
+              <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
+                CERTIFICATIONS
+              </h2>
             </div>
-          ))}
-        </div>
-
-        {/* Show More/Less Button */}
-        {certifications.length > 8 && (
-          <div className="flex justify-center mt-12">
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="group flex items-center gap-2 px-8 py-3 border-2 border-primary/50 rounded-full text-foreground hover:bg-primary/10 hover:border-primary transition-all duration-300"
-            >
-              <span className="font-medium">
-                {showAll ? "Show Less" : `Show All ${certifications.length} Certifications`}
-              </span>
-              <svg
-                className={`w-5 h-5 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+            <div className="hidden md:block">
+              <span className="text-4xl font-naruto text-gradient-sunset">{certifications.length}+</span>
+              <span className="text-muted-foreground ml-2">Achievements</span>
+            </div>
           </div>
-        )}
+
+          {/* Certifications Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {displayedCerts.map((cert, index) => (
+              <div
+                key={cert.name + index}
+                className={`group card-scroll rounded-xl p-5 transition-all duration-500 hover:scale-[1.03] hover:glow-fire cursor-default ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${(index % 8) * 50}ms` }}
+              >
+                {/* Icon & Date Header */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-3xl group-hover:scale-125 transition-transform duration-300">
+                    {cert.icon}
+                  </div>
+                  <span className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded-full">
+                    {cert.date}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2 min-h-[48px]">
+                  {cert.name}
+                </h3>
+
+                {/* Issuer */}
+                <p className="text-sm text-muted-foreground mb-3">
+                  {cert.issuer}
+                </p>
+
+                {/* Skills Tags */}
+                <div className="flex flex-wrap gap-1.5">
+                  {cert.skills.slice(0, 2).map((skill) => (
+                    <span
+                      key={skill}
+                      className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full border border-primary/20"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                  {cert.skills.length > 2 && (
+                    <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground rounded-full">
+                      +{cert.skills.length - 2}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Show More/Less Button */}
+          {certifications.length > 8 && (
+            <div className="flex justify-center mt-12">
+              <button
+                onClick={() => setShowAll(!showAll)}
+                className="group flex items-center gap-2 px-8 py-3 border-2 border-primary/50 rounded-full text-foreground hover:bg-primary/10 hover:border-primary transition-all duration-300"
+              >
+                <span className="font-medium">
+                  {showAll ? "Show Less" : `Show All ${certifications.length} Certifications`}
+                </span>
+                <svg
+                  className={`w-5 h-5 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

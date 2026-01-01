@@ -1,10 +1,13 @@
 import ContactSection from "@/components/ContactSection";
+import PageTransition from "@/components/PageTransition";
 
 const ContactPage = () => {
   return (
-    <div className="pt-20">
-      <ContactSection />
-    </div>
+    <PageTransition>
+      <div className="pt-20">
+        <ContactSection />
+      </div>
+    </PageTransition>
   );
 };
 

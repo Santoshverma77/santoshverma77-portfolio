@@ -1,10 +1,13 @@
 import SkillsSection from "@/components/SkillsSection";
+import PageTransition from "@/components/PageTransition";
 
 const SkillsPage = () => {
   return (
-    <div className="pt-20">
-      <SkillsSection />
-    </div>
+    <PageTransition>
+      <div className="pt-20">
+        <SkillsSection />
+      </div>
+    </PageTransition>
   );
 };
 
