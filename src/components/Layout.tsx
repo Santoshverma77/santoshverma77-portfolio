@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import LeafParticles from "@/components/LeafParticles";
 import NarutoEffects from "@/components/NarutoEffects";
 import LoadingScreen from "@/components/LoadingScreen";
+import ThemeToggle from "@/components/ThemeToggle";
+import ScrollToTop from "@/components/ScrollToTop";
 
 interface LayoutProps {
   children: ReactNode;
@@ -33,6 +35,12 @@ const Layout = ({ children }: LayoutProps) => {
         
         {/* Naruto themed effects */}
         <NarutoEffects />
+        
+        {/* Theme Toggle */}
+        <ThemeToggle />
+        
+        {/* Scroll to Top */}
+        <ScrollToTop />
         
         {/* Navigation */}
         <Navbar />
