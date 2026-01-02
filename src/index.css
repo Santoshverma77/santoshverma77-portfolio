@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chakra+Petch:wght@400;500;600;700&display=swap');
 
 @layer base {
-  :root {
+  :root, .dark {
     --background: 220 20% 4%;
     --foreground: 40 100% 97%;
 
@@ -62,6 +62,59 @@
     --sidebar-accent: 220 15% 12%;
     --sidebar-accent-foreground: 40 100% 97%;
     --sidebar-border: 25 50% 20%;
+    --sidebar-ring: 25 100% 50%;
+  }
+
+  .light {
+    --background: 40 30% 96%;
+    --foreground: 220 20% 10%;
+
+    --card: 40 30% 98%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 40 30% 98%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 25 100% 50%;
+    --primary-foreground: 40 100% 98%;
+
+    --secondary: 200 80% 50%;
+    --secondary-foreground: 40 100% 98%;
+
+    --muted: 40 20% 90%;
+    --muted-foreground: 220 15% 40%;
+
+    --accent: 0 70% 55%;
+    --accent-foreground: 40 100% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 25 40% 80%;
+    --input: 40 20% 92%;
+    --ring: 25 100% 50%;
+
+    /* Custom Naruto theme tokens - lighter variants */
+    --naruto-orange: 25 100% 50%;
+    --naruto-orange-glow: 25 100% 55%;
+    --naruto-red: 0 70% 50%;
+    --naruto-blue: 200 80% 50%;
+    --naruto-gold: 40 100% 50%;
+    --naruto-dark: 40 20% 94%;
+    --naruto-darker: 40 15% 90%;
+
+    /* Shadows */
+    --shadow-glow: 0 0 30px hsl(25 100% 50% / 0.2);
+    --shadow-fire: 0 0 60px hsl(25 100% 50% / 0.3), 0 0 100px hsl(0 70% 55% / 0.1);
+    --shadow-chakra: 0 0 40px hsl(200 80% 60% / 0.2);
+
+    --sidebar-background: 40 30% 96%;
+    --sidebar-foreground: 220 20% 10%;
+    --sidebar-primary: 25 100% 50%;
+    --sidebar-primary-foreground: 40 100% 98%;
+    --sidebar-accent: 40 20% 92%;
+    --sidebar-accent-foreground: 220 20% 10%;
+    --sidebar-border: 25 40% 80%;
     --sidebar-ring: 25 100% 50%;
   }
 }
