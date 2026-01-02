@@ -6,7 +6,7 @@ import NarutoEffects from "@/components/NarutoEffects";
 import LoadingScreen from "@/components/LoadingScreen";
 import ThemeToggle from "@/components/ThemeToggle";
 import ScrollToTop from "@/components/ScrollToTop";
-
+import SoundToggle from "@/components/SoundToggle";
 interface LayoutProps {
   children: ReactNode;
 }
@@ -38,6 +38,9 @@ const Layout = ({ children }: LayoutProps) => {
         
         {/* Theme Toggle */}
         <ThemeToggle />
+        
+        {/* Sound Toggle */}
+        <SoundToggle />
         
         {/* Scroll to Top */}
         <ScrollToTop />

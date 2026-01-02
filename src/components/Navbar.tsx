@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSounds } from "@/contexts/SoundContext";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -15,6 +16,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { playClick, playHover, playNavigate } = useSounds();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +25,14 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = () => {
+    playNavigate();
+  };
+
+  const handleHover = () => {
+    playHover();
+  };
 
   return (
     <nav
@@ -35,7 +45,12 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link 
+            to="/" 
+            className="flex items-center gap-3 group"
+            onClick={handleNavClick}
+            onMouseEnter={handleHover}
+          >
             <div className="relative">
               <div className="w-10 h-10 rounded-full bg-gradient-fire flex items-center justify-center animate-pulse-glow">
                 <span className="font-naruto text-xl text-primary-foreground">S</span>
@@ -53,6 +68,8 @@ const Navbar = () => {
               <Link
                 key={link.href}
                 to={link.href}
+                onClick={handleNavClick}
+                onMouseEnter={handleHover}
                 className={`relative text-muted-foreground hover:text-primary transition-colors duration-300 group font-medium ${
                   location.pathname === link.href ? "text-primary" : ""
                 }`}
@@ -69,7 +86,10 @@ const Navbar = () => {
 
           {/* Mobile Toggle */}
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={() => {
+              setMobileOpen(!mobileOpen);
+              playClick();
+            }}
             className="lg:hidden flex flex-col gap-1.5 p-2"
             aria-label="Toggle menu"
           >
@@ -102,7 +122,11 @@ const Navbar = () => {
               <Link
                 key={link.href}
                 to={link.href}
-                onClick={() => setMobileOpen(false)}
+                onClick={() => {
+                  setMobileOpen(false);
+                  handleNavClick();
+                }}
+                onMouseEnter={handleHover}
                 className={`text-muted-foreground hover:text-primary transition-colors duration-300 font-medium pl-2 border-l-2 hover:border-primary ${
                   location.pathname === link.href ? "text-primary border-primary" : "border-transparent"
                 }`}
