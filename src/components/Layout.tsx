@@ -7,6 +7,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import ThemeToggle from "@/components/ThemeToggle";
 import ScrollToTop from "@/components/ScrollToTop";
 import SoundToggle from "@/components/SoundToggle";
+import BackgroundMusicPlayer from "@/components/BackgroundMusicPlayer";
 interface LayoutProps {
   children: ReactNode;
 }
@@ -41,6 +42,9 @@ const Layout = ({ children }: LayoutProps) => {
         
         {/* Sound Toggle */}
         <SoundToggle />
+        
+        {/* Background Music Player */}
+        <BackgroundMusicPlayer />
         
         {/* Scroll to Top */}
         <ScrollToTop />
