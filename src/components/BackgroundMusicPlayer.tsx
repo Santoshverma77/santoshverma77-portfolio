@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Music, Pause, Play, SkipForward, Volume2 } from "lucide-react";
 import { useSounds } from "@/contexts/SoundContext";
 
-// Naruto-style ambient music using Web Audio API synthesis
-const useAmbientMusic = () => {
+// Stranger Things style synth music using Web Audio API
+const useSynthMusic = () => {
   const audioContextRef = useRef<AudioContext | null>(null);
   const nodesRef = useRef<{
     masterGain: GainNode | null;
@@ -16,9 +16,9 @@ const useAmbientMusic = () => {
   const animationFrameRef = useRef<number | null>(null);
 
   const tracks = [
-    { name: "Konoha Sunset", mood: "peaceful" },
-    { name: "Training Grounds", mood: "motivational" },
-    { name: "Hidden Leaf Village", mood: "mysterious" },
+    { name: "Hawkins Lab", mood: "dark" },
+    { name: "The Upside Down", mood: "eerie" },
+    { name: "Eleven's Theme", mood: "emotional" },
   ];
 
   const stopMusic = useCallback(() => {
@@ -46,7 +46,7 @@ const useAmbientMusic = () => {
     }
 
     const masterGain = ctx.createGain();
-    masterGain.gain.setValueAtTime(0.15, ctx.currentTime);
+    masterGain.gain.setValueAtTime(0.12, ctx.currentTime);
     masterGain.connect(ctx.destination);
     nodesRef.current.masterGain = masterGain;
 
@@ -54,29 +54,29 @@ const useAmbientMusic = () => {
     const oscillators: OscillatorNode[] = [];
     const gains: GainNode[] = [];
 
-    // Different chord progressions based on mood
+    // 80s synth chord progressions
     const progressions: Record<string, number[][]> = {
-      peaceful: [
-        [261.63, 329.63, 392], // C major
-        [293.66, 369.99, 440], // D major
-        [246.94, 311.13, 369.99], // B minor
-        [220, 277.18, 329.63], // A minor
+      dark: [
+        [130.81, 164.81, 196], // C minor
+        [123.47, 155.56, 185], // B minor
+        [116.54, 146.83, 174.61], // Bb minor
+        [110, 138.59, 164.81], // A minor
       ],
-      motivational: [
-        [329.63, 415.3, 493.88], // E major
-        [349.23, 440, 523.25], // F major
-        [392, 493.88, 587.33], // G major
-        [329.63, 415.3, 493.88], // E major
+      eerie: [
+        [98, 123.47, 146.83], // G minor
+        [92.5, 116.54, 138.59], // F# minor
+        [87.31, 110, 130.81], // F minor
+        [82.41, 103.83, 123.47], // E minor
       ],
-      mysterious: [
-        [220, 261.63, 329.63], // A minor
-        [196, 246.94, 293.66], // G minor
-        [174.61, 220, 261.63], // F minor
+      emotional: [
+        [146.83, 185, 220], // D minor
         [164.81, 207.65, 246.94], // E minor
+        [174.61, 220, 261.63], // F major
+        [196, 246.94, 293.66], // G major
       ],
     };
 
-    const chords = progressions[mood] || progressions.peaceful;
+    const chords = progressions[mood] || progressions.dark;
     let chordIndex = 0;
     let noteTime = ctx.currentTime;
 
@@ -90,15 +90,18 @@ const useAmbientMusic = () => {
         filter.connect(gain);
         gain.connect(masterGain);
 
-        osc.type = i === 0 ? "sine" : "triangle";
+        // 80s synth sound
+        osc.type = i === 0 ? "sawtooth" : "square";
         osc.frequency.setValueAtTime(freq, startTime);
 
         filter.type = "lowpass";
-        filter.frequency.setValueAtTime(1000, startTime);
+        filter.frequency.setValueAtTime(400, startTime);
+        filter.frequency.exponentialRampToValueAtTime(800, startTime + 1);
+        filter.frequency.exponentialRampToValueAtTime(300, startTime + 4);
 
         gain.gain.setValueAtTime(0, startTime);
-        gain.gain.linearRampToValueAtTime(0.08 / (i + 1), startTime + 0.5);
-        gain.gain.linearRampToValueAtTime(0.04 / (i + 1), startTime + 3.5);
+        gain.gain.linearRampToValueAtTime(0.06 / (i + 1), startTime + 0.3);
+        gain.gain.linearRampToValueAtTime(0.03 / (i + 1), startTime + 3.5);
         gain.gain.linearRampToValueAtTime(0, startTime + 4);
 
         osc.start(startTime);
@@ -107,6 +110,31 @@ const useAmbientMusic = () => {
         oscillators.push(osc);
         gains.push(gain);
       });
+
+      // Add bass drone
+      const bass = ctx.createOscillator();
+      const bassGain = ctx.createGain();
+      const bassFilter = ctx.createBiquadFilter();
+
+      bass.connect(bassFilter);
+      bassFilter.connect(bassGain);
+      bassGain.connect(masterGain);
+
+      bass.type = "sine";
+      bass.frequency.setValueAtTime(frequencies[0] / 2, startTime);
+
+      bassFilter.type = "lowpass";
+      bassFilter.frequency.setValueAtTime(200, startTime);
+
+      bassGain.gain.setValueAtTime(0, startTime);
+      bassGain.gain.linearRampToValueAtTime(0.08, startTime + 0.5);
+      bassGain.gain.linearRampToValueAtTime(0.04, startTime + 3.5);
+      bassGain.gain.linearRampToValueAtTime(0, startTime + 4);
+
+      bass.start(startTime);
+      bass.stop(startTime + 4.5);
+
+      oscillators.push(bass);
     };
 
     // Create initial chords
@@ -118,7 +146,6 @@ const useAmbientMusic = () => {
     nodesRef.current.oscillators = oscillators;
     nodesRef.current.gains = gains;
 
-    // Schedule more chords as music plays
     const scheduleMore = () => {
       if (!isPlaying) return;
       const currentTime = ctx.currentTime;
@@ -148,7 +175,7 @@ const useAmbientMusic = () => {
 
   const setVolume = useCallback((volume: number) => {
     if (nodesRef.current.masterGain) {
-      nodesRef.current.masterGain.gain.setValueAtTime(volume * 0.15, audioContextRef.current?.currentTime || 0);
+      nodesRef.current.masterGain.gain.setValueAtTime(volume * 0.12, audioContextRef.current?.currentTime || 0);
     }
   }, []);
 
@@ -173,7 +200,7 @@ const useAmbientMusic = () => {
 };
 
 const BackgroundMusicPlayer = () => {
-  const { isPlaying, currentTrack, tracks, playMusic, stopMusic, nextTrack, setVolume } = useAmbientMusic();
+  const { isPlaying, currentTrack, tracks, playMusic, stopMusic, nextTrack, setVolume } = useSynthMusic();
   const [isExpanded, setIsExpanded] = useState(false);
   const [volume, setVolumeState] = useState(0.7);
   const { playClick } = useSounds();
@@ -215,7 +242,7 @@ const BackgroundMusicPlayer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Music className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground">
+                <span className="text-sm font-stranger text-foreground">
                   {tracks[currentTrack].name}
                 </span>
               </div>
@@ -263,7 +290,10 @@ const BackgroundMusicPlayer = () => {
                   {[...Array(12)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className="w-1.5 bg-gradient-to-t from-primary to-naruto-orange rounded-full"
+                      className="w-1.5 rounded-full"
+                      style={{
+                        background: `linear-gradient(to top, hsl(0, 85%, 50%), hsl(280, 60%, 45%))`,
+                      }}
                       animate={{
                         height: [8, 20 + Math.random() * 12, 8],
                       }}
@@ -293,7 +323,7 @@ const BackgroundMusicPlayer = () => {
         }`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        title="Background Music"
+        title="80s Synth Music"
       >
         <Music className={`w-5 h-5 ${isPlaying ? "text-primary" : "text-muted-foreground"}`} />
         {isPlaying && (

@@ -1,13 +1,25 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
-import narutoHeroBg from "@/assets/naruto-hero-bg.png";
+import { motion } from "framer-motion";
+import strangerHeroBg from "@/assets/stranger-things-hero-bg.png";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [glitchText, setGlitchText] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Occasional glitch effect
+    const glitchInterval = setInterval(() => {
+      if (Math.random() > 0.8) {
+        setGlitchText(true);
+        setTimeout(() => setGlitchText(false), 150);
+      }
+    }, 3000);
+
+    return () => clearInterval(glitchInterval);
   }, []);
 
   return (
@@ -18,61 +30,98 @@ const HeroSection = () => {
       {/* Hero Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src={narutoHeroBg}
-          alt="Naruto themed background"
-          className="w-full h-full object-cover opacity-40"
+          src={strangerHeroBg}
+          alt="Dark forest background"
+          className="w-full h-full object-cover opacity-50"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/30" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
       </div>
 
-      {/* Animated Glow Effects */}
+      {/* Animated Portal Glow Effects */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[150px] animate-pulse-glow" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[100px] animate-float-delayed" />
+        <motion.div 
+          className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[150px]"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.15, 0.3, 0.15],
+          }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-st-purple/20 rounded-full blur-[100px]"
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.1, 0.25, 0.1],
+          }}
+          transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+        />
       </div>
 
-      {/* Konoha Symbol */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] z-0">
+      {/* Upside Down Tentacle/Vine Effect */}
+      <div className="absolute inset-0 flex items-end justify-center opacity-[0.03] z-0">
         <svg
-          className="w-[1000px] h-[1000px] animate-spin-slow"
-          viewBox="0 0 100 100"
+          className="w-full h-[60%]"
+          viewBox="0 0 100 60"
           fill="none"
+          preserveAspectRatio="none"
         >
-          <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="0.3" className="text-primary" />
-          <path
-            d="M50 10 L55 35 L80 25 L65 45 L90 50 L65 55 L80 75 L55 65 L50 90 L45 65 L20 75 L35 55 L10 50 L35 45 L20 25 L45 35 Z"
-            fill="currentColor"
-            className="text-primary"
-          />
+          {[...Array(10)].map((_, i) => (
+            <motion.path
+              key={i}
+              d={`M${10 + i * 9} 60 Q${15 + i * 9} ${30 + Math.random() * 20} ${10 + i * 9} 0`}
+              stroke="currentColor"
+              strokeWidth="0.3"
+              className="text-primary"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: [0, 1, 0] }}
+              transition={{ duration: 8 + i, repeat: Infinity, delay: i * 0.5 }}
+            />
+          ))}
         </svg>
       </div>
 
       <div className="container mx-auto px-6 relative z-10 pt-20">
-        <div
-          className={`text-center transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+          transition={{ duration: 0.8 }}
         >
-          {/* Japanese Text */}
-          <p className="font-naruto text-xl md:text-2xl text-primary/80 mb-4 tracking-[0.3em]">
-            忍者の道
-          </p>
+          {/* Tagline */}
+          <motion.p 
+            className="font-stranger text-xl md:text-2xl text-primary/80 mb-4 tracking-[0.3em]"
+            animate={glitchText ? { x: [-2, 2, -2, 0] } : {}}
+          >
+            THE UPSIDE DOWN
+          </motion.p>
 
-          {/* Title */}
-          <h1 className="font-naruto text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-4 leading-none">
-            <span className="text-gradient-fire drop-shadow-2xl block">SANTOSH</span>
-            <span className="text-gradient-sunset block mt-2">KUMAR VERMA</span>
-          </h1>
+          {/* Title - Stranger Things Style */}
+          <motion.h1 
+            className={`font-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-4 leading-none ${glitchText ? 'animate-glitch' : ''}`}
+          >
+            <span className="text-gradient-portal drop-shadow-2xl block">SANTOSH</span>
+            <span className="text-gradient-upside block mt-2">KUMAR VERMA</span>
+          </motion.h1>
 
-          {/* Decorative Line */}
+          {/* Decorative Line - Light bulb style */}
           <div className="flex items-center justify-center gap-4 my-8">
             <div className="w-20 md:w-32 h-0.5 bg-gradient-to-r from-transparent to-primary" />
-            <div className="w-3 h-3 rotate-45 bg-primary animate-pulse" />
+            <motion.div 
+              className="w-4 h-4 rounded-full bg-st-yellow"
+              animate={{
+                boxShadow: [
+                  "0 0 10px hsl(45, 100%, 60%)",
+                  "0 0 20px hsl(45, 100%, 60%)",
+                  "0 0 10px hsl(45, 100%, 60%)",
+                ],
+              }}
+              transition={{ duration: 1, repeat: Infinity }}
+            />
             <div className="w-20 md:w-32 h-0.5 bg-gradient-to-l from-transparent to-primary" />
           </div>
 
-          {/* Subtitle */}
+          {/* Subtitle Tags */}
           <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
             <span className="px-5 py-2 bg-primary/20 border border-primary/40 rounded-full text-primary font-bold text-sm md:text-base backdrop-blur-sm">
               🎓 BS Data Science @ IIT Madras
@@ -90,10 +139,9 @@ const HeroSection = () => {
           {/* Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button
-              variant="fire"
               size="lg"
               asChild
-              className="group"
+              className="group bg-primary hover:bg-primary/90 text-primary-foreground glow-red"
             >
               <a href="#projects">
                 <span>View Work</span>
@@ -111,13 +159,14 @@ const HeroSection = () => {
               variant="outline"
               size="lg"
               asChild
+              className="border-primary/50 hover:bg-primary/10"
             >
               <a href="#contact">Contact</a>
             </Button>
             <Button
-              variant="chakra"
               size="lg"
               asChild
+              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground"
             >
               <a href="https://www.linkedin.com/in/santoshverma77" target="_blank" rel="noopener noreferrer">
                 LinkedIn
@@ -127,7 +176,7 @@ const HeroSection = () => {
               variant="outline"
               size="lg"
               asChild
-              className="border-accent text-accent hover:bg-accent hover:text-background"
+              className="border-accent text-accent hover:bg-accent hover:text-accent-foreground"
             >
               <a href="https://drive.google.com/file/d/1zpv8uhFt0Bu4uwMS-JYuJAgqwWXsc8ub/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                 <Download className="w-4 h-4 mr-2" />
@@ -137,17 +186,28 @@ const HeroSection = () => {
           </div>
 
           {/* Quote */}
-          <div className="mt-16 text-muted-foreground/60 italic">
-            <p className="text-sm md:text-base">"I never go back on my word. That is my ninja way!"</p>
-          </div>
-        </div>
+          <motion.div 
+            className="mt-16 text-muted-foreground/60 italic font-stranger"
+            animate={glitchText ? { opacity: [1, 0.3, 1] } : {}}
+          >
+            <p className="text-sm md:text-base">"Friends don't lie."</p>
+          </motion.div>
+        </motion.div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+        <motion.div 
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
           <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center pt-2">
-            <div className="w-1 h-3 bg-primary rounded-full animate-pulse" />
+            <motion.div 
+              className="w-1 h-3 bg-primary rounded-full"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
