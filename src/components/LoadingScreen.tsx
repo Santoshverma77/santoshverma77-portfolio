@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const LoadingScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [flickering, setFlickering] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,7 +18,18 @@ const LoadingScreen = () => {
       });
     }, 30);
 
-    return () => clearInterval(interval);
+    // Random flickering
+    const flickerInterval = setInterval(() => {
+      if (Math.random() > 0.7) {
+        setFlickering(true);
+        setTimeout(() => setFlickering(false), 150);
+      }
+    }, 500);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(flickerInterval);
+    };
   }, []);
 
   return (
@@ -27,19 +39,53 @@ const LoadingScreen = () => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
+          className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background ${flickering ? 'opacity-80' : ''}`}
         >
-          {/* Rasengan Animation */}
-          <div className="relative w-40 h-40 mb-8">
-            {/* Outer glow rings */}
+          {/* Portal Animation */}
+          <div className="relative w-48 h-48 mb-8">
+            {/* Outer glow */}
             <motion.div
               className="absolute inset-0 rounded-full"
               style={{
-                background: "radial-gradient(circle, hsl(200 80% 60% / 0.3) 0%, transparent 70%)",
+                background: "radial-gradient(circle, hsl(0 85% 50% / 0.4) 0%, transparent 70%)",
               }}
               animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.5, 0.8, 0.5],
+                scale: [1, 1.3, 1],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            
+            {/* Portal rings */}
+            <motion.div
+              className="absolute inset-4 rounded-full border-4 border-primary/60"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.div
+              className="absolute inset-8 rounded-full border-2 border-st-purple/60"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.div
+              className="absolute inset-12 rounded-full border-2 border-primary/40"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            />
+
+            {/* Portal center */}
+            <motion.div
+              className="absolute inset-16 rounded-full"
+              style={{
+                background: "radial-gradient(circle, hsl(0 0% 0%) 0%, hsl(280 60% 20%) 50%, hsl(0 85% 30%) 100%)",
+                boxShadow: "0 0 40px hsl(0 85% 50%), inset 0 0 20px hsl(280 60% 30%)",
+              }}
+              animate={{
+                scale: [1, 1.1, 1],
               }}
               transition={{
                 duration: 1.5,
@@ -47,89 +93,26 @@ const LoadingScreen = () => {
                 ease: "easeInOut",
               }}
             />
-            
-            {/* Second ring */}
-            <motion.div
-              className="absolute inset-4 rounded-full border-2 border-secondary/50"
-              animate={{
-                rotate: 360,
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-                scale: { duration: 1, repeat: Infinity, ease: "easeInOut" },
-              }}
-            />
 
-            {/* Third ring */}
-            <motion.div
-              className="absolute inset-8 rounded-full border-2 border-secondary/70"
-              animate={{
-                rotate: -360,
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            />
-
-            {/* Core Rasengan */}
-            <motion.div
-              className="absolute inset-12 rounded-full"
-              style={{
-                background: "radial-gradient(circle, hsl(200 90% 70%) 0%, hsl(200 80% 50%) 50%, hsl(200 70% 40%) 100%)",
-                boxShadow: "0 0 40px hsl(200 80% 60%), 0 0 80px hsl(200 80% 60% / 0.5), inset 0 0 20px hsl(200 90% 80%)",
-              }}
-              animate={{
-                rotate: 360,
-                scale: [1, 1.15, 1],
-              }}
-              transition={{
-                rotate: { duration: 0.5, repeat: Infinity, ease: "linear" },
-                scale: { duration: 0.8, repeat: Infinity, ease: "easeInOut" },
-              }}
-            />
-
-            {/* Inner spiral lines */}
-            <motion.div
-              className="absolute inset-14 rounded-full overflow-hidden"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 0.3, repeat: Infinity, ease: "linear" }}
-            >
-              {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute w-full h-0.5 bg-white/60"
-                  style={{
-                    top: "50%",
-                    transform: `rotate(${i * 30}deg)`,
-                    transformOrigin: "center",
-                  }}
-                />
-              ))}
-            </motion.div>
-
-            {/* Chakra particles */}
-            {[...Array(8)].map((_, i) => (
+            {/* Vine tentacles */}
+            {[...Array(6)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-2 h-2 rounded-full bg-secondary"
+                className="absolute w-1 bg-gradient-to-t from-primary/50 to-transparent"
                 style={{
+                  left: `${50 + Math.sin(i * 60 * Math.PI / 180) * 35}%`,
                   top: "50%",
-                  left: "50%",
+                  height: "40px",
+                  transformOrigin: "bottom",
                 }}
                 animate={{
-                  x: [0, Math.cos((i * 45 * Math.PI) / 180) * 60],
-                  y: [0, Math.sin((i * 45 * Math.PI) / 180) * 60],
-                  opacity: [1, 0],
-                  scale: [1, 0.5],
+                  scaleY: [0, 1, 0],
+                  rotate: [0, 10, -10, 0],
                 }}
                 transition={{
-                  duration: 1,
+                  duration: 2 + i * 0.3,
                   repeat: Infinity,
-                  delay: i * 0.1,
-                  ease: "easeOut",
+                  delay: i * 0.2,
                 }}
               />
             ))}
@@ -137,22 +120,24 @@ const LoadingScreen = () => {
 
           {/* Loading text */}
           <motion.div
-            className="font-naruto text-3xl text-gradient-chakra mb-4"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+            className="font-title text-4xl text-gradient-portal mb-4 tracking-[0.2em]"
+            animate={{ 
+              opacity: flickering ? [1, 0.3, 1] : [0.7, 1, 0.7],
+            }}
+            transition={{ duration: flickering ? 0.15 : 1.5, repeat: Infinity }}
           >
-            螺旋丸
+            STRANGER THINGS
           </motion.div>
           
-          <div className="text-muted-foreground mb-4">Gathering Chakra...</div>
+          <div className="text-muted-foreground mb-4 font-stranger">Opening the gate...</div>
 
           {/* Progress bar */}
           <div className="w-64 h-2 bg-muted rounded-full overflow-hidden">
             <motion.div
               className="h-full rounded-full"
               style={{
-                background: "linear-gradient(90deg, hsl(200 80% 50%), hsl(200 90% 70%))",
-                boxShadow: "0 0 10px hsl(200 80% 60%)",
+                background: "linear-gradient(90deg, hsl(0 85% 50%), hsl(280 60% 45%))",
+                boxShadow: "0 0 10px hsl(0 85% 50%)",
               }}
               initial={{ width: "0%" }}
               animate={{ width: `${progress}%` }}
@@ -161,6 +146,32 @@ const LoadingScreen = () => {
           </div>
           
           <div className="mt-2 text-sm text-muted-foreground">{progress}%</div>
+
+          {/* Christmas lights decoration */}
+          <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 pt-8">
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-3 h-4 rounded-b-full"
+                style={{
+                  backgroundColor: ["hsl(0, 85%, 50%)", "hsl(45, 100%, 60%)", "hsl(120, 70%, 45%)", "hsl(200, 70%, 50%)"][i % 4],
+                }}
+                animate={{
+                  opacity: flickering ? [1, 0.2, 1] : [0.8, 1, 0.8],
+                  boxShadow: [
+                    `0 0 10px ${["hsl(0, 85%, 50%)", "hsl(45, 100%, 60%)", "hsl(120, 70%, 45%)", "hsl(200, 70%, 50%)"][i % 4]}`,
+                    `0 0 20px ${["hsl(0, 85%, 50%)", "hsl(45, 100%, 60%)", "hsl(120, 70%, 45%)", "hsl(200, 70%, 50%)"][i % 4]}`,
+                    `0 0 10px ${["hsl(0, 85%, 50%)", "hsl(45, 100%, 60%)", "hsl(120, 70%, 45%)", "hsl(200, 70%, 50%)"][i % 4]}`,
+                  ],
+                }}
+                transition={{
+                  duration: 0.5 + Math.random() * 0.5,
+                  repeat: Infinity,
+                  delay: i * 0.1,
+                }}
+              />
+            ))}
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

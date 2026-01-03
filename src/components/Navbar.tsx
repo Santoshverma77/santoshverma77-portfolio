@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSounds } from "@/contexts/SoundContext";
+import { motion } from "framer-motion";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -41,6 +42,7 @@ const Navbar = () => {
           ? "bg-background/90 backdrop-blur-xl border-b border-primary/20 shadow-lg"
           : "bg-transparent"
       }`}
+      style={{ marginTop: scrolled ? "0" : "2.5rem" }}
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
@@ -52,12 +54,21 @@ const Navbar = () => {
             onMouseEnter={handleHover}
           >
             <div className="relative">
-              <div className="w-10 h-10 rounded-full bg-gradient-fire flex items-center justify-center animate-pulse-glow">
-                <span className="font-naruto text-xl text-primary-foreground">S</span>
-              </div>
-              <div className="absolute inset-0 rounded-full bg-gradient-fire blur-md opacity-50 group-hover:opacity-80 transition-opacity" />
+              <motion.div 
+                className="w-10 h-10 rounded-full bg-primary flex items-center justify-center"
+                animate={{
+                  boxShadow: [
+                    "0 0 10px hsl(0, 85%, 50%)",
+                    "0 0 20px hsl(0, 85%, 50%)",
+                    "0 0 10px hsl(0, 85%, 50%)",
+                  ],
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <span className="font-title text-xl text-primary-foreground">S</span>
+              </motion.div>
             </div>
-            <span className="font-naruto text-2xl tracking-wider text-gradient-fire hidden sm:block">
+            <span className="font-title text-2xl tracking-wider text-gradient-portal hidden sm:block">
               SANTOSH VERMA
             </span>
           </Link>
@@ -76,7 +87,7 @@ const Navbar = () => {
               >
                 {link.label}
                 <span 
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-fire transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-portal transition-all duration-300 ${
                     location.pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
                   }`} 
                 />
