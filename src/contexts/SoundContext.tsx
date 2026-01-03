@@ -3,12 +3,12 @@ import { createContext, useContext, ReactNode, useState, useCallback, useRef } f
 interface SoundContextType {
   playClick: () => void;
   playHover: () => void;
-  playPortal: () => void;
+  playJutsu: () => void;
   playNavigate: () => void;
-  playFlicker: () => void;
-  playDemogorgon: () => void;
-  playSynth: () => void;
-  playStatic: () => void;
+  playRasengan: () => void;
+  playKunai: () => void;
+  playChakra: () => void;
+  playChidori: () => void;
   enabled: boolean;
   setEnabled: (enabled: boolean) => void;
 }
@@ -41,7 +41,6 @@ export const SoundProvider = ({ children }: SoundProviderProps) => {
     return audioContextRef.current;
   }, []);
 
-  // 80s Synth Click Sound
   const playClick = useCallback(() => {
     if (!enabled) return;
     try {
@@ -52,11 +51,10 @@ export const SoundProvider = ({ children }: SoundProviderProps) => {
       oscillator.connect(gainNode);
       gainNode.connect(ctx.destination);
       
-      oscillator.type = "square";
-      oscillator.frequency.setValueAtTime(200, ctx.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.1);
+      oscillator.frequency.setValueAtTime(800, ctx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.1);
       
-      gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
+      gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
       
       oscillator.start(ctx.currentTime);
@@ -66,7 +64,6 @@ export const SoundProvider = ({ children }: SoundProviderProps) => {
     }
   }, [enabled, getAudioContext]);
 
-  // Subtle hover blip
   const playHover = useCallback(() => {
     if (!enabled) return;
     try {
@@ -78,10 +75,10 @@ export const SoundProvider = ({ children }: SoundProviderProps) => {
       gainNode.connect(ctx.destination);
       
       oscillator.type = "sine";
-      oscillator.frequency.setValueAtTime(800, ctx.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.05);
+      oscillator.frequency.setValueAtTime(600, ctx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.05);
       
-      gainNode.gain.setValueAtTime(0.02, ctx.currentTime);
+      gainNode.gain.setValueAtTime(0.03, ctx.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
       
       oscillator.start(ctx.currentTime);
@@ -91,64 +88,52 @@ export const SoundProvider = ({ children }: SoundProviderProps) => {
     }
   }, [enabled, getAudioContext]);
 
-  // Portal opening sound - deep, ominous
-  const playPortal = useCallback(() => {
+  const playJutsu = useCallback(() => {
     if (!enabled) return;
     try {
       const ctx = getAudioContext();
       
-      // Deep bass rumble
-      for (let i = 0; i < 6; i++) {
+      // Create chakra charging sound
+      const frequencies = [200, 300, 400, 500, 600, 800];
+      
+      frequencies.forEach((freq, i) => {
         const oscillator = ctx.createOscillator();
         const gainNode = ctx.createGain();
-        const filter = ctx.createBiquadFilter();
         
-        oscillator.connect(filter);
-        filter.connect(gainNode);
+        oscillator.connect(gainNode);
         gainNode.connect(ctx.destination);
         
-        filter.type = "lowpass";
-        filter.frequency.setValueAtTime(200, ctx.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.8);
+        oscillator.type = i % 2 === 0 ? "sine" : "triangle";
+        oscillator.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.08);
+        oscillator.frequency.exponentialRampToValueAtTime(freq * 1.5, ctx.currentTime + i * 0.08 + 0.1);
         
-        oscillator.type = i % 2 === 0 ? "sine" : "sawtooth";
-        const baseFreq = 40 + i * 20;
-        oscillator.frequency.setValueAtTime(baseFreq, ctx.currentTime + i * 0.1);
-        oscillator.frequency.exponentialRampToValueAtTime(baseFreq * 0.5, ctx.currentTime + i * 0.1 + 0.8);
+        gainNode.gain.setValueAtTime(0.06, ctx.currentTime + i * 0.08);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.08 + 0.1);
         
-        gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
-        gainNode.gain.linearRampToValueAtTime(0.05, ctx.currentTime + i * 0.1 + 0.2);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.8);
-        
-        oscillator.start(ctx.currentTime + i * 0.1);
-        oscillator.stop(ctx.currentTime + i * 0.1 + 0.8);
-      }
+        oscillator.start(ctx.currentTime + i * 0.08);
+        oscillator.stop(ctx.currentTime + i * 0.08 + 0.1);
+      });
     } catch (e) {
       // Silently fail
     }
   }, [enabled, getAudioContext]);
 
-  // Navigation whoosh
   const playNavigate = useCallback(() => {
     if (!enabled) return;
     try {
       const ctx = getAudioContext();
       const oscillator = ctx.createOscillator();
       const gainNode = ctx.createGain();
-      const filter = ctx.createBiquadFilter();
       
-      oscillator.connect(filter);
-      filter.connect(gainNode);
+      oscillator.connect(gainNode);
       gainNode.connect(ctx.destination);
       
-      filter.type = "highpass";
-      filter.frequency.setValueAtTime(200, ctx.currentTime);
+      oscillator.type = "triangle";
+      oscillator.frequency.setValueAtTime(300, ctx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.1);
+      oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.2);
       
-      oscillator.type = "sawtooth";
-      oscillator.frequency.setValueAtTime(150, ctx.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.2);
-      
-      gainNode.gain.setValueAtTime(0.04, ctx.currentTime);
+      gainNode.gain.setValueAtTime(0.06, ctx.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
       
       oscillator.start(ctx.currentTime);
@@ -158,148 +143,211 @@ export const SoundProvider = ({ children }: SoundProviderProps) => {
     }
   }, [enabled, getAudioContext]);
 
-  // Light flickering sound
-  const playFlicker = useCallback(() => {
+  // Rasengan charging sound - spiraling energy buildup
+  const playRasengan = useCallback(() => {
     if (!enabled) return;
     try {
       const ctx = getAudioContext();
       
-      for (let i = 0; i < 4; i++) {
+      // Create multiple layers for the spiraling energy effect
+      for (let i = 0; i < 8; i++) {
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+        
+        oscillator.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(800 + i * 200, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(2000 + i * 300, ctx.currentTime + 0.8);
+        
+        oscillator.type = i % 2 === 0 ? "sine" : "sawtooth";
+        const baseFreq = 150 + i * 50;
+        oscillator.frequency.setValueAtTime(baseFreq, ctx.currentTime + i * 0.1);
+        oscillator.frequency.exponentialRampToValueAtTime(baseFreq * 3, ctx.currentTime + i * 0.1 + 0.6);
+        
+        gainNode.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
+        gainNode.gain.linearRampToValueAtTime(0.04, ctx.currentTime + i * 0.1 + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.6);
+        
+        oscillator.start(ctx.currentTime + i * 0.1);
+        oscillator.stop(ctx.currentTime + i * 0.1 + 0.6);
+      }
+      
+      // Add whooshing wind effect
+      const noise = ctx.createOscillator();
+      const noiseGain = ctx.createGain();
+      const noiseFilter = ctx.createBiquadFilter();
+      
+      noise.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+      
+      noise.type = "triangle";
+      noise.frequency.setValueAtTime(100, ctx.currentTime);
+      noise.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.8);
+      
+      noiseFilter.type = "bandpass";
+      noiseFilter.frequency.setValueAtTime(500, ctx.currentTime);
+      noiseFilter.Q.setValueAtTime(1, ctx.currentTime);
+      
+      noiseGain.gain.setValueAtTime(0.02, ctx.currentTime);
+      noiseGain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 0.5);
+      noiseGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+      
+      noise.start(ctx.currentTime);
+      noise.stop(ctx.currentTime + 0.8);
+    } catch (e) {
+      // Silently fail
+    }
+  }, [enabled, getAudioContext]);
+
+  // Kunai throwing sound - sharp metallic whoosh
+  const playKunai = useCallback(() => {
+    if (!enabled) return;
+    try {
+      const ctx = getAudioContext();
+      
+      // Metal ring sound
+      const ring = ctx.createOscillator();
+      const ringGain = ctx.createGain();
+      
+      ring.connect(ringGain);
+      ringGain.connect(ctx.destination);
+      
+      ring.type = "sine";
+      ring.frequency.setValueAtTime(2500, ctx.currentTime);
+      ring.frequency.exponentialRampToValueAtTime(1500, ctx.currentTime + 0.15);
+      
+      ringGain.gain.setValueAtTime(0.08, ctx.currentTime);
+      ringGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+      
+      ring.start(ctx.currentTime);
+      ring.stop(ctx.currentTime + 0.15);
+      
+      // Whoosh effect
+      const whoosh = ctx.createOscillator();
+      const whooshGain = ctx.createGain();
+      const whooshFilter = ctx.createBiquadFilter();
+      
+      whoosh.connect(whooshFilter);
+      whooshFilter.connect(whooshGain);
+      whooshGain.connect(ctx.destination);
+      
+      whoosh.type = "sawtooth";
+      whoosh.frequency.setValueAtTime(800, ctx.currentTime);
+      whoosh.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.2);
+      
+      whooshFilter.type = "highpass";
+      whooshFilter.frequency.setValueAtTime(400, ctx.currentTime);
+      
+      whooshGain.gain.setValueAtTime(0.03, ctx.currentTime);
+      whooshGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+      
+      whoosh.start(ctx.currentTime);
+      whoosh.stop(ctx.currentTime + 0.2);
+    } catch (e) {
+      // Silently fail
+    }
+  }, [enabled, getAudioContext]);
+
+  // Chakra release sound - energy burst
+  const playChakra = useCallback(() => {
+    if (!enabled) return;
+    try {
+      const ctx = getAudioContext();
+      
+      // Low rumble base
+      const bass = ctx.createOscillator();
+      const bassGain = ctx.createGain();
+      
+      bass.connect(bassGain);
+      bassGain.connect(ctx.destination);
+      
+      bass.type = "sine";
+      bass.frequency.setValueAtTime(80, ctx.currentTime);
+      bass.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.4);
+      
+      bassGain.gain.setValueAtTime(0.1, ctx.currentTime);
+      bassGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+      
+      bass.start(ctx.currentTime);
+      bass.stop(ctx.currentTime + 0.4);
+      
+      // Energy burst layers
+      for (let i = 0; i < 5; i++) {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         
         osc.connect(gain);
         gain.connect(ctx.destination);
         
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(2000 + Math.random() * 1000, ctx.currentTime + i * 0.05);
+        osc.type = "triangle";
+        const freq = 200 + i * 150;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.5, ctx.currentTime + 0.3);
         
-        gain.gain.setValueAtTime(0.02, ctx.currentTime + i * 0.05);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.05 + 0.03);
+        gain.gain.setValueAtTime(0.05, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
         
-        osc.start(ctx.currentTime + i * 0.05);
-        osc.stop(ctx.currentTime + i * 0.05 + 0.03);
+        osc.start(ctx.currentTime + i * 0.02);
+        osc.stop(ctx.currentTime + 0.3);
       }
     } catch (e) {
       // Silently fail
     }
   }, [enabled, getAudioContext]);
 
-  // Demogorgon growl - low, menacing
-  const playDemogorgon = useCallback(() => {
+  // Chidori sound - electric crackling
+  const playChidori = useCallback(() => {
     if (!enabled) return;
     try {
       const ctx = getAudioContext();
       
-      // Low growl
-      const growl = ctx.createOscillator();
-      const growlGain = ctx.createGain();
-      const growlFilter = ctx.createBiquadFilter();
-      
-      growl.connect(growlFilter);
-      growlFilter.connect(growlGain);
-      growlGain.connect(ctx.destination);
-      
-      growl.type = "sawtooth";
-      growl.frequency.setValueAtTime(50, ctx.currentTime);
-      growl.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.5);
-      
-      growlFilter.type = "lowpass";
-      growlFilter.frequency.setValueAtTime(150, ctx.currentTime);
-      
-      growlGain.gain.setValueAtTime(0.08, ctx.currentTime);
-      growlGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-      
-      growl.start(ctx.currentTime);
-      growl.stop(ctx.currentTime + 0.5);
-      
-      // Distorted overlay
-      for (let i = 0; i < 3; i++) {
-        const noise = ctx.createOscillator();
-        const noiseGain = ctx.createGain();
-        
-        noise.connect(noiseGain);
-        noiseGain.connect(ctx.destination);
-        
-        noise.type = "square";
-        noise.frequency.setValueAtTime(60 + Math.random() * 40, ctx.currentTime + i * 0.1);
-        
-        noiseGain.gain.setValueAtTime(0.02, ctx.currentTime + i * 0.1);
-        noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.1 + 0.2);
-        
-        noise.start(ctx.currentTime + i * 0.1);
-        noise.stop(ctx.currentTime + i * 0.1 + 0.2);
-      }
-    } catch (e) {
-      // Silently fail
-    }
-  }, [enabled, getAudioContext]);
-
-  // 80s Synth pad sound
-  const playSynth = useCallback(() => {
-    if (!enabled) return;
-    try {
-      const ctx = getAudioContext();
-      
-      const notes = [261.63, 329.63, 392.00]; // C4, E4, G4
-      
-      notes.forEach((freq, i) => {
+      // Create electric crackling effect
+      for (let i = 0; i < 12; i++) {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        const filter = ctx.createBiquadFilter();
         
-        osc.connect(filter);
-        filter.connect(gain);
+        osc.connect(gain);
         gain.connect(ctx.destination);
         
-        filter.type = "lowpass";
-        filter.frequency.setValueAtTime(800, ctx.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.5);
+        osc.type = "square";
+        const startTime = ctx.currentTime + Math.random() * 0.5;
+        const freq = 1000 + Math.random() * 3000;
         
-        osc.type = "sawtooth";
-        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        osc.frequency.setValueAtTime(freq, startTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.3, startTime + 0.05);
         
-        gain.gain.setValueAtTime(0.03, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+        gain.gain.setValueAtTime(0.02 + Math.random() * 0.02, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.05);
         
-        osc.start(ctx.currentTime + i * 0.05);
-        osc.stop(ctx.currentTime + 0.5);
-      });
-    } catch (e) {
-      // Silently fail
-    }
-  }, [enabled, getAudioContext]);
-
-  // TV Static sound
-  const playStatic = useCallback(() => {
-    if (!enabled) return;
-    try {
-      const ctx = getAudioContext();
-      const bufferSize = ctx.sampleRate * 0.2;
-      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = buffer.getChannelData(0);
-      
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 - 1;
+        osc.start(startTime);
+        osc.stop(startTime + 0.05);
       }
       
-      const noise = ctx.createBufferSource();
-      const gain = ctx.createGain();
-      const filter = ctx.createBiquadFilter();
+      // Base electrical hum
+      const hum = ctx.createOscillator();
+      const humGain = ctx.createGain();
+      const humFilter = ctx.createBiquadFilter();
       
-      noise.buffer = buffer;
-      noise.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
+      hum.connect(humFilter);
+      humFilter.connect(humGain);
+      humGain.connect(ctx.destination);
       
-      filter.type = "bandpass";
-      filter.frequency.setValueAtTime(3000, ctx.currentTime);
-      filter.Q.setValueAtTime(1, ctx.currentTime);
+      hum.type = "sawtooth";
+      hum.frequency.setValueAtTime(120, ctx.currentTime);
       
-      gain.gain.setValueAtTime(0.03, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+      humFilter.type = "lowpass";
+      humFilter.frequency.setValueAtTime(300, ctx.currentTime);
       
-      noise.start(ctx.currentTime);
+      humGain.gain.setValueAtTime(0.04, ctx.currentTime);
+      humGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+      
+      hum.start(ctx.currentTime);
+      hum.stop(ctx.currentTime + 0.6);
     } catch (e) {
       // Silently fail
     }
@@ -309,12 +357,12 @@ export const SoundProvider = ({ children }: SoundProviderProps) => {
     <SoundContext.Provider value={{ 
       playClick, 
       playHover, 
-      playPortal, 
+      playJutsu, 
       playNavigate, 
-      playFlicker,
-      playDemogorgon,
-      playSynth,
-      playStatic,
+      playRasengan,
+      playKunai,
+      playChakra,
+      playChidori,
       enabled, 
       setEnabled 
     }}>

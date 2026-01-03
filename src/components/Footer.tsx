@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -64,7 +63,7 @@ const Footer = () => {
 
   return (
     <footer className="relative border-t border-primary/20 bg-card/50 backdrop-blur-lg">
-      {/* Portal glow at top */}
+      {/* Fire glow at top */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
       
       <div className="container mx-auto px-6 py-12">
@@ -72,32 +71,22 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <motion.div 
-                className="w-10 h-10 rounded-full bg-primary flex items-center justify-center"
-                animate={{
-                  boxShadow: [
-                    "0 0 10px hsl(0, 85%, 50%)",
-                    "0 0 20px hsl(0, 85%, 50%)",
-                    "0 0 10px hsl(0, 85%, 50%)",
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <span className="font-title text-xl text-primary-foreground">S</span>
-              </motion.div>
-              <span className="font-title text-2xl text-gradient-portal">SANTOSH VERMA</span>
+              <div className="w-10 h-10 rounded-full bg-gradient-fire flex items-center justify-center">
+                <span className="font-naruto text-xl text-primary-foreground">S</span>
+              </div>
+              <span className="font-naruto text-2xl text-gradient-fire">SANTOSH VERMA</span>
             </div>
-            <p className="text-muted-foreground text-sm font-stranger">
-              Full Stack Developer exploring the Upside Down of technology 🔦
+            <p className="text-muted-foreground text-sm">
+              Full Stack Developer & Tech Enthusiast following the Way of the Ninja 🍃
             </p>
             <div className="text-sm text-muted-foreground">
-              <span className="text-primary font-stranger">FRIENDS DON'T LIE</span>
+              <span className="text-primary">忍者の道</span> - The Way of the Ninja
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-title text-xl text-primary mb-4 tracking-wider">QUICK LINKS</h3>
+            <h3 className="font-naruto text-xl text-primary mb-4">QUICK LINKS</h3>
             <ul className="grid grid-cols-2 gap-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -114,7 +103,7 @@ const Footer = () => {
 
           {/* Social Links */}
           <div>
-            <h3 className="font-title text-xl text-primary mb-4 tracking-wider">CONNECT</h3>
+            <h3 className="font-naruto text-xl text-primary mb-4">CONNECT</h3>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -147,16 +136,10 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>Made with</span>
-            <motion.span 
-              className="text-primary"
-              animate={{ opacity: [1, 0.5, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              ❤️
-            </motion.span>
-            <span>in</span>
-            <span className="text-secondary font-stranger">Hawkins</span>
-            <span className="text-xl">🔦</span>
+            <span className="text-primary animate-pulse">❤️</span>
+            <span>and</span>
+            <span className="text-secondary">Chakra</span>
+            <span className="text-xl">🍃</span>
           </div>
         </div>
       </div>

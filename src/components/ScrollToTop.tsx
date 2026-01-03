@@ -33,31 +33,31 @@ const ScrollToTop = () => {
           exit={{ opacity: 0, scale: 0, y: 20 }}
           transition={{ duration: 0.3, type: "spring" }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-4 z-50 w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg hover:shadow-primary/50 transition-all duration-300 group"
+          className="fixed bottom-6 right-4 z-50 w-12 h-12 rounded-full bg-gradient-fire flex items-center justify-center shadow-lg hover:shadow-naruto-orange/50 transition-all duration-300 group"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           aria-label="Scroll to top"
         >
-          {/* Flashlight Icon */}
+          {/* Kunai Arrow pointing up */}
           <svg
-            viewBox="0 0 24 24"
-            className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1"
+            viewBox="0 0 24 32"
+            className="w-5 h-6 transition-transform duration-300 group-hover:-translate-y-1"
             fill="none"
           >
-            {/* Light beam */}
+            {/* Kunai blade */}
             <path
-              d="M12 2 L8 10 L16 10 Z"
-              className="fill-st-yellow"
+              d="M12 2L6 14H10V22H14V14H18L12 2Z"
+              className="fill-white"
             />
-            {/* Flashlight body */}
-            <rect x="9" y="10" width="6" height="8" rx="1" className="fill-primary-foreground" />
-            {/* Handle */}
-            <rect x="10" y="18" width="4" height="4" rx="0.5" className="fill-muted-foreground" />
+            {/* Handle wrap */}
+            <rect x="10" y="22" width="4" height="6" className="fill-muted-foreground" />
+            {/* Ring at bottom */}
+            <circle cx="12" cy="30" r="2" className="stroke-white" strokeWidth="1.5" fill="none" />
           </svg>
           
-          {/* Portal glow effect */}
+          {/* Chakra glow effect */}
           <motion.div
-            className="absolute inset-0 rounded-full bg-primary/30"
+            className="absolute inset-0 rounded-full bg-naruto-orange/30"
             animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
