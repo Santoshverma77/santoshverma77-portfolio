@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
-import narutoHeroBg from "@/assets/naruto-hero-bg.png";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,37 +14,36 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Hero Background Image */}
+      {/* Dark atmospheric background */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={narutoHeroBg}
-          alt="Naruto themed background"
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-[hsl(200_30%_5%)] to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_hsl(0_0%_0%/0.8)_100%)]" />
       </div>
 
-      {/* Animated Glow Effects */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[150px] animate-pulse-glow" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[100px] animate-float-delayed" />
-      </div>
-
-      {/* Konoha Symbol */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] z-0">
-        <svg
-          className="w-[1000px] h-[1000px] animate-spin-slow"
-          viewBox="0 0 100 100"
-          fill="none"
-        >
-          <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="0.3" className="text-primary" />
-          <path
-            d="M50 10 L55 35 L80 25 L65 45 L90 50 L65 55 L80 75 L55 65 L50 90 L45 65 L20 75 L35 55 L10 50 L35 45 L20 25 L45 35 Z"
-            fill="currentColor"
-            className="text-primary"
+      {/* Upside Down particle overlay */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-muted-foreground rounded-full animate-snow-fall"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 20}s`,
+              animationDuration: `${15 + Math.random() * 10}s`,
+            }}
           />
-        </svg>
+        ))}
+      </div>
+
+      {/* Neon glow effects */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[200px] animate-flicker-slow" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-secondary/15 rounded-full blur-[150px] animate-float-delayed" />
+      </div>
+
+      {/* Stranger Things style title glow */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] z-0">
+        <div className="w-[800px] h-[800px] border border-primary/30 rounded-full animate-spin-slow" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 pt-20">
@@ -54,46 +52,46 @@ const HeroSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          {/* Japanese Text */}
-          <p className="font-naruto text-xl md:text-2xl text-primary/80 mb-4 tracking-[0.3em]">
-            忍者の道
+          {/* Retro subtitle */}
+          <p className="font-retro text-2xl md:text-3xl text-primary/80 mb-4 tracking-[0.5em] animate-flicker-slow">
+            WELCOME TO THE
           </p>
 
-          {/* Title */}
-          <h1 className="font-naruto text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-4 leading-none">
-            <span className="text-gradient-fire drop-shadow-2xl block">SANTOSH</span>
-            <span className="text-gradient-sunset block mt-2">KUMAR VERMA</span>
+          {/* Main Title - Stranger Things style */}
+          <h1 className="font-stranger text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] mb-4 leading-none">
+            <span className="text-gradient-neon drop-shadow-2xl block animate-flicker-slow vhs-effect">SANTOSH</span>
+            <span className="text-gradient-synth block mt-2 animate-flicker-slow">KUMAR VERMA</span>
           </h1>
 
           {/* Decorative Line */}
           <div className="flex items-center justify-center gap-4 my-8">
-            <div className="w-20 md:w-32 h-0.5 bg-gradient-to-r from-transparent to-primary" />
-            <div className="w-3 h-3 rotate-45 bg-primary animate-pulse" />
-            <div className="w-20 md:w-32 h-0.5 bg-gradient-to-l from-transparent to-primary" />
+            <div className="w-20 md:w-32 h-0.5 bg-gradient-to-r from-transparent to-primary animate-flicker" />
+            <div className="w-3 h-3 rotate-45 bg-primary animate-pulse glow-neon" />
+            <div className="w-20 md:w-32 h-0.5 bg-gradient-to-l from-transparent to-primary animate-flicker" />
           </div>
 
-          {/* Subtitle */}
+          {/* Subtitle badges */}
           <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
-            <span className="px-5 py-2 bg-primary/20 border border-primary/40 rounded-full text-primary font-bold text-sm md:text-base backdrop-blur-sm">
+            <span className="px-5 py-2 bg-primary/20 border border-primary/40 rounded-sm text-primary font-retro text-lg md:text-xl backdrop-blur-sm glow-neon">
               🎓 BS Data Science @ IIT Madras
             </span>
-            <span className="px-5 py-2 bg-secondary/20 border border-secondary/40 rounded-full text-secondary font-bold text-sm md:text-base backdrop-blur-sm">
+            <span className="px-5 py-2 bg-secondary/20 border border-secondary/40 rounded-sm text-secondary font-retro text-lg md:text-xl backdrop-blur-sm">
               💻 Full-Stack Developer
             </span>
           </div>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+          <p className="font-retro text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">
             Tech Community Builder · Photography & Videography · Java · DSA · MERN
           </p>
 
           {/* Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button
-              variant="fire"
+              variant="default"
               size="lg"
               asChild
-              className="group"
+              className="group bg-primary hover:bg-primary/80 glow-neon font-retro text-lg"
             >
               <a href="#projects">
                 <span>View Work</span>
@@ -111,13 +109,15 @@ const HeroSection = () => {
               variant="outline"
               size="lg"
               asChild
+              className="border-primary/50 text-primary hover:bg-primary/10 font-retro text-lg"
             >
               <a href="#contact">Contact</a>
             </Button>
             <Button
-              variant="chakra"
+              variant="outline"
               size="lg"
               asChild
+              className="border-secondary/50 text-secondary hover:bg-secondary/10 font-retro text-lg"
             >
               <a href="https://www.linkedin.com/in/santoshverma77" target="_blank" rel="noopener noreferrer">
                 LinkedIn
@@ -127,7 +127,7 @@ const HeroSection = () => {
               variant="outline"
               size="lg"
               asChild
-              className="border-accent text-accent hover:bg-accent hover:text-background"
+              className="border-accent/50 text-accent hover:bg-accent/10 font-retro text-lg"
             >
               <a href="https://drive.google.com/file/d/1zpv8uhFt0Bu4uwMS-JYuJAgqwWXsc8ub/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                 <Download className="w-4 h-4 mr-2" />
@@ -137,8 +137,8 @@ const HeroSection = () => {
           </div>
 
           {/* Quote */}
-          <div className="mt-16 text-muted-foreground/60 italic">
-            <p className="text-sm md:text-base">"I never go back on my word. That is my ninja way!"</p>
+          <div className="mt-16 text-muted-foreground/60 italic font-retro text-lg">
+            <p>"Friends don't lie."</p>
           </div>
         </div>
 
