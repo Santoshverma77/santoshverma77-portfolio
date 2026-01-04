@@ -52,12 +52,12 @@ const Navbar = () => {
             onMouseEnter={handleHover}
           >
             <div className="relative">
-              <div className="w-10 h-10 rounded-sm bg-primary flex items-center justify-center animate-pulse-glow">
-                <span className="font-stranger text-xl text-primary-foreground">S</span>
+              <div className="w-10 h-10 rounded-full bg-gradient-fire flex items-center justify-center animate-pulse-glow">
+                <span className="font-naruto text-xl text-primary-foreground">S</span>
               </div>
-              <div className="absolute inset-0 rounded-sm bg-primary blur-md opacity-50 group-hover:opacity-80 transition-opacity" />
+              <div className="absolute inset-0 rounded-full bg-gradient-fire blur-md opacity-50 group-hover:opacity-80 transition-opacity" />
             </div>
-            <span className="font-stranger text-2xl tracking-wider text-gradient-neon hidden sm:block animate-flicker-slow">
+            <span className="font-naruto text-2xl tracking-wider text-gradient-fire hidden sm:block">
               SANTOSH VERMA
             </span>
           </Link>
@@ -70,13 +70,13 @@ const Navbar = () => {
                 to={link.href}
                 onClick={handleNavClick}
                 onMouseEnter={handleHover}
-                className={`relative font-retro text-lg text-muted-foreground hover:text-primary transition-colors duration-300 group ${
+                className={`relative text-muted-foreground hover:text-primary transition-colors duration-300 group font-medium ${
                   location.pathname === link.href ? "text-primary" : ""
                 }`}
               >
                 {link.label}
                 <span 
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-fire transition-all duration-300 ${
                     location.pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
                   }`} 
                 />
@@ -127,7 +127,7 @@ const Navbar = () => {
                   handleNavClick();
                 }}
                 onMouseEnter={handleHover}
-                className={`font-retro text-lg text-muted-foreground hover:text-primary transition-colors duration-300 pl-2 border-l-2 hover:border-primary ${
+                className={`text-muted-foreground hover:text-primary transition-colors duration-300 font-medium pl-2 border-l-2 hover:border-primary ${
                   location.pathname === link.href ? "text-primary border-primary" : "border-transparent"
                 }`}
               >

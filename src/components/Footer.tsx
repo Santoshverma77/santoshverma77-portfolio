@@ -63,7 +63,7 @@ const Footer = () => {
 
   return (
     <footer className="relative border-t border-primary/20 bg-card/50 backdrop-blur-lg">
-      {/* Neon glow at top */}
+      {/* Fire glow at top */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
       
       <div className="container mx-auto px-6 py-12">
@@ -71,28 +71,28 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-sm bg-primary flex items-center justify-center glow-neon">
-                <span className="font-stranger text-xl text-primary-foreground">S</span>
+              <div className="w-10 h-10 rounded-full bg-gradient-fire flex items-center justify-center">
+                <span className="font-naruto text-xl text-primary-foreground">S</span>
               </div>
-              <span className="font-stranger text-2xl text-gradient-neon">SANTOSH VERMA</span>
+              <span className="font-naruto text-2xl text-gradient-fire">SANTOSH VERMA</span>
             </div>
-            <p className="text-muted-foreground text-sm font-retro">
-              Full Stack Developer & Tech Enthusiast exploring the digital dimension ⚡
+            <p className="text-muted-foreground text-sm">
+              Full Stack Developer & Tech Enthusiast following the Way of the Ninja 🍃
             </p>
-            <div className="text-sm text-muted-foreground font-retro">
-              <span className="text-primary">"Friends don't lie"</span>
+            <div className="text-sm text-muted-foreground">
+              <span className="text-primary">忍者の道</span> - The Way of the Ninja
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-stranger text-xl text-primary mb-4">QUICK LINKS</h3>
+            <h3 className="font-naruto text-xl text-primary mb-4">QUICK LINKS</h3>
             <ul className="grid grid-cols-2 gap-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm font-retro"
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -103,7 +103,7 @@ const Footer = () => {
 
           {/* Social Links */}
           <div>
-            <h3 className="font-stranger text-xl text-primary mb-4">CONNECT</h3>
+            <h3 className="font-naruto text-xl text-primary mb-4">CONNECT</h3>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -111,14 +111,14 @@ const Footer = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-sm bg-muted/50 border border-primary/20 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 rounded-full bg-muted/50 border border-primary/20 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-110"
                   aria-label={social.name}
                 >
                   {social.icon}
                 </a>
               ))}
             </div>
-            <div className="mt-4 text-sm text-muted-foreground font-retro">
+            <div className="mt-4 text-sm text-muted-foreground">
               <a 
                 href="mailto:santoshskv2005@gmail.com"
                 className="hover:text-primary transition-colors"
@@ -131,15 +131,15 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-primary/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-sm text-muted-foreground font-retro">
+          <div className="text-sm text-muted-foreground">
             © {currentYear} Santosh Verma. All rights reserved.
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground font-retro">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>Made with</span>
             <span className="text-primary animate-pulse">❤️</span>
-            <span>in</span>
-            <span className="text-secondary">Hawkins, Indiana</span>
-            <span className="text-xl">💡</span>
+            <span>and</span>
+            <span className="text-secondary">Chakra</span>
+            <span className="text-xl">🍃</span>
           </div>
         </div>
       </div>
