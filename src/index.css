@@ -2,120 +2,120 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chakra+Petch:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=VT323&family=Courier+Prime:wght@400;700&display=swap');
 
 @layer base {
   :root, .dark {
-    --background: 220 20% 4%;
-    --foreground: 40 100% 97%;
+    --background: 0 0% 3%;
+    --foreground: 0 0% 95%;
 
-    --card: 220 15% 8%;
-    --card-foreground: 40 100% 97%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 220 15% 8%;
-    --popover-foreground: 40 100% 97%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 25 100% 50%;
-    --primary-foreground: 220 20% 4%;
+    --primary: 0 85% 50%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 200 80% 60%;
-    --secondary-foreground: 220 20% 4%;
+    --secondary: 280 80% 60%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 40 20% 60%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 0 70% 55%;
-    --accent-foreground: 40 100% 97%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 0 0% 3%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 25 50% 20%;
-    --input: 220 15% 15%;
-    --ring: 25 100% 50%;
+    --border: 0 50% 20%;
+    --input: 0 0% 12%;
+    --ring: 0 85% 50%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Custom Naruto theme tokens */
-    --naruto-orange: 25 100% 50%;
-    --naruto-orange-glow: 25 100% 60%;
-    --naruto-red: 0 70% 55%;
-    --naruto-blue: 200 80% 60%;
-    --naruto-gold: 40 100% 55%;
-    --naruto-dark: 220 20% 6%;
-    --naruto-darker: 220 25% 3%;
+    /* Stranger Things theme tokens */
+    --stranger-red: 0 85% 50%;
+    --stranger-red-glow: 0 100% 60%;
+    --stranger-neon: 180 100% 50%;
+    --stranger-purple: 280 80% 60%;
+    --stranger-pink: 330 100% 60%;
+    --stranger-dark: 0 0% 4%;
+    --stranger-darker: 0 0% 2%;
 
     /* Gradients */
-    --gradient-fire: linear-gradient(135deg, hsl(25 100% 50%), hsl(0 70% 55%));
-    --gradient-chakra: linear-gradient(135deg, hsl(200 80% 60%), hsl(260 70% 60%));
-    --gradient-sunset: linear-gradient(135deg, hsl(40 100% 55%), hsl(25 100% 50%), hsl(0 70% 55%));
+    --gradient-neon: linear-gradient(135deg, hsl(0 85% 50%), hsl(280 80% 60%));
+    --gradient-upside-down: linear-gradient(180deg, hsl(0 0% 3%), hsl(200 50% 10%), hsl(0 0% 3%));
+    --gradient-synth: linear-gradient(135deg, hsl(280 80% 60%), hsl(330 100% 60%), hsl(0 85% 50%));
 
     /* Shadows */
-    --shadow-glow: 0 0 30px hsl(25 100% 50% / 0.3);
-    --shadow-fire: 0 0 60px hsl(25 100% 50% / 0.4), 0 0 100px hsl(0 70% 55% / 0.2);
-    --shadow-chakra: 0 0 40px hsl(200 80% 60% / 0.3);
+    --shadow-glow: 0 0 30px hsl(0 85% 50% / 0.4);
+    --shadow-neon: 0 0 60px hsl(0 85% 50% / 0.5), 0 0 100px hsl(280 80% 60% / 0.3);
+    --shadow-flicker: 0 0 40px hsl(0 85% 50% / 0.6);
 
-    --sidebar-background: 220 20% 4%;
-    --sidebar-foreground: 40 100% 97%;
-    --sidebar-primary: 25 100% 50%;
-    --sidebar-primary-foreground: 220 20% 4%;
-    --sidebar-accent: 220 15% 12%;
-    --sidebar-accent-foreground: 40 100% 97%;
-    --sidebar-border: 25 50% 20%;
-    --sidebar-ring: 25 100% 50%;
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 85% 50%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 50% 20%;
+    --sidebar-ring: 0 85% 50%;
   }
 
   .light {
-    --background: 40 30% 96%;
-    --foreground: 220 20% 10%;
+    --background: 40 10% 96%;
+    --foreground: 0 0% 10%;
 
-    --card: 40 30% 98%;
-    --card-foreground: 220 20% 10%;
+    --card: 40 10% 98%;
+    --card-foreground: 0 0% 10%;
 
-    --popover: 40 30% 98%;
-    --popover-foreground: 220 20% 10%;
+    --popover: 40 10% 98%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 25 100% 50%;
-    --primary-foreground: 40 100% 98%;
+    --primary: 0 85% 45%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 200 80% 50%;
-    --secondary-foreground: 40 100% 98%;
+    --secondary: 280 60% 50%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 40 20% 90%;
-    --muted-foreground: 220 15% 40%;
+    --muted: 40 10% 90%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 0 70% 55%;
-    --accent-foreground: 40 100% 98%;
+    --accent: 180 80% 40%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 25 40% 80%;
-    --input: 40 20% 92%;
-    --ring: 25 100% 50%;
+    --border: 0 20% 80%;
+    --input: 40 10% 92%;
+    --ring: 0 85% 45%;
 
-    /* Custom Naruto theme tokens - lighter variants */
-    --naruto-orange: 25 100% 50%;
-    --naruto-orange-glow: 25 100% 55%;
-    --naruto-red: 0 70% 50%;
-    --naruto-blue: 200 80% 50%;
-    --naruto-gold: 40 100% 50%;
-    --naruto-dark: 40 20% 94%;
-    --naruto-darker: 40 15% 90%;
+    /* Stranger Things theme tokens - lighter variants */
+    --stranger-red: 0 85% 45%;
+    --stranger-red-glow: 0 100% 55%;
+    --stranger-neon: 180 80% 40%;
+    --stranger-purple: 280 60% 50%;
+    --stranger-pink: 330 80% 50%;
+    --stranger-dark: 40 10% 94%;
+    --stranger-darker: 40 10% 90%;
 
     /* Shadows */
-    --shadow-glow: 0 0 30px hsl(25 100% 50% / 0.2);
-    --shadow-fire: 0 0 60px hsl(25 100% 50% / 0.3), 0 0 100px hsl(0 70% 55% / 0.1);
-    --shadow-chakra: 0 0 40px hsl(200 80% 60% / 0.2);
+    --shadow-glow: 0 0 30px hsl(0 85% 50% / 0.2);
+    --shadow-neon: 0 0 60px hsl(0 85% 50% / 0.3), 0 0 100px hsl(280 80% 60% / 0.2);
+    --shadow-flicker: 0 0 40px hsl(0 85% 50% / 0.3);
 
-    --sidebar-background: 40 30% 96%;
-    --sidebar-foreground: 220 20% 10%;
-    --sidebar-primary: 25 100% 50%;
-    --sidebar-primary-foreground: 40 100% 98%;
-    --sidebar-accent: 40 20% 92%;
-    --sidebar-accent-foreground: 220 20% 10%;
-    --sidebar-border: 25 40% 80%;
-    --sidebar-ring: 25 100% 50%;
+    --sidebar-background: 40 10% 96%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 0 85% 45%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 40 10% 92%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 20% 80%;
+    --sidebar-ring: 0 85% 45%;
   }
 }
 
@@ -130,12 +130,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Chakra Petch', system-ui, sans-serif;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff6b00' d='M12 2L4 20h3l5-12 5 12h3L12 2z'/%3E%3C/svg%3E") 12 0, auto;
-  }
-
-  a, button, [role="button"] {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff8c00' d='M12 2L4 20h3l5-12 5 12h3L12 2z'/%3E%3Ccircle cx='12' cy='18' r='2' fill='%23ff6b00'/%3E%3C/svg%3E") 12 0, pointer;
+    font-family: 'Courier Prime', monospace;
   }
 
   ::selection {
@@ -145,45 +140,43 @@
 }
 
 @layer components {
-  .font-naruto {
+  .font-stranger {
     font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.15em;
+  }
+
+  .font-retro {
+    font-family: 'VT323', monospace;
     letter-spacing: 0.05em;
   }
 
-  .text-gradient-fire {
-    background: var(--gradient-fire);
+  .text-gradient-neon {
+    background: var(--gradient-neon);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .text-gradient-sunset {
-    background: var(--gradient-sunset);
+  .text-gradient-synth {
+    background: var(--gradient-synth);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .text-gradient-chakra {
-    background: var(--gradient-chakra);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .glow-neon {
+    box-shadow: var(--shadow-neon);
   }
 
-  .glow-fire {
-    box-shadow: var(--shadow-fire);
+  .glow-flicker {
+    animation: flicker 0.15s infinite;
   }
 
-  .glow-chakra {
-    box-shadow: var(--shadow-chakra);
-  }
-
-  .card-scroll {
+  .card-retro {
     background: linear-gradient(
       135deg,
       hsl(var(--card)) 0%,
-      hsl(220 15% 10%) 50%,
+      hsl(0 0% 8%) 50%,
       hsl(var(--card)) 100%
     );
     border: 1px solid hsl(var(--border));
@@ -191,32 +184,56 @@
     overflow: hidden;
   }
 
-  .card-scroll::before {
+  .card-retro::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: var(--gradient-fire);
+    height: 2px;
+    background: var(--gradient-neon);
   }
 
-  .ninja-border {
+  .scanlines {
     position: relative;
   }
 
-  .ninja-border::after {
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+  }
+
+  .vhs-effect {
+    text-shadow: 
+      2px 0 hsl(180 100% 50% / 0.5),
+      -2px 0 hsl(0 85% 50% / 0.5);
+  }
+
+  .upside-down-border {
+    position: relative;
+  }
+
+  .upside-down-border::after {
     content: '';
     position: absolute;
     inset: -2px;
-    background: var(--gradient-fire);
+    background: var(--gradient-neon);
     border-radius: inherit;
     z-index: -1;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
 
-  .ninja-border:hover::after {
+  .upside-down-border:hover::after {
     opacity: 1;
   }
 }
@@ -239,6 +256,14 @@
     animation: pulse-glow 2s ease-in-out infinite;
   }
 
+  .animate-flicker {
+    animation: flicker 0.15s infinite;
+  }
+
+  .animate-flicker-slow {
+    animation: flicker-slow 3s infinite;
+  }
+
   .animate-slide-up {
     animation: slide-up 0.6s ease-out forwards;
   }
@@ -247,8 +272,8 @@
     animation: fade-in-up 0.8s ease-out forwards;
   }
 
-  .animate-leaf-fall {
-    animation: leaf-fall 15s linear infinite;
+  .animate-snow-fall {
+    animation: snow-fall 15s linear infinite;
   }
 
   .animate-shimmer {
@@ -260,27 +285,12 @@
     animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   }
 
-  .animate-shake {
-    animation: shake 0.5s ease-in-out;
+  .animate-static {
+    animation: static 0.5s steps(10) infinite;
   }
 
-  .animate-glow-pulse {
-    animation: glow-pulse 1.5s ease-in-out infinite;
-  }
-
-  .animate-typing {
-    animation: typing 3s steps(30) infinite, blink 0.5s step-end infinite alternate;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid hsl(var(--primary));
-  }
-
-  .animate-rotate-in {
-    animation: rotate-in 0.5s ease-out forwards;
-  }
-
-  .animate-scale-bounce {
-    animation: scale-bounce 0.4s ease-out;
+  .animate-portal-pulse {
+    animation: portal-pulse 4s ease-in-out infinite;
   }
 
   .hover-lift {
@@ -289,15 +299,16 @@
 
   .hover-lift:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px hsl(var(--primary) / 0.2);
+    box-shadow: 0 20px 40px hsl(var(--primary) / 0.3);
   }
 
   .hover-glow {
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, text-shadow 0.3s ease;
   }
 
   .hover-glow:hover {
     box-shadow: 0 0 30px hsl(var(--primary) / 0.5), 0 0 60px hsl(var(--primary) / 0.3);
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.8);
   }
 
   .stagger-1 { animation-delay: 0.1s; }
@@ -312,16 +323,16 @@
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-20px) rotate(5deg);
+    transform: translateY(-20px) rotate(2deg);
   }
 }
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px hsl(25 100% 50% / 0.3);
+    box-shadow: 0 0 20px hsl(0 85% 50% / 0.3);
   }
   50% {
-    box-shadow: 0 0 40px hsl(25 100% 50% / 0.6), 0 0 60px hsl(0 70% 55% / 0.3);
+    box-shadow: 0 0 40px hsl(0 85% 50% / 0.6), 0 0 80px hsl(280 80% 60% / 0.3);
   }
 }
 
@@ -347,14 +358,14 @@
   }
 }
 
-@keyframes leaf-fall {
+@keyframes snow-fall {
   0% {
     transform: translateY(-100vh) rotate(0deg) translateX(0);
     opacity: 1;
   }
   100% {
-    transform: translateY(100vh) rotate(720deg) translateX(100px);
-    opacity: 0;
+    transform: translateY(100vh) rotate(360deg) translateX(50px);
+    opacity: 0.3;
   }
 }
 
@@ -393,107 +404,55 @@
   }
 }
 
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  10%, 30%, 50%, 70%, 90% {
-    transform: translateX(-5px);
-  }
-  20%, 40%, 60%, 80% {
-    transform: translateX(5px);
-  }
-}
-
-@keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 5px hsl(var(--primary) / 0.5);
-  }
-  50% {
-    box-shadow: 0 0 25px hsl(var(--primary) / 0.8), 0 0 50px hsl(var(--primary) / 0.4);
-  }
-}
-
-@keyframes typing {
-  0%, 100% {
-    width: 0;
-  }
-  50% {
-    width: 100%;
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-
-@keyframes rotate-in {
-  0% {
-    opacity: 0;
-    transform: rotate(-180deg) scale(0);
-  }
-  100% {
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
     opacity: 1;
-    transform: rotate(0) scale(1);
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.4;
   }
 }
 
-@keyframes scale-bounce {
-  0% {
+@keyframes flicker-slow {
+  0%, 10%, 10.5%, 30%, 30.5%, 50%, 55%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 30px hsl(0 85% 50% / 0.8), 0 0 60px hsl(0 85% 50% / 0.5);
+  }
+  10.25%, 30.25%, 52.5% {
+    opacity: 0.6;
+    text-shadow: none;
+  }
+}
+
+@keyframes static {
+  0%, 100% {
+    background-position: 0 0;
+  }
+  10% {
+    background-position: -5% -10%;
+  }
+  30% {
+    background-position: 3% 5%;
+  }
+  50% {
+    background-position: -3% -5%;
+  }
+  70% {
+    background-position: 5% 10%;
+  }
+  90% {
+    background-position: -2% 3%;
+  }
+}
+
+@keyframes portal-pulse {
+  0%, 100% {
     transform: scale(1);
+    opacity: 0.3;
   }
   50% {
     transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes kunai-throw {
-  0% {
-    transform: translateX(-100vw) rotate(-45deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100vw) rotate(-45deg);
-    opacity: 0;
-  }
-}
-
-@keyframes seal-float {
-  0% {
-    transform: translateY(100vh) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.2;
-  }
-  90% {
-    opacity: 0.2;
-  }
-  100% {
-    transform: translateY(-100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-@keyframes spark {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) scale(0);
-    opacity: 0;
+    opacity: 0.6;
   }
 }
 
@@ -506,36 +465,18 @@
   }
 }
 
-.animate-kunai-throw {
-  animation: kunai-throw 2s linear forwards;
-}
-
-.animate-seal-float {
-  animation: seal-float 10s linear infinite;
-}
-
-.animate-spark {
-  animation: spark 3s ease-out infinite;
-}
-
 .animate-spin-reverse {
-  animation: spin-reverse 10s linear infinite;
+  animation: spin-reverse 15s linear infinite;
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
+/* Christmas lights effect */
+@keyframes lights-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
-::-webkit-scrollbar-track {
-  background: hsl(var(--background));
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.5);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary));
-}
+.light-red { color: hsl(0 85% 50%); animation: lights-blink 1s infinite; }
+.light-blue { color: hsl(200 80% 50%); animation: lights-blink 1.2s infinite 0.2s; }
+.light-green { color: hsl(120 70% 40%); animation: lights-blink 0.8s infinite 0.4s; }
+.light-yellow { color: hsl(50 100% 50%); animation: lights-blink 1.1s infinite 0.6s; }
+.light-purple { color: hsl(280 80% 60%); animation: lights-blink 0.9s infinite 0.8s; }

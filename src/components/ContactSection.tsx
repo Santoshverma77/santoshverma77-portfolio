@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import RasenganLoader from "./RasenganLoader";
 import { supabase } from "@/integrations/supabase/client";
+import { Loader2 } from "lucide-react";
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -59,7 +59,7 @@ const ContactSection = () => {
         return;
       }
 
-      toast.success("Message sent successfully! I'll get back to you soon. 🍃");
+      toast.success("Message sent successfully! I'll get back to you soon. ⚡");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("Error sending message:", error);
@@ -126,13 +126,12 @@ const ContactSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className={`w-16 h-1 bg-gradient-fire ${isVisible ? 'animate-shimmer' : ''}`} 
-               style={{ background: 'linear-gradient(90deg, hsl(25 100% 50%), hsl(0 70% 55%), hsl(25 100% 50%))' }} />
-          <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
+          <div className={`w-16 h-1 bg-gradient-to-r from-primary to-secondary ${isVisible ? 'animate-shimmer' : ''}`} />
+          <h2 className="font-stranger text-5xl md:text-6xl text-gradient-neon animate-flicker-slow">
             CONTACT
           </h2>
           <div className={`text-4xl ${isVisible ? 'animate-bounce-in' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
-            🍃
+            💡
           </div>
         </div>
 
@@ -143,16 +142,16 @@ const ContactSection = () => {
               isVisible ? "opacity-100 translate-y-0 animate-fade-in-up" : "opacity-0 translate-y-10"
             }`}
           >
-            <div className="card-scroll rounded-2xl p-8 hover-lift group relative overflow-hidden">
+            <div className="card-retro rounded-lg p-8 hover-lift group relative overflow-hidden">
               {/* Animated border gradient */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                    style={{ 
-                     background: 'linear-gradient(135deg, hsl(25 100% 50% / 0.1), transparent, hsl(0 70% 55% / 0.1))',
+                     background: 'linear-gradient(135deg, hsl(0 85% 50% / 0.1), transparent, hsl(280 80% 60% / 0.1))',
                    }} />
               
-              <h3 className="font-naruto text-2xl text-foreground mb-6 flex items-center gap-2">
+              <h3 className="font-stranger text-2xl text-foreground mb-6 flex items-center gap-2">
                 Send a Message 
-                <span className={`${isVisible ? 'animate-float' : ''}`}>🍃</span>
+                <span className={`${isVisible ? 'animate-float' : ''}`}>⚡</span>
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -163,8 +162,8 @@ const ContactSection = () => {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     onFocus={() => setFocusedField('name')}
                     onBlur={() => setFocusedField(null)}
-                    className={`bg-background/50 border-primary/20 focus:border-primary transition-all duration-300 ${
-                      focusedField === 'name' ? 'shadow-[0_0_20px_hsl(25_100%_50%/0.3)]' : ''
+                    className={`bg-background/50 border-primary/20 focus:border-primary transition-all duration-300 font-retro ${
+                      focusedField === 'name' ? 'shadow-[0_0_20px_hsl(0_85%_50%/0.3)]' : ''
                     }`}
                     disabled={isSubmitting}
                   />
@@ -177,8 +176,8 @@ const ContactSection = () => {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     onFocus={() => setFocusedField('email')}
                     onBlur={() => setFocusedField(null)}
-                    className={`bg-background/50 border-primary/20 focus:border-primary transition-all duration-300 ${
-                      focusedField === 'email' ? 'shadow-[0_0_20px_hsl(25_100%_50%/0.3)]' : ''
+                    className={`bg-background/50 border-primary/20 focus:border-primary transition-all duration-300 font-retro ${
+                      focusedField === 'email' ? 'shadow-[0_0_20px_hsl(0_85%_50%/0.3)]' : ''
                     }`}
                     disabled={isSubmitting}
                   />
@@ -190,15 +189,15 @@ const ContactSection = () => {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     onFocus={() => setFocusedField('message')}
                     onBlur={() => setFocusedField(null)}
-                    className={`bg-background/50 border-primary/20 focus:border-primary min-h-[150px] transition-all duration-300 ${
-                      focusedField === 'message' ? 'shadow-[0_0_20px_hsl(25_100%_50%/0.3)]' : ''
+                    className={`bg-background/50 border-primary/20 focus:border-primary min-h-[150px] transition-all duration-300 font-retro ${
+                      focusedField === 'message' ? 'shadow-[0_0_20px_hsl(0_85%_50%/0.3)]' : ''
                     }`}
                     disabled={isSubmitting}
                   />
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-fire hover:opacity-90 font-naruto text-lg group/btn relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_hsl(25_100%_50%/0.5)]"
+                  className="w-full bg-primary hover:bg-primary/90 font-stranger text-lg group/btn relative overflow-hidden transition-all duration-300 hover:scale-[1.02] glow-neon"
                   disabled={isSubmitting}
                 >
                   {/* Animated shine effect */}
@@ -206,7 +205,7 @@ const ContactSection = () => {
                   
                   {isSubmitting ? (
                     <div className="flex items-center gap-3">
-                      <RasenganLoader size="sm" />
+                      <Loader2 className="w-5 h-5 animate-spin" />
                       <span>Sending...</span>
                     </div>
                   ) : (
@@ -228,18 +227,18 @@ const ContactSection = () => {
           >
             <div className="space-y-8">
               <div className={`${isVisible ? 'animate-fade-in-up stagger-1' : 'opacity-0'}`}>
-                <h3 className="font-naruto text-2xl text-foreground mb-4 flex items-center gap-2">
+                <h3 className="font-stranger text-2xl text-foreground mb-4 flex items-center gap-2">
                   Let's Connect! 
                   <span className="animate-pulse">🤝</span>
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed font-retro">
                   Whether it's collaborating on tech projects, discussing photography techniques, 
                   or working on community initiatives, I'm always excited to connect!
                 </p>
               </div>
 
               <div className={`space-y-4 ${isVisible ? 'animate-fade-in-up stagger-2' : 'opacity-0'}`}>
-                <p className="text-muted-foreground group">
+                <p className="text-muted-foreground group font-retro">
                   <span className="text-primary font-semibold">📧 Email:</span>{" "}
                   <a href="mailto:santoshskv2005@gmail.com" 
                      className="hover:text-primary transition-all duration-300 hover:tracking-wide">
@@ -256,17 +255,17 @@ const ContactSection = () => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative p-4 rounded-xl bg-card border border-primary/20 hover:border-primary transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover-glow"
+                    className="group relative p-4 rounded-lg bg-card border border-primary/20 hover:border-primary transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover-glow"
                     style={{ animationDelay: `${0.4 + index * 0.1}s` }}
                   >
                     <div className="text-muted-foreground group-hover:text-primary transition-all duration-300 group-hover:rotate-12">
                       {link.icon}
                     </div>
                     {/* Glow effect */}
-                    <div className="absolute inset-0 rounded-xl bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
+                    <div className="absolute inset-0 rounded-lg bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
                     
                     {/* Tooltip */}
-                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-card border border-primary/30 rounded text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
+                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-card border border-primary/30 rounded text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap font-retro">
                       {link.name}
                     </span>
                   </a>
@@ -274,13 +273,13 @@ const ContactSection = () => {
               </div>
 
               {/* Decorative Quote with animation */}
-              <div className={`card-scroll rounded-xl p-6 mt-8 hover-lift ${isVisible ? 'animate-fade-in-up stagger-4' : 'opacity-0'}`}>
-                <p className="font-naruto text-lg text-primary italic">
-                  "I'm not gonna run away, I never go back on my word! That's my nindo: my ninja way!"
+              <div className={`card-retro rounded-lg p-6 mt-8 hover-lift ${isVisible ? 'animate-fade-in-up stagger-4' : 'opacity-0'}`}>
+                <p className="font-stranger text-lg text-primary italic animate-flicker-slow">
+                  "Friends don't lie."
                 </p>
-                <p className="text-muted-foreground text-sm mt-2 flex items-center gap-2">
-                  — Naruto Uzumaki 
-                  <span className="animate-pulse">🍥</span>
+                <p className="text-muted-foreground text-sm mt-2 flex items-center gap-2 font-retro">
+                  — Eleven 
+                  <span className="animate-pulse">💡</span>
                 </p>
               </div>
             </div>
@@ -293,12 +292,12 @@ const ContactSection = () => {
             isVisible ? "opacity-100" : "opacity-0"
           }`}
         >
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground font-retro">
             © 2024 <span className="text-primary hover:animate-pulse cursor-default">Santosh Kumar Verma</span>. Built with passion.
           </p>
-          <p className="text-sm text-muted-foreground mt-2 flex items-center justify-center gap-2">
-            "Believe it! 信じろ!" 
-            <span className="animate-spin-slow inline-block">🍥</span>
+          <p className="text-sm text-muted-foreground mt-2 flex items-center justify-center gap-2 font-retro">
+            "Mornings are for coffee and contemplation" 
+            <span className="inline-block">☕</span>
           </p>
         </div>
       </div>
