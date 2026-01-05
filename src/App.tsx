@@ -15,6 +15,8 @@ import ProjectsPage from "./pages/ProjectsPage";
 import CertificationsPage from "./pages/CertificationsPage";
 import ExperiencePage from "./pages/ExperiencePage";
 import ContactPage from "./pages/ContactPage";
+import EducationPage from "./pages/EducationPage";
+import AwardsPage from "./pages/AwardsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +51,8 @@ const AnimatedRoutes = () => {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/certifications" element={<CertificationsPage />} />
           <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/education" element={<EducationPage />} />
+          <Route path="/awards" element={<AwardsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

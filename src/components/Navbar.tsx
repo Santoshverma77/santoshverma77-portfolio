@@ -5,9 +5,11 @@ import { useSounds } from "@/contexts/SoundContext";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/education", label: "Education" },
   { href: "/skills", label: "Skills" },
   { href: "/projects", label: "Projects" },
   { href: "/certifications", label: "Certificates" },
+  { href: "/awards", label: "Awards" },
   { href: "/experience", label: "Experience" },
   { href: "/contact", label: "Contact" },
 ];
