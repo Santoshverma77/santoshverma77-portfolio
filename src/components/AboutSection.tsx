@@ -1,52 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Instagram, Twitter, MapPin, GraduationCap, Trophy, Award } from "lucide-react";
+import { Instagram, Twitter, MapPin } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
-
-const education = [
-  {
-    institution: "Indian Institute of Technology, Madras",
-    degree: "Bachelor of Science - BS, Data Science & AI",
-    period: "Aug 2025",
-    skills: ["Data Science", "Computational Thinking"],
-    current: true,
-  },
-  {
-    institution: "S.M. Arya Public School",
-    degree: "CLASS 12th, Mathematics and Computer Science",
-    period: "May 2021 - Jun 2023",
-    activities: ["Cricket", "Chess", "Atal Tinkering Lab Project"],
-  },
-  {
-    institution: "Saraswati Shishu Vidya Mandir, Giridih, Jharkhand",
-    degree: "Class 8-10",
-    period: "Mar 2018 - Mar 2021",
-    grade: "A",
-  },
-];
-
-const awards = [
-  {
-    title: "Logistic Legend Award – DevFest Ranchi 2025",
-    issuer: "Google Developer Groups (GDG) Ranchi",
-    date: "Oct 2025",
-    description: "Awarded for exceptional contribution to event logistics and operations at DevFest Ranchi 2025.",
-    icon: "🏆",
-  },
-  {
-    title: "Winner – HACKED 3.0 Hackathon (1st Prize)",
-    issuer: "BML Munjal University (BMU)",
-    date: "Mar 2025",
-    description: "Secured 1st Prize at HACKED 3.0, a 36-hour national-level hackathon. Won ₹25,000 competing against 60+ teams.",
-    icon: "🥇",
-  },
-  {
-    title: "Second Prize – State-Level Gyan Vigyan Mela",
-    issuer: "Vidya Vikas Samiti, Jharkhand",
-    date: "Oct 2018",
-    description: "Secured Second Prize at the State-Level Science Exhibition representing Saraswati Shishu Vidya Mandir.",
-    icon: "🥈",
-  },
-];
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -170,83 +124,6 @@ const AboutSection = () => {
               As a <span className="text-primary">Core Team Member at GDG Ranchi</span> and an active contributor 
               to various tech communities, I thrive on collaboration, knowledge sharing, and empowering fellow developers.
             </p>
-
-            {/* Education Section */}
-            <div className="pt-6">
-              <h4 className="font-naruto text-xl text-primary mb-4 flex items-center gap-2">
-                <GraduationCap className="w-5 h-5" />
-                Education
-              </h4>
-              <div className="space-y-4">
-                {education.map((edu, index) => (
-                  <div 
-                    key={index}
-                    className="card-scroll rounded-xl p-4 border border-primary/20 hover:border-primary/40 transition-all duration-300"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <h5 className="font-semibold text-foreground flex items-center gap-2">
-                          {edu.institution}
-                          {edu.current && (
-                            <span className="text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full">
-                              Current
-                            </span>
-                          )}
-                        </h5>
-                        <p className="text-muted-foreground text-sm">{edu.degree}</p>
-                        <p className="text-xs text-muted-foreground/70 mt-1">{edu.period}</p>
-                        {edu.skills && (
-                          <div className="flex flex-wrap gap-2 mt-2">
-                            {edu.skills.map((skill) => (
-                              <span key={skill} className="text-xs bg-secondary/20 text-secondary px-2 py-0.5 rounded-full">
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                        {edu.activities && (
-                          <p className="text-xs text-muted-foreground mt-2">
-                            <span className="text-secondary">Activities:</span> {edu.activities.join(", ")}
-                          </p>
-                        )}
-                        {edu.grade && (
-                          <p className="text-xs text-muted-foreground mt-2">
-                            <span className="text-primary">Grade:</span> {edu.grade}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Honors & Awards Section */}
-            <div className="pt-6">
-              <h4 className="font-naruto text-xl text-secondary mb-4 flex items-center gap-2">
-                <Trophy className="w-5 h-5" />
-                Honors & Awards
-              </h4>
-              <div className="space-y-4">
-                {awards.map((award, index) => (
-                  <div 
-                    key={index}
-                    className="card-scroll rounded-xl p-4 border border-secondary/20 hover:border-secondary/40 transition-all duration-300 group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="text-3xl group-hover:scale-110 transition-transform">
-                        {award.icon}
-                      </div>
-                      <div className="flex-1">
-                        <h5 className="font-semibold text-foreground">{award.title}</h5>
-                        <p className="text-sm text-primary">{award.issuer} · {award.date}</p>
-                        <p className="text-sm text-muted-foreground mt-2">{award.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
 
             {/* What I Do */}
             <div className="pt-4">
