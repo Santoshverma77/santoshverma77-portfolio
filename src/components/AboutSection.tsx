@@ -1,6 +1,52 @@
 import { useEffect, useRef, useState } from "react";
-import { Instagram, Twitter } from "lucide-react";
+import { Instagram, Twitter, MapPin, GraduationCap, Trophy, Award } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
+
+const education = [
+  {
+    institution: "Indian Institute of Technology, Madras",
+    degree: "Bachelor of Science - BS, Data Science & AI",
+    period: "Aug 2025",
+    skills: ["Data Science", "Computational Thinking"],
+    current: true,
+  },
+  {
+    institution: "S.M. Arya Public School",
+    degree: "CLASS 12th, Mathematics and Computer Science",
+    period: "May 2021 - Jun 2023",
+    activities: ["Cricket", "Chess", "Atal Tinkering Lab Project"],
+  },
+  {
+    institution: "Saraswati Shishu Vidya Mandir, Giridih, Jharkhand",
+    degree: "Class 8-10",
+    period: "Mar 2018 - Mar 2021",
+    grade: "A",
+  },
+];
+
+const awards = [
+  {
+    title: "Logistic Legend Award – DevFest Ranchi 2025",
+    issuer: "Google Developer Groups (GDG) Ranchi",
+    date: "Oct 2025",
+    description: "Awarded for exceptional contribution to event logistics and operations at DevFest Ranchi 2025.",
+    icon: "🏆",
+  },
+  {
+    title: "Winner – HACKED 3.0 Hackathon (1st Prize)",
+    issuer: "BML Munjal University (BMU)",
+    date: "Mar 2025",
+    description: "Secured 1st Prize at HACKED 3.0, a 36-hour national-level hackathon. Won ₹25,000 competing against 60+ teams.",
+    icon: "🥇",
+  },
+  {
+    title: "Second Prize – State-Level Gyan Vigyan Mela",
+    issuer: "Vidya Vikas Samiti, Jharkhand",
+    date: "Oct 2018",
+    description: "Secured Second Prize at the State-Level Science Exhibition representing Saraswati Shishu Vidya Mandir.",
+    icon: "🥈",
+  },
+];
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -52,7 +98,7 @@ const AboutSection = () => {
           }`}
         >
           {/* Profile Picture with Anime Frame */}
-          <div className="md:col-span-4 flex justify-center">
+          <div className="md:col-span-4 flex flex-col items-center gap-6">
             <div className="relative group">
               {/* Outer rotating ring */}
               <div className="absolute -inset-4 rounded-full border-2 border-dashed border-primary/30 animate-spin" 
@@ -86,6 +132,20 @@ const AboutSection = () => {
                      style={{ animationDelay: "1s" }} />
               </div>
             </div>
+
+            {/* Location Info */}
+            <div className="text-center space-y-2 mt-4">
+              <div className="flex items-center justify-center gap-2 text-primary">
+                <MapPin className="w-4 h-4" />
+                <span className="font-semibold">Current Location</span>
+              </div>
+              <p className="text-muted-foreground">New Delhi, Delhi</p>
+              <div className="flex items-center justify-center gap-2 text-secondary mt-2">
+                <MapPin className="w-4 h-4" />
+                <span className="font-semibold">Hometown</span>
+              </div>
+              <p className="text-muted-foreground">Giridih, Jharkhand</p>
+            </div>
           </div>
 
           {/* About Text */}
@@ -111,6 +171,83 @@ const AboutSection = () => {
               to various tech communities, I thrive on collaboration, knowledge sharing, and empowering fellow developers.
             </p>
 
+            {/* Education Section */}
+            <div className="pt-6">
+              <h4 className="font-naruto text-xl text-primary mb-4 flex items-center gap-2">
+                <GraduationCap className="w-5 h-5" />
+                Education
+              </h4>
+              <div className="space-y-4">
+                {education.map((edu, index) => (
+                  <div 
+                    key={index}
+                    className="card-scroll rounded-xl p-4 border border-primary/20 hover:border-primary/40 transition-all duration-300"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <h5 className="font-semibold text-foreground flex items-center gap-2">
+                          {edu.institution}
+                          {edu.current && (
+                            <span className="text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full">
+                              Current
+                            </span>
+                          )}
+                        </h5>
+                        <p className="text-muted-foreground text-sm">{edu.degree}</p>
+                        <p className="text-xs text-muted-foreground/70 mt-1">{edu.period}</p>
+                        {edu.skills && (
+                          <div className="flex flex-wrap gap-2 mt-2">
+                            {edu.skills.map((skill) => (
+                              <span key={skill} className="text-xs bg-secondary/20 text-secondary px-2 py-0.5 rounded-full">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        {edu.activities && (
+                          <p className="text-xs text-muted-foreground mt-2">
+                            <span className="text-secondary">Activities:</span> {edu.activities.join(", ")}
+                          </p>
+                        )}
+                        {edu.grade && (
+                          <p className="text-xs text-muted-foreground mt-2">
+                            <span className="text-primary">Grade:</span> {edu.grade}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Honors & Awards Section */}
+            <div className="pt-6">
+              <h4 className="font-naruto text-xl text-secondary mb-4 flex items-center gap-2">
+                <Trophy className="w-5 h-5" />
+                Honors & Awards
+              </h4>
+              <div className="space-y-4">
+                {awards.map((award, index) => (
+                  <div 
+                    key={index}
+                    className="card-scroll rounded-xl p-4 border border-secondary/20 hover:border-secondary/40 transition-all duration-300 group"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="text-3xl group-hover:scale-110 transition-transform">
+                        {award.icon}
+                      </div>
+                      <div className="flex-1">
+                        <h5 className="font-semibold text-foreground">{award.title}</h5>
+                        <p className="text-sm text-primary">{award.issuer} · {award.date}</p>
+                        <p className="text-sm text-muted-foreground mt-2">{award.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* What I Do */}
             <div className="pt-4">
               <h4 className="font-naruto text-xl text-primary mb-4">🎯 What I Do:</h4>
@@ -131,25 +268,6 @@ const AboutSection = () => {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Creative Side */}
-            <div className="pt-4 card-scroll rounded-xl p-6">
-              <h4 className="font-naruto text-xl text-secondary mb-3">📸 Creative Side:</h4>
-              <p className="text-muted-foreground">
-                Beyond coding, I'm passionate about capturing moments and telling stories through my lens. 
-                I combine my technical skills with creative vision to document tech events, create educational content, 
-                and bring ideas to life visually.
-              </p>
-            </div>
-
-            {/* What Drives Me */}
-            <div className="pt-2">
-              <h4 className="font-naruto text-xl text-accent mb-3">💡 What Drives Me:</h4>
-              <p className="text-muted-foreground">
-                I'm passionate about solving real-world problems through technology and creating meaningful visual content. 
-                My goal is to continuously upskill in both technical and creative domains to make a lasting impact.
-              </p>
             </div>
 
             {/* Stats */}
