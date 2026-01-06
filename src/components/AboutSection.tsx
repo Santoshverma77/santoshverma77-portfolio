@@ -116,7 +116,7 @@ const AboutSection = () => {
 
             <p className="text-muted-foreground leading-relaxed">
               Currently enrolled in <span className="text-secondary">Apna College's Sigma 7.0</span> and{" "}
-              <span className="text-secondary">Harkirat Singh's Cohort 4.0</span>, I'm honing my skills 
+              <span className="text-secondary">Harkirat Singh's Cohort 1.0</span>, I'm honing my skills 
               in Java, Data Structures & Algorithms (DSA), and MERN Stack Development to build optimized and scalable solutions.
             </p>
 
