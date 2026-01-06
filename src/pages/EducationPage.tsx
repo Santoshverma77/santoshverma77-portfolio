@@ -38,7 +38,7 @@ const education = [
 
 const achievements = [
   { text: "Enrolled in Apna College's Sigma 7.0 for Java & DSA", icon: "⚡" },
-  { text: "Enrolled in Harkirat Singh's Cohort 4.0 for MERN Stack", icon: "🚀" },
+  { text: "Enrolled in Harkirat Singh's Cohort 1.0 for MERN Stack", icon: "🚀" },
   { text: "Core Team Member at GDG Ranchi", icon: "🌟" },
   { text: "Google Student Ambassador", icon: "🎯" },
   { text: "Multiple hackathon winner", icon: "🏆" },
