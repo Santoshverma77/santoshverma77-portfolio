@@ -31,7 +31,7 @@ const PageTransitionLoader = ({ isLoading, onComplete }: PageTransitionLoaderPro
         }
         return prev + 1;
       });
-    }, 100);
+    }, 80);
 
     return () => clearInterval(interval);
   }, [isLoading, onComplete]);
