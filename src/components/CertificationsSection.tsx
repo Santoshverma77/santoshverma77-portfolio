@@ -2,6 +2,13 @@ import { useEffect, useRef, useState } from "react";
 
 const certifications = [
   {
+    name: "ECWoC Assessment - Elite Coders Winter of Code",
+    issuer: "Elite Coders",
+    date: "2025",
+    skills: ["Open Source", "Collaboration"],
+    icon: "❄️",
+  },
+  {
     name: "AWS Certifications",
     issuer: "Amazon Web Services",
     date: "Mar 2025",
