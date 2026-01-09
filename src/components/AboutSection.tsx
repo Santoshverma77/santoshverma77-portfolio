@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Instagram, Twitter, MapPin } from "lucide-react";
+import { Instagram, Twitter, MapPin, Github } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 
 const AboutSection = () => {
@@ -189,6 +189,14 @@ const AboutSection = () => {
                 className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center hover:scale-110 transition-transform"
               >
                 <span className="text-xl">👻</span>
+              </a>
+              <a 
+                href="https://github.com/Santoshverma77" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <Github className="w-5 h-5 text-white" />
               </a>
             </div>
           </div>
