@@ -27,23 +27,28 @@ const AboutSection = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-32 overflow-hidden"
+      className="relative py-24 md:py-32"
     >
-      {/* Background glow */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px]" />
-
-      <div className="container mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6 md:px-10">
         {/* Section Title */}
         <div
-          className={`flex items-center gap-4 mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          className={`flex items-center gap-4 mb-3 transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
         >
-          <div className="w-16 h-1 bg-gradient-fire" />
-          <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
-            ABOUT ME
-          </h2>
+          <span className="text-[10px] tracking-[0.45em] uppercase text-foreground/45">
+            About
+          </span>
+          <div className="h-px w-12 bg-foreground/20" />
         </div>
+        <h2
+          className={`text-[44px] md:text-6xl lg:text-7xl font-light tracking-tight leading-[1] mb-16 md:mb-20 transition-all duration-700 delay-100 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+          style={{ fontFamily: "'Cormorant Garamond', 'Times New Roman', serif" }}
+        >
+          About <span className="italic text-foreground/70">me</span>
+        </h2>
 
         {/* Content */}
         <div
