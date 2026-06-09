@@ -1,19 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 
 const skills = [
-  { name: "Java", level: 90, category: "language" },
-  { name: "JavaScript", level: 85, category: "language" },
-  { name: "Python", level: 80, category: "language" },
-  { name: "React", level: 85, category: "frontend" },
-  { name: "Node.js", level: 80, category: "backend" },
-  { name: "Spring Boot", level: 75, category: "backend" },
-  { name: "MongoDB", level: 75, category: "database" },
-  { name: "MySQL", level: 80, category: "database" },
-  { name: "Git", level: 85, category: "tools" },
-  { name: "REST APIs", level: 85, category: "backend" },
-  { name: "DSA", level: 80, category: "core" },
-  { name: "HTML/CSS", level: 90, category: "frontend" },
+  { name: "Java", level: 90, category: "Language" },
+  { name: "JavaScript", level: 85, category: "Language" },
+  { name: "Python", level: 80, category: "Language" },
+  { name: "React", level: 85, category: "Frontend" },
+  { name: "Node.js", level: 80, category: "Backend" },
+  { name: "Spring Boot", level: 75, category: "Backend" },
+  { name: "MongoDB", level: 75, category: "Database" },
+  { name: "MySQL", level: 80, category: "Database" },
+  { name: "Git", level: 85, category: "Tools" },
+  { name: "REST APIs", level: 85, category: "Backend" },
+  { name: "DSA", level: 80, category: "Core" },
+  { name: "HTML / CSS", level: 90, category: "Frontend" },
 ];
+
+const SERIF = "'Cormorant Garamond', 'Times New Roman', serif";
 
 const SkillsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,18 +23,10 @@ const SkillsSection = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
+      ([entry]) => entry.isIntersecting && setIsVisible(true),
+      { threshold: 0.15 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
@@ -40,64 +34,88 @@ const SkillsSection = () => {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative py-32 overflow-hidden"
+      className="relative py-24 md:py-32"
     >
-      {/* Background */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-[600px] bg-gradient-to-l from-secondary/10 to-transparent blur-3xl" />
-
-      <div className="container mx-auto px-6">
-        {/* Section Title */}
+      <div className="max-w-6xl mx-auto px-6 md:px-10">
+        {/* Eyebrow */}
         <div
-          className={`flex items-center gap-4 mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          className={`flex items-center gap-4 mb-3 transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
         >
-          <div className="w-16 h-1 bg-gradient-fire" />
-          <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
-            SKILLS & JUTSU
-          </h2>
+          <span className="text-[10px] tracking-[0.45em] uppercase text-foreground/45">
+            Know
+          </span>
+          <div className="h-px w-12 bg-foreground/20" />
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Title */}
+        <h2
+          className={`text-[44px] md:text-6xl lg:text-7xl font-light tracking-tight leading-[1] mb-16 md:mb-20 transition-all duration-700 delay-100 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+          style={{ fontFamily: SERIF }}
+        >
+          My <span className="italic text-foreground/70">skillset</span>
+        </h2>
+
+        {/* Editorial list */}
+        <ul className="divide-y divide-foreground/10 border-y border-foreground/10">
           {skills.map((skill, index) => (
-            <div
+            <li
               key={skill.name}
-              className={`card-scroll rounded-xl p-6 transition-all duration-700 hover:scale-105 hover:glow-fire ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              className={`group grid grid-cols-12 items-center gap-4 py-5 md:py-6 transition-all duration-700 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
               }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ transitionDelay: `${150 + index * 60}ms` }}
             >
-              <div className="flex justify-between items-center mb-3">
-                <span className="font-bold text-foreground">{skill.name}</span>
-                <span className="text-primary font-naruto text-lg">{skill.level}%</span>
-              </div>
-              <div className="h-2 bg-muted rounded-full overflow-hidden">
+              <span className="col-span-1 text-[11px] tracking-[0.3em] text-foreground/35 tabular-nums">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <span
+                className="col-span-5 md:col-span-4 text-xl md:text-2xl font-light tracking-tight"
+                style={{ fontFamily: SERIF }}
+              >
+                {skill.name}
+              </span>
+
+              <span className="col-span-3 md:col-span-2 text-[10px] tracking-[0.3em] uppercase text-foreground/45">
+                {skill.category}
+              </span>
+
+              <div className="col-span-2 md:col-span-4 h-px bg-foreground/10 relative overflow-hidden">
                 <div
-                  className="h-full bg-gradient-fire rounded-full transition-all duration-1000 ease-out"
+                  className="absolute left-0 top-0 h-full bg-foreground/70 transition-all duration-[1200ms] ease-out"
                   style={{
                     width: isVisible ? `${skill.level}%` : "0%",
-                    transitionDelay: `${index * 100 + 300}ms`,
+                    transitionDelay: `${400 + index * 60}ms`,
                   }}
                 />
               </div>
-              <div className="mt-2 text-xs text-muted-foreground capitalize">
-                {skill.category}
-              </div>
-            </div>
-          ))}
-        </div>
 
-        {/* Additional Skills Text */}
-        <div
-          className={`mt-12 text-center transition-all duration-1000 delay-500 ${
+              <span
+                className="col-span-1 text-right text-sm tabular-nums text-foreground/60"
+                style={{ fontFamily: SERIF }}
+              >
+                {skill.level}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Footer note */}
+        <p
+          className={`mt-10 text-sm text-foreground/50 transition-all duration-700 delay-700 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
         >
-          <p className="text-muted-foreground">
-            Also experienced with: <span className="text-primary">Express.js</span>, <span className="text-secondary">DevOps Basics</span>, <span className="text-accent">SQL</span>, and more...
-          </p>
-        </div>
+          Also fluent with{" "}
+          <span className="italic text-foreground/80" style={{ fontFamily: SERIF }}>
+            Express · DevOps · SQL · TypeScript
+          </span>
+          .
+        </p>
       </div>
     </section>
   );
