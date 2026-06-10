@@ -14,30 +14,51 @@ interface ContactEmailRequest {
   message: string;
 }
 
+const escapeHtml = (text: string) =>
+  text.replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  }[char] || char));
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     const { name, email, message }: ContactEmailRequest = await req.json();
-    
-    console.log("Received contact form submission:", { name, email, message: message.substring(0, 50) + "..." });
 
-    // Validate input
     if (!name || !email || !message) {
-      console.error("Missing required fields");
       return new Response(
         JSON.stringify({ error: "All fields are required" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
-    // Send notification email to you using Resend API
+    const trimmedName = String(name).trim();
+    const trimmedEmail = String(email).trim();
+    const trimmedMessage = String(message).trim();
+
+    if (
+      trimmedName.length === 0 || trimmedName.length > 100 ||
+      trimmedMessage.length === 0 || trimmedMessage.length > 2000 ||
+      trimmedEmail.length > 255 || !emailRegex.test(trimmedEmail)
+    ) {
+      return new Response(
+        JSON.stringify({ error: "Invalid input" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const safeName = escapeHtml(trimmedName);
+    const safeEmail = escapeHtml(trimmedEmail);
+    const safeMessage = escapeHtml(trimmedMessage).replace(/\n/g, "<br>");
+
     const notificationRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -47,17 +68,17 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Portfolio Contact <onboarding@resend.dev>",
         to: ["santoshskv2005@gmail.com"],
-        subject: `🍃 New Message from ${name}`,
+        subject: `🍃 New Message from ${safeName}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%); color: #fff; padding: 30px; border-radius: 15px;">
             <h1 style="color: #f97316; border-bottom: 2px solid #f97316; padding-bottom: 10px;">🍥 New Contact Form Submission</h1>
             <div style="background: rgba(249, 115, 22, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
-              <p style="margin: 10px 0;"><strong style="color: #f97316;">👤 Name:</strong> ${name}</p>
-              <p style="margin: 10px 0;"><strong style="color: #f97316;">📧 Email:</strong> <a href="mailto:${email}" style="color: #60a5fa;">${email}</a></p>
+              <p style="margin: 10px 0;"><strong style="color: #f97316;">👤 Name:</strong> ${safeName}</p>
+              <p style="margin: 10px 0;"><strong style="color: #f97316;">📧 Email:</strong> <a href="mailto:${safeEmail}" style="color: #60a5fa;">${safeEmail}</a></p>
             </div>
             <div style="background: rgba(96, 165, 250, 0.1); padding: 20px; border-radius: 10px;">
               <p style="color: #f97316; margin-bottom: 10px;"><strong>💬 Message:</strong></p>
-              <p style="line-height: 1.6;">${message.replace(/\n/g, '<br>')}</p>
+              <p style="line-height: 1.6;">${safeMessage}</p>
             </div>
             <p style="color: #888; font-size: 12px; margin-top: 20px; text-align: center;">"Believe it! 信じろ!" 🍥</p>
           </div>
@@ -66,28 +87,32 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     if (!notificationRes.ok) {
-      const error = await notificationRes.text();
-      console.error("Failed to send notification email:", error);
-      throw new Error(`Failed to send email: ${error}`);
+      const errorText = await notificationRes.text();
+      console.error("Resend API error:", {
+        status: notificationRes.status,
+        statusText: notificationRes.statusText,
+        body: errorText,
+        timestamp: new Date().toISOString(),
+      });
+      return new Response(
+        JSON.stringify({ error: "Unable to send message at this time. Please try again later." }),
+        { status: 502, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
     }
-
-    console.log("Notification email sent successfully to santoshskv2005@gmail.com");
 
     return new Response(
       JSON.stringify({ success: true, message: "Message sent successfully!" }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: any) {
-    console.error("Error in send-contact-email function:", error);
+    console.error("Error in send-contact-email function:", {
+      message: error?.message,
+      stack: error?.stack,
+      timestamp: new Date().toISOString(),
+    });
     return new Response(
-      JSON.stringify({ error: error.message }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      JSON.stringify({ error: "Unable to send message at this time. Please try again later." }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
 };
