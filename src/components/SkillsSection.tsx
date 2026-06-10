@@ -1,103 +1,71 @@
-import { useEffect, useRef, useState } from "react";
+import SectionHeader from "./SectionHeader";
+import { useReveal, revealStyle } from "@/hooks/useReveal";
 
 const skills = [
-  { name: "Java", level: 90, category: "language" },
-  { name: "JavaScript", level: 85, category: "language" },
-  { name: "Python", level: 80, category: "language" },
-  { name: "React", level: 85, category: "frontend" },
-  { name: "Node.js", level: 80, category: "backend" },
-  { name: "Spring Boot", level: 75, category: "backend" },
-  { name: "MongoDB", level: 75, category: "database" },
-  { name: "MySQL", level: 80, category: "database" },
-  { name: "Git", level: 85, category: "tools" },
-  { name: "REST APIs", level: 85, category: "backend" },
-  { name: "DSA", level: 80, category: "core" },
-  { name: "HTML/CSS", level: 90, category: "frontend" },
+  { name: "Java", level: 90, category: "Language" },
+  { name: "JavaScript", level: 85, category: "Language" },
+  { name: "Python", level: 80, category: "Language" },
+  { name: "React", level: 85, category: "Frontend" },
+  { name: "Node.js", level: 80, category: "Backend" },
+  { name: "Spring Boot", level: 75, category: "Backend" },
+  { name: "MongoDB", level: 75, category: "Database" },
+  { name: "MySQL", level: 80, category: "Database" },
+  { name: "Git", level: 85, category: "Tools" },
+  { name: "REST APIs", level: 85, category: "Backend" },
+  { name: "DSA", level: 80, category: "Core" },
+  { name: "HTML / CSS", level: 90, category: "Frontend" },
 ];
 
 const SkillsSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const { ref, visible } = useReveal<HTMLElement>(0.12);
 
   return (
     <section
       id="skills"
-      ref={sectionRef}
-      className="relative py-32 overflow-hidden"
+      ref={ref}
+      className="relative bg-[#0a0a0a] text-white py-24 md:py-32 overflow-hidden border-t border-white/5"
     >
-      {/* Background */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-[600px] bg-gradient-to-l from-secondary/10 to-transparent blur-3xl" />
+      <div className="mx-auto w-full max-w-6xl px-6 md:px-12">
+        <SectionHeader eyebrow="Skills" title="Tools of the" italic="craft" visible={visible} />
 
-      <div className="container mx-auto px-6">
-        {/* Section Title */}
-        <div
-          className={`flex items-center gap-4 mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <div className="w-16 h-1 bg-gradient-fire" />
-          <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
-            SKILLS & JUTSU
-          </h2>
-        </div>
-
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
           {skills.map((skill, index) => (
             <div
               key={skill.name}
-              className={`card-scroll rounded-xl p-6 transition-all duration-700 hover:scale-105 hover:glow-fire ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              className="group"
+              style={revealStyle(visible, index, 60)}
             >
-              <div className="flex justify-between items-center mb-3">
-                <span className="font-bold text-foreground">{skill.name}</span>
-                <span className="text-primary font-naruto text-lg">{skill.level}%</span>
+              <div className="flex justify-between items-baseline mb-2">
+                <span className="text-white/90 text-[15px]">{skill.name}</span>
+                <span
+                  className="italic text-white/50 text-lg"
+                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                >
+                  {skill.level}
+                </span>
               </div>
-              <div className="h-2 bg-muted rounded-full overflow-hidden">
+              <div className="h-px bg-white/10 overflow-hidden">
                 <div
-                  className="h-full bg-gradient-fire rounded-full transition-all duration-1000 ease-out"
+                  className="h-full bg-white/70 transition-all duration-1000 ease-out"
                   style={{
-                    width: isVisible ? `${skill.level}%` : "0%",
-                    transitionDelay: `${index * 100 + 300}ms`,
+                    width: visible ? `${skill.level}%` : "0%",
+                    transitionDelay: `${index * 60 + 300}ms`,
                   }}
                 />
               </div>
-              <div className="mt-2 text-xs text-muted-foreground capitalize">
+              <div className="mt-2 text-[10px] tracking-[0.3em] uppercase text-white/30">
                 {skill.category}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Additional Skills Text */}
-        <div
-          className={`mt-12 text-center transition-all duration-1000 delay-500 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
+        <p
+          className="mt-16 text-white/40 text-sm"
+          style={revealStyle(visible, skills.length, 60)}
         >
-          <p className="text-muted-foreground">
-            Also experienced with: <span className="text-primary">Express.js</span>, <span className="text-secondary">DevOps Basics</span>, <span className="text-accent">SQL</span>, and more...
-          </p>
-        </div>
+          Also working with Express.js, DevOps basics, SQL, and more.
+        </p>
       </div>
     </section>
   );
