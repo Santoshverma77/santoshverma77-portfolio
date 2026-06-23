@@ -85,6 +85,16 @@ const Navbar = () => {
                 />
               </Link>
             ))}
+            <a
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={handleHover}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-all"
+            >
+              <Download className="w-3.5 h-3.5" />
+              Resume
+            </a>
           </div>
 
           {/* Mobile Toggle */}
