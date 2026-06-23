@@ -101,7 +101,8 @@ const FreelanceSection = () => {
               key={w.title}
               href={w.link}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer external"
+              referrerPolicy="no-referrer"
               className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 transition-all"
               style={revealStyle(visible, i + 1, 80)}
             >
