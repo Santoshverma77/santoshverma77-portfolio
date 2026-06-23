@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import { usePrefersReducedMotion } from "@/hooks/useReveal";
+import { RESUME_URL } from "@/lib/links";
 
 const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
