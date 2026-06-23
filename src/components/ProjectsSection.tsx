@@ -70,7 +70,7 @@ const ProjectsSection = () => {
               style={revealStyle(visible, i, 80)}
             >
               <a
-                href={p.demo ?? p.link}
+                href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group grid grid-cols-12 items-baseline gap-4 py-6 md:py-8 transition-colors"
