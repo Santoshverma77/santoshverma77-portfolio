@@ -14,6 +14,16 @@ const skills = [
   { name: "REST APIs", level: 85, category: "Backend" },
   { name: "DSA", level: 80, category: "Core" },
   { name: "HTML / CSS", level: 90, category: "Frontend" },
+  { name: "Adobe Premiere Pro", level: 90, category: "Creative" },
+  { name: "CapCut", level: 90, category: "Creative" },
+  { name: "Photoshop", level: 80, category: "Creative" },
+  { name: "Canva", level: 85, category: "Creative" },
+  { name: "Photography", level: 85, category: "Creative" },
+  { name: "Videography", level: 85, category: "Creative" },
+  { name: "Visual Storytelling", level: 85, category: "Creative" },
+  { name: "Motion Graphics", level: 75, category: "Creative" },
+  { name: "Social Media Mgmt", level: 85, category: "Creative" },
+  { name: "AI Content Creation", level: 80, category: "Creative" },
 ];
 
 const SkillsSection = () => {

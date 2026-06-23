@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Download } from "lucide-react";
 import { useSounds } from "@/contexts/SoundContext";
+import { RESUME_URL } from "@/lib/links";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/education", label: "Education" },
   { href: "/skills", label: "Skills" },
   { href: "/projects", label: "Projects" },
+  { href: "/freelance", label: "Freelance" },
   { href: "/certifications", label: "Certificates" },
-  { href: "/awards", label: "Awards" },
   { href: "/experience", label: "Experience" },
   { href: "/contact", label: "Contact" },
 ];
@@ -84,6 +85,16 @@ const Navbar = () => {
                 />
               </Link>
             ))}
+            <a
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={handleHover}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-all"
+            >
+              <Download className="w-3.5 h-3.5" />
+              Resume
+            </a>
           </div>
 
           {/* Mobile Toggle */}
@@ -136,6 +147,16 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-black text-sm font-medium w-fit"
+            >
+              <Download className="w-3.5 h-3.5" />
+              Resume
+            </a>
           </div>
         </div>
       </div>

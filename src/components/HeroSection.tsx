@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import { usePrefersReducedMotion } from "@/hooks/useReveal";
+import { RESUME_URL } from "@/lib/links";
 
 const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
@@ -174,6 +175,15 @@ const HeroSection = () => {
             Reach out
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group px-6 py-3 rounded-full border border-white/20 text-white text-sm tracking-wide hover:bg-white/5 hover:border-white/40 transition-all flex items-center gap-2"
+          >
+            <Download className="w-4 h-4" />
+            Resume
+          </a>
         </div>
 
         <div
