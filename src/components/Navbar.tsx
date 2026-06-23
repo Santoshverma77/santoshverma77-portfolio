@@ -147,6 +147,16 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-black text-sm font-medium w-fit"
+            >
+              <Download className="w-3.5 h-3.5" />
+              Resume
+            </a>
           </div>
         </div>
       </div>
