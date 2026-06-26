@@ -6,63 +6,60 @@
 
 @layer base {
   :root, .dark {
-    --background: 220 20% 4%;
-    --foreground: 40 100% 97%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
 
-    --card: 220 15% 8%;
-    --card-foreground: 40 100% 97%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 15% 8%;
-    --popover-foreground: 40 100% 97%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 25 100% 50%;
-    --primary-foreground: 220 20% 4%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 80% 60%;
-    --secondary-foreground: 220 20% 4%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 40 20% 60%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 0 70% 55%;
-    --accent-foreground: 40 100% 97%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 25 50% 20%;
-    --input: 220 15% 15%;
-    --ring: 25 100% 50%;
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Custom Naruto theme tokens */
-    --naruto-orange: 25 100% 50%;
-    --naruto-orange-glow: 25 100% 60%;
-    --naruto-red: 0 70% 55%;
-    --naruto-blue: 200 80% 60%;
-    --naruto-gold: 40 100% 55%;
-    --naruto-dark: 220 20% 6%;
-    --naruto-darker: 220 25% 3%;
+    --naruto-orange: 217 91% 60%;
+    --naruto-orange-glow: 217 91% 70%;
+    --naruto-red: 217 91% 60%;
+    --naruto-blue: 217 91% 60%;
+    --naruto-gold: 0 0% 80%;
+    --naruto-dark: 0 0% 6%;
+    --naruto-darker: 0 0% 3%;
 
-    /* Gradients */
-    --gradient-fire: linear-gradient(135deg, hsl(25 100% 50%), hsl(0 70% 55%));
-    --gradient-chakra: linear-gradient(135deg, hsl(200 80% 60%), hsl(260 70% 60%));
-    --gradient-sunset: linear-gradient(135deg, hsl(40 100% 55%), hsl(25 100% 50%), hsl(0 70% 55%));
+    --gradient-fire: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 45%));
+    --gradient-chakra: linear-gradient(135deg, hsl(217 91% 60%), hsl(240 80% 60%));
+    --gradient-sunset: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 50%), hsl(0 0% 10%));
 
-    /* Shadows */
-    --shadow-glow: 0 0 30px hsl(25 100% 50% / 0.3);
-    --shadow-fire: 0 0 60px hsl(25 100% 50% / 0.4), 0 0 100px hsl(0 70% 55% / 0.2);
-    --shadow-chakra: 0 0 40px hsl(200 80% 60% / 0.3);
+    --shadow-glow: 0 0 30px hsl(217 91% 60% / 0.35);
+    --shadow-fire: 0 0 60px hsl(217 91% 60% / 0.35), 0 0 100px hsl(217 91% 60% / 0.15);
+    --shadow-chakra: 0 0 40px hsl(217 91% 60% / 0.3);
 
-    --sidebar-background: 220 20% 4%;
-    --sidebar-foreground: 40 100% 97%;
-    --sidebar-primary: 25 100% 50%;
-    --sidebar-primary-foreground: 220 20% 4%;
-    --sidebar-accent: 220 15% 12%;
-    --sidebar-accent-foreground: 40 100% 97%;
-    --sidebar-border: 25 50% 20%;
-    --sidebar-ring: 25 100% 50%;
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 217 91% 60%;
   }
 
   .light {
@@ -130,12 +127,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Chakra Petch', system-ui, sans-serif;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff6b00' d='M12 2L4 20h3l5-12 5 12h3L12 2z'/%3E%3C/svg%3E") 12 0, auto;
-  }
-
-  a, button, [role="button"] {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff8c00' d='M12 2L4 20h3l5-12 5 12h3L12 2z'/%3E%3Ccircle cx='12' cy='18' r='2' fill='%23ff6b00'/%3E%3C/svg%3E") 12 0, pointer;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 
   ::selection {
