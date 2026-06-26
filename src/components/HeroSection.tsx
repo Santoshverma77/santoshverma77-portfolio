@@ -52,7 +52,7 @@ const HeroSection = () => {
 
       {/* Top-left label */}
       <div
-        className={`absolute top-24 left-6 md:left-12 text-[10px] md:text-xs tracking-[0.4em] text-white/60 uppercase transition-all duration-700 ${
+        className={`absolute top-24 left-6 md:left-24 text-[10px] md:text-xs tracking-[0.4em] text-white/60 uppercase transition-all duration-700 ${
           mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
         }`}
         style={{ transform: `translateY(${px(-0.05)}px)`, opacity: fadeOut }}
@@ -92,15 +92,15 @@ const HeroSection = () => {
 
       {/* Scroll indicator (fades out on scroll) */}
       <div
-        className="absolute bottom-10 left-6 md:left-12 flex flex-col items-start gap-3 transition-opacity duration-500"
+        className="absolute bottom-10 left-6 md:left-24 flex flex-col items-start gap-3 transition-opacity duration-500"
         style={{ opacity: mounted ? fadeOut : 0 }}
       >
         <span className="text-[10px] tracking-[0.4em] uppercase text-white/50">Scroll</span>
         <div className="relative w-px h-12 bg-white/10 overflow-hidden">
           {!reducedMotion && (
-            <div className="hero-scroll-line absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/80 to-transparent" />
+            <div className="hero-scroll-line absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary to-transparent" />
           )}
-          {reducedMotion && <div className="w-full h-full bg-white/40" />}
+          {reducedMotion && <div className="w-full h-full bg-primary/60" />}
         </div>
       </div>
 
@@ -163,7 +163,7 @@ const HeroSection = () => {
         >
           <a
             href="#projects"
-            className="group px-6 py-3 rounded-full bg-white text-black text-sm tracking-wide hover:bg-white/90 transition-all flex items-center gap-2"
+            className="group px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm tracking-wide hover:opacity-90 transition-all flex items-center gap-2 shadow-[0_0_30px_hsl(var(--primary)/0.45)]"
           >
             See Works
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
