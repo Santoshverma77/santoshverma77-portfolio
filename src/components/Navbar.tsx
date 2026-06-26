@@ -1,166 +1,110 @@
-import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Download } from "lucide-react";
+import { Home, User, Briefcase, Code2, FolderKanban, Mail, FileText, Sparkles } from "lucide-react";
 import { useSounds } from "@/contexts/SoundContext";
 import { RESUME_URL } from "@/lib/links";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/skills", label: "Skills" },
-  { href: "/projects", label: "Projects" },
-  { href: "/freelance", label: "Freelance" },
-  { href: "/certifications", label: "Certificates" },
-  { href: "/experience", label: "Experience" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home", icon: Home },
+  { href: "/about", label: "About", icon: User },
+  { href: "/skills", label: "Skills", icon: Code2 },
+  { href: "/projects", label: "Projects", icon: FolderKanban },
+  { href: "/freelance", label: "Freelance", icon: Sparkles },
+  { href: "/experience", label: "Experience", icon: Briefcase },
+  { href: "/resume", label: "Resume", icon: FileText },
 ];
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const { playClick, playHover, playNavigate } = useSounds();
+  const { playHover, playNavigate } = useSounds();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleNavClick = () => {
-    playNavigate();
-  };
-
-  const handleHover = () => {
-    playHover();
-  };
+  const isActive = (href: string) =>
+    href === "/" ? location.pathname === "/" : location.pathname.startsWith(href);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-background/90 backdrop-blur-xl border-b border-primary/20 shadow-lg"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link 
-            to="/" 
-            className="flex items-center gap-3 group"
-            onClick={handleNavClick}
-            onMouseEnter={handleHover}
-          >
-            <div className="relative">
-              <div className="w-10 h-10 rounded-full bg-gradient-fire flex items-center justify-center animate-pulse-glow">
-                <span className="font-naruto text-xl text-primary-foreground">S</span>
+    <>
+      {/* Desktop: floating left vertical rail */}
+      <nav
+        className="hidden md:flex fixed left-5 top-1/2 -translate-y-1/2 z-50 flex-col items-center gap-2 p-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/10 shadow-2xl"
+        aria-label="Primary"
+      >
+        {navLinks.map((link) => {
+          const Icon = link.icon;
+          const active = isActive(link.href);
+          return (
+            <Link
+              key={link.href}
+              to={link.href}
+              onClick={() => playNavigate()}
+              onMouseEnter={() => playHover()}
+              aria-label={link.label}
+              className="group relative"
+            >
+              <div
+                className={`relative flex items-center justify-center w-11 h-11 rounded-full transition-all duration-300 ${
+                  active
+                    ? "bg-primary text-primary-foreground shadow-[0_0_24px_hsl(var(--primary)/0.6)]"
+                    : "text-white/55 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <Icon className="w-[18px] h-[18px]" strokeWidth={1.75} />
               </div>
-              <div className="absolute inset-0 rounded-full bg-gradient-fire blur-md opacity-50 group-hover:opacity-80 transition-opacity" />
-            </div>
-            <span className="font-naruto text-2xl tracking-wider text-gradient-fire hidden sm:block">
-              SANTOSH VERMA
-            </span>
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                onClick={handleNavClick}
-                onMouseEnter={handleHover}
-                className={`relative text-muted-foreground hover:text-primary transition-colors duration-300 group font-medium ${
-                  location.pathname === link.href ? "text-primary" : ""
-                }`}
-              >
+              {/* Tooltip */}
+              <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-md bg-black/90 border border-white/10 text-[11px] tracking-wide text-white/90 opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-opacity">
                 {link.label}
-                <span 
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-fire transition-all duration-300 ${
-                    location.pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
-                  }`} 
-                />
-              </Link>
-            ))}
-            <a
-              href={RESUME_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onMouseEnter={handleHover}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-all"
-            >
-              <Download className="w-3.5 h-3.5" />
-              Resume
-            </a>
-          </div>
+              </span>
+            </Link>
+          );
+        })}
 
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => {
-              setMobileOpen(!mobileOpen);
-              playClick();
-            }}
-            className="lg:hidden flex flex-col gap-1.5 p-2"
-            aria-label="Toggle menu"
-          >
-            <span
-              className={`w-6 h-0.5 bg-primary transition-all duration-300 ${
-                mobileOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-primary transition-all duration-300 ${
-                mobileOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-primary transition-all duration-300 ${
-                mobileOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
-          </button>
-        </div>
+        <div className="w-6 h-px bg-white/10 my-1" />
 
-        {/* Mobile Menu */}
-        <div
-          className={`lg:hidden overflow-hidden transition-all duration-500 ${
-            mobileOpen ? "max-h-96 mt-4" : "max-h-0"
-          }`}
+        <a
+          href={RESUME_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact"
+          onMouseEnter={() => playHover()}
+          className="group relative"
         >
-          <div className="flex flex-col gap-4 py-4 border-t border-primary/20">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                onClick={() => {
-                  setMobileOpen(false);
-                  handleNavClick();
-                }}
-                onMouseEnter={handleHover}
-                className={`text-muted-foreground hover:text-primary transition-colors duration-300 font-medium pl-2 border-l-2 hover:border-primary ${
-                  location.pathname === link.href ? "text-primary border-primary" : "border-transparent"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href={RESUME_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMobileOpen(false)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-black text-sm font-medium w-fit"
-            >
-              <Download className="w-3.5 h-3.5" />
-              Resume
-            </a>
+          <div className="flex items-center justify-center w-11 h-11 rounded-full bg-primary text-primary-foreground shadow-[0_0_24px_hsl(var(--primary)/0.6)] hover:scale-105 transition-transform">
+            <Mail className="w-[18px] h-[18px]" strokeWidth={1.75} />
           </div>
-        </div>
-      </div>
-    </nav>
+        </a>
+      </nav>
+
+      {/* Mobile: bottom horizontal pill */}
+      <nav
+        className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 p-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl"
+        aria-label="Primary mobile"
+      >
+        {navLinks.slice(0, 5).map((link) => {
+          const Icon = link.icon;
+          const active = isActive(link.href);
+          return (
+            <Link
+              key={link.href}
+              to={link.href}
+              onClick={() => playNavigate()}
+              aria-label={link.label}
+              className={`flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 ${
+                active
+                  ? "bg-primary text-primary-foreground"
+                  : "text-white/60 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Icon className="w-[17px] h-[17px]" strokeWidth={1.75} />
+            </Link>
+          );
+        })}
+        <Link
+          to="/contact"
+          aria-label="Contact"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground"
+        >
+          <Mail className="w-[17px] h-[17px]" strokeWidth={1.75} />
+        </Link>
+      </nav>
+    </>
   );
 };
 
