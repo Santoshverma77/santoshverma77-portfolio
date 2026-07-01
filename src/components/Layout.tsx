@@ -27,33 +27,21 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       {showLoader && <LoadingScreen />}
-      <main className="relative min-h-screen bg-background overflow-hidden flex flex-col">
-        {/* Background gradient */}
-        <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-naruto-darker pointer-events-none" />
-        
-        {/* Animated particles */}
-        <LeafParticles />
-        
-        {/* Naruto themed effects */}
-        <NarutoEffects />
-        
-        {/* Theme Toggle */}
+      <main className="relative min-h-screen bg-background text-foreground overflow-hidden flex flex-col">
+        {/* Subtle dark background */}
+        <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(var(--primary)/0.06),_transparent_60%)] pointer-events-none" />
+
+        {/* Floating controls */}
         <ThemeToggle />
-        
-        {/* Sound Toggle */}
         <SoundToggle />
-        
-        {/* Background Music Player */}
         <BackgroundMusicPlayer />
-        
-        {/* Scroll to Top */}
         <ScrollToTop />
-        
+
         {/* Navigation */}
         <Navbar />
-        
-        {/* Main content */}
-        <div className="relative z-10 flex-1">
+
+        {/* Main content with room for left rail on desktop */}
+        <div className="relative z-10 flex-1 md:pl-24">
           {children}
         </div>
 
