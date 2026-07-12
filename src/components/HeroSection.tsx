@@ -4,6 +4,7 @@ import { ArrowUpRight, Download } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import { usePrefersReducedMotion } from "@/hooks/useReveal";
 import { RESUME_URL } from "@/lib/links";
+import Hero3DEmblem from "@/components/Hero3DEmblem";
 
 const SERIF = "'Cormorant Garamond', 'Times New Roman', serif";
 
@@ -99,9 +100,13 @@ const HeroSection = () => {
             style={{ transform: `translate3d(0, ${py(0.08)}px, 0)` }}
           >
             <div className="relative">
+              {/* 3D emblem — orbits behind and around the portrait */}
+              {!reducedMotion && (
+                <Hero3DEmblem className="absolute -inset-24 md:-inset-32 z-0" />
+              )}
               {/* Red glow disc */}
               <div
-                className="absolute inset-0 rounded-full blur-2xl"
+                className="absolute inset-0 rounded-full blur-2xl z-0"
                 style={{
                   background:
                     "radial-gradient(circle, rgba(220,38,38,0.55), rgba(120,20,30,0.35) 55%, transparent 75%)",
@@ -109,7 +114,8 @@ const HeroSection = () => {
                 }}
               />
               {/* Circle frame */}
-              <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-[300px] md:h-[300px] rounded-full overflow-hidden">
+              <div className="relative z-10 w-56 h-56 sm:w-64 sm:h-64 md:w-[300px] md:h-[300px] rounded-full overflow-hidden">
+
                 <div
                   className="absolute inset-0 rounded-full"
                   style={{
