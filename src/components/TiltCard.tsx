@@ -17,15 +17,31 @@ interface Props {
   type?: "button" | "submit";
 }
 
-const TiltCard = ({ children, className, max = 10, as = "div", style, ...rest }: Props) => {
+const TiltCard = ({
+  children,
+  className,
+  max = 10,
+  as = "div",
+  style,
+  onMouseEnter,
+  onMouseLeave: userLeave,
+  type,
+  ...rest
+}: Props) => {
   const { ref, style: tiltStyle, onMouseMove, onMouseLeave } = useTilt3D(max);
   const Tag: any = as;
+  const btnType = as === "button" ? (type ?? "button") : undefined;
   return (
     <Tag
       {...rest}
+      type={btnType}
       ref={ref as any}
       onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={(e: React.MouseEvent) => {
+        onMouseLeave();
+        userLeave?.(e);
+      }}
       className={className}
       style={{ ...style, ...tiltStyle, transformStyle: "preserve-3d", willChange: "transform" }}
     >
