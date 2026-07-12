@@ -67,20 +67,22 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "Portfolio Contact <onboarding@resend.dev>",
-        to: ["santoshskv2005@gmail.com"],
-        subject: `🍃 New Message from ${safeName}`,
+        to: ["santoshskv0007@gmail.com"],
+        reply_to: trimmedEmail,
+        subject: `New portfolio message from ${safeName}`,
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%); color: #fff; padding: 30px; border-radius: 15px;">
-            <h1 style="color: #f97316; border-bottom: 2px solid #f97316; padding-bottom: 10px;">🍥 New Contact Form Submission</h1>
-            <div style="background: rgba(249, 115, 22, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
-              <p style="margin: 10px 0;"><strong style="color: #f97316;">👤 Name:</strong> ${safeName}</p>
-              <p style="margin: 10px 0;"><strong style="color: #f97316;">📧 Email:</strong> <a href="mailto:${safeEmail}" style="color: #60a5fa;">${safeEmail}</a></p>
+          <div style="font-family: -apple-system, Segoe UI, Arial, sans-serif; max-width: 600px; margin: 0 auto; background:#ffffff; color:#0a0a0a; padding:32px; border:1px solid #e5e7eb; border-radius:12px;">
+            <h1 style="margin:0 0 16px; font-size:20px; font-weight:600; color:#0a0a0a;">New portfolio message</h1>
+            <p style="margin:0 0 24px; color:#6b7280; font-size:14px;">You received a new message from your portfolio contact form.</p>
+            <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
+              <tr><td style="padding:8px 0; color:#6b7280; width:80px; font-size:13px;">Name</td><td style="padding:8px 0; color:#0a0a0a; font-size:14px;">${safeName}</td></tr>
+              <tr><td style="padding:8px 0; color:#6b7280; font-size:13px;">Email</td><td style="padding:8px 0; font-size:14px;"><a href="mailto:${safeEmail}" style="color:#2563eb; text-decoration:none;">${safeEmail}</a></td></tr>
+            </table>
+            <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:16px;">
+              <div style="color:#6b7280; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Message</div>
+              <p style="margin:0; line-height:1.6; color:#0a0a0a; font-size:14px; white-space:pre-wrap;">${safeMessage}</p>
             </div>
-            <div style="background: rgba(96, 165, 250, 0.1); padding: 20px; border-radius: 10px;">
-              <p style="color: #f97316; margin-bottom: 10px;"><strong>💬 Message:</strong></p>
-              <p style="line-height: 1.6;">${safeMessage}</p>
-            </div>
-            <p style="color: #888; font-size: 12px; margin-top: 20px; text-align: center;">"Believe it! 信じろ!" 🍥</p>
+            <p style="color:#9ca3af; font-size:12px; margin-top:24px;">Reply directly to this email to respond to ${safeName}.</p>
           </div>
         `,
       }),
