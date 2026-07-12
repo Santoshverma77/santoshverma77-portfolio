@@ -103,7 +103,7 @@ const ServicesSection = () => {
           </div>
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black text-sm whitespace-nowrap hover:bg-white/90 transition-all"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm whitespace-nowrap shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.55)] transition-all"
           >
             Hire me
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

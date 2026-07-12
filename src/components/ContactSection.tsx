@@ -1,305 +1,161 @@
-import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { useRef, useState } from "react";
+import { ArrowUpRight, Github, Instagram, Linkedin, Mail, Send } from "lucide-react";
 import { toast } from "sonner";
-import RasenganLoader from "./RasenganLoader";
 import { supabase } from "@/integrations/supabase/client";
+import SectionHeader from "./SectionHeader";
+import { useReveal, revealStyle } from "@/hooks/useReveal";
+
+const socials = [
+  { name: "Email",     href: "mailto:santoshskv2005@gmail.com",             icon: Mail,      handle: "santoshskv2005@gmail.com" },
+  { name: "GitHub",    href: "https://github.com/Santoshverma77",           icon: Github,    handle: "@Santoshverma77" },
+  { name: "LinkedIn",  href: "https://linkedin.com/in/santoshverma77",      icon: Linkedin,  handle: "@santoshverma77" },
+  { name: "Instagram", href: "https://www.instagram.com/santoshverma_77/",  icon: Instagram, handle: "@santoshverma_77" },
+];
 
 const ContactSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [focusedField, setFocusedField] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const { ref, visible } = useReveal<HTMLElement>(0.1);
+  const [focus, setFocus] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!form.name || !form.email || !form.message) {
       toast.error("Please fill in all fields");
       return;
     }
-
-    setIsSubmitting(true);
-
+    setSubmitting(true);
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        },
-      });
-
-      if (error) {
-        console.error("Error sending message:", error);
-        toast.error("Failed to send message. Please try again.");
-        return;
-      }
-
-      toast.success("Message sent successfully! I'll get back to you soon. 🍃");
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.error("Error sending message:", error);
-      toast.error("Failed to send message. Please try again.");
+      const { error } = await supabase.functions.invoke("send-contact-email", { body: form });
+      if (error) throw error;
+      toast.success("Message sent — I'll get back to you soon.");
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to send. Please try again.");
     } finally {
-      setIsSubmitting(false);
+      setSubmitting(false);
     }
   };
-
-  const socialLinks = [
-    { 
-      name: "GitHub", 
-      url: "https://github.com/Santoshverma77",
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-        </svg>
-      ),
-    },
-    { 
-      name: "LinkedIn", 
-      url: "https://linkedin.com/in/santoshverma77",
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-        </svg>
-      ),
-    },
-    { 
-      name: "Email", 
-      url: "mailto:santoshskv2005@gmail.com",
-      icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      ),
-    },
-  ];
 
   return (
     <section
       id="contact"
-      ref={sectionRef}
-      className="relative py-32 overflow-hidden"
+      ref={ref}
+      className="relative bg-[#0a0a0a] text-white py-24 md:py-32 overflow-hidden border-t border-white/5"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-pulse-glow" />
-      <div className="absolute left-0 bottom-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px] animate-float" />
-      
-      {/* Floating particles */}
-      {isVisible && (
-        <>
-          <div className="absolute top-20 left-[10%] w-2 h-2 bg-primary/40 rounded-full animate-float" style={{ animationDelay: '0s' }} />
-          <div className="absolute top-40 right-[15%] w-3 h-3 bg-primary/30 rounded-full animate-float" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-40 left-[20%] w-2 h-2 bg-secondary/40 rounded-full animate-float" style={{ animationDelay: '2s' }} />
-          <div className="absolute top-60 right-[25%] w-4 h-4 bg-primary/20 rounded-full animate-float" style={{ animationDelay: '0.5s' }} />
-        </>
-      )}
+      <div className="mx-auto w-full max-w-6xl px-6 md:px-12">
+        <SectionHeader eyebrow="Contact" title="Let's build" italic="something" visible={visible} />
 
-      <div className="container mx-auto px-6">
-        {/* Section Title with animation */}
-        <div
-          className={`flex items-center gap-4 mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <div className={`w-16 h-1 bg-gradient-fire ${isVisible ? 'animate-shimmer' : ''}`} 
-               style={{ background: 'linear-gradient(90deg, hsl(25 100% 50%), hsl(0 70% 55%), hsl(25 100% 50%))' }} />
-          <h2 className="font-naruto text-5xl md:text-6xl text-gradient-fire">
-            CONTACT
-          </h2>
-          <div className={`text-4xl ${isVisible ? 'animate-bounce-in' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
-            🍃
-          </div>
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
+          {/* Left column — intro & socials */}
+          <div className="md:col-span-5 space-y-8" style={revealStyle(visible, 0, 80)}>
+            <p
+              className="text-2xl md:text-3xl font-light leading-snug text-white/90"
+              style={{ fontFamily: "'Cormorant Garamond', 'Times New Roman', serif" }}
+            >
+              Have a project, a role, or just a good idea?{" "}
+              <span className="italic text-white/60">I'd love to hear it.</span>
+            </p>
+            <p className="text-white/55 leading-relaxed text-[15px]">
+              Open to freelance video &amp; content work, full-stack collaborations, and full-time
+              opportunities in AI / product engineering.
+            </p>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form with enhanced animations */}
-          <div
-            className={`transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-y-0 animate-fade-in-up" : "opacity-0 translate-y-10"
-            }`}
-          >
-            <div className="card-scroll rounded-2xl p-8 hover-lift group relative overflow-hidden">
-              {/* Animated border gradient */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                   style={{ 
-                     background: 'linear-gradient(135deg, hsl(25 100% 50% / 0.1), transparent, hsl(0 70% 55% / 0.1))',
-                   }} />
-              
-              <h3 className="font-naruto text-2xl text-foreground mb-6 flex items-center gap-2">
-                Send a Message 
-                <span className={`${isVisible ? 'animate-float' : ''}`}>🍃</span>
-              </h3>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className={`transition-all duration-300 ${focusedField === 'name' ? 'scale-[1.02]' : ''}`}>
-                  <Input
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    onFocus={() => setFocusedField('name')}
-                    onBlur={() => setFocusedField(null)}
-                    className={`bg-background/50 border-primary/20 focus:border-primary transition-all duration-300 ${
-                      focusedField === 'name' ? 'shadow-[0_0_20px_hsl(25_100%_50%/0.3)]' : ''
-                    }`}
-                    disabled={isSubmitting}
-                  />
-                </div>
-                <div className={`transition-all duration-300 ${focusedField === 'email' ? 'scale-[1.02]' : ''}`}>
-                  <Input
-                    type="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    onFocus={() => setFocusedField('email')}
-                    onBlur={() => setFocusedField(null)}
-                    className={`bg-background/50 border-primary/20 focus:border-primary transition-all duration-300 ${
-                      focusedField === 'email' ? 'shadow-[0_0_20px_hsl(25_100%_50%/0.3)]' : ''
-                    }`}
-                    disabled={isSubmitting}
-                  />
-                </div>
-                <div className={`transition-all duration-300 ${focusedField === 'message' ? 'scale-[1.02]' : ''}`}>
-                  <Textarea
-                    placeholder="Your Message"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    onFocus={() => setFocusedField('message')}
-                    onBlur={() => setFocusedField(null)}
-                    className={`bg-background/50 border-primary/20 focus:border-primary min-h-[150px] transition-all duration-300 ${
-                      focusedField === 'message' ? 'shadow-[0_0_20px_hsl(25_100%_50%/0.3)]' : ''
-                    }`}
-                    disabled={isSubmitting}
-                  />
-                </div>
-                <Button 
-                  type="submit" 
-                  className="w-full bg-gradient-fire hover:opacity-90 font-naruto text-lg group/btn relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_hsl(25_100%_50%/0.5)]"
-                  disabled={isSubmitting}
-                >
-                  {/* Animated shine effect */}
-                  <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                  
-                  {isSubmitting ? (
-                    <div className="flex items-center gap-3">
-                      <RasenganLoader size="sm" />
-                      <span>Sending...</span>
-                    </div>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      Send Message
-                      <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                    </span>
-                  )}
-                </Button>
-              </form>
-            </div>
-          </div>
-
-          {/* Contact Info with staggered animations */}
-          <div
-            className={`transition-all duration-700 delay-300 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
-            <div className="space-y-8">
-              <div className={`${isVisible ? 'animate-fade-in-up stagger-1' : 'opacity-0'}`}>
-                <h3 className="font-naruto text-2xl text-foreground mb-4 flex items-center gap-2">
-                  Let's Connect! 
-                  <span className="animate-pulse">🤝</span>
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Whether it's collaborating on tech projects, discussing photography techniques, 
-                  or working on community initiatives, I'm always excited to connect!
-                </p>
-              </div>
-
-              <div className={`space-y-4 ${isVisible ? 'animate-fade-in-up stagger-2' : 'opacity-0'}`}>
-                <p className="text-muted-foreground group">
-                  <span className="text-primary font-semibold">📧 Email:</span>{" "}
-                  <a href="mailto:santoshskv2005@gmail.com" 
-                     className="hover:text-primary transition-all duration-300 hover:tracking-wide">
-                    santoshskv2005@gmail.com
-                  </a>
-                </p>
-              </div>
-
-              {/* Social Links with hover animations */}
-              <div className={`flex gap-4 ${isVisible ? 'animate-fade-in-up stagger-3' : 'opacity-0'}`}>
-                {socialLinks.map((link, index) => (
+            <div className="pt-4 space-y-3">
+              <div className="text-[10px] tracking-[0.4em] uppercase text-white/40 mb-3">Elsewhere</div>
+              {socials.map((s, i) => {
+                const Icon = s.icon;
+                return (
                   <a
-                    key={link.name}
-                    href={link.url}
+                    key={s.name}
+                    href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative p-4 rounded-xl bg-card border border-primary/20 hover:border-primary transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover-glow"
-                    style={{ animationDelay: `${0.4 + index * 0.1}s` }}
+                    className="group flex items-center justify-between py-3 border-b border-white/10 hover:border-primary/40 transition-colors"
+                    style={revealStyle(visible, i + 1, 60)}
                   >
-                    <div className="text-muted-foreground group-hover:text-primary transition-all duration-300 group-hover:rotate-12">
-                      {link.icon}
+                    <div className="flex items-center gap-3">
+                      <Icon className="w-4 h-4 text-white/50 group-hover:text-primary transition-colors" strokeWidth={1.75} />
+                      <span className="text-white/80 group-hover:text-white text-[15px] transition-colors">
+                        {s.name}
+                      </span>
+                      <span className="text-white/40 text-xs hidden sm:inline">{s.handle}</span>
                     </div>
-                    {/* Glow effect */}
-                    <div className="absolute inset-0 rounded-xl bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
-                    
-                    {/* Tooltip */}
-                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-card border border-primary/30 rounded text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
-                      {link.name}
-                    </span>
+                    <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                   </a>
-                ))}
-              </div>
-
-              {/* Decorative Quote with animation */}
-              <div className={`card-scroll rounded-xl p-6 mt-8 hover-lift ${isVisible ? 'animate-fade-in-up stagger-4' : 'opacity-0'}`}>
-                <p className="font-naruto text-lg text-primary italic">
-                  "I'm not gonna run away, I never go back on my word! That's my nindo: my ninja way!"
-                </p>
-                <p className="text-muted-foreground text-sm mt-2 flex items-center gap-2">
-                  — Naruto Uzumaki 
-                  <span className="animate-pulse">🍥</span>
-                </p>
-              </div>
+                );
+              })}
             </div>
           </div>
-        </div>
 
-        {/* Footer with animation */}
-        <div
-          className={`mt-20 pt-8 border-t border-border/50 text-center transition-all duration-1000 delay-700 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <p className="text-muted-foreground">
-            © 2024 <span className="text-primary hover:animate-pulse cursor-default">Santosh Kumar Verma</span>. Built with passion.
-          </p>
-          <p className="text-sm text-muted-foreground mt-2 flex items-center justify-center gap-2">
-            "Believe it! 信じろ!" 
-            <span className="animate-spin-slow inline-block">🍥</span>
-          </p>
+          {/* Right column — form */}
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="md:col-span-7 space-y-6 p-6 md:p-8 rounded-2xl border border-white/10 bg-white/[0.02]"
+            style={revealStyle(visible, 1, 80)}
+          >
+            {[
+              { key: "name" as const,  label: "Your name",  type: "text",  placeholder: "Full name" },
+              { key: "email" as const, label: "Your email", type: "email", placeholder: "you@example.com" },
+            ].map((field) => (
+              <div key={field.key}>
+                <label className="block text-[10px] tracking-[0.3em] uppercase text-white/40 mb-2">
+                  {field.label}
+                </label>
+                <input
+                  type={field.type}
+                  value={form[field.key]}
+                  onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                  onFocus={() => setFocus(field.key)}
+                  onBlur={() => setFocus(null)}
+                  placeholder={field.placeholder}
+                  disabled={submitting}
+                  className={`w-full bg-transparent border-b py-2.5 text-white placeholder-white/25 outline-none transition-colors ${
+                    focus === field.key ? "border-primary" : "border-white/15 hover:border-white/30"
+                  }`}
+                />
+              </div>
+            ))}
+
+            <div>
+              <label className="block text-[10px] tracking-[0.3em] uppercase text-white/40 mb-2">
+                Message
+              </label>
+              <textarea
+                rows={5}
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                onFocus={() => setFocus("message")}
+                onBlur={() => setFocus(null)}
+                placeholder="Tell me about your project, timeline, and what success looks like."
+                disabled={submitting}
+                className={`w-full bg-transparent border-b py-2.5 text-white placeholder-white/25 outline-none resize-none transition-colors ${
+                  focus === "message" ? "border-primary" : "border-white/15 hover:border-white/30"
+                }`}
+              />
+            </div>
+
+            <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
+              <p className="text-xs text-white/40">
+                Usually replies within 24 hours.
+              </p>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.55)] disabled:opacity-60 transition-all"
+              >
+                {submitting ? "Sending…" : (
+                  <>
+                    Send message
+                    <Send className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </section>
