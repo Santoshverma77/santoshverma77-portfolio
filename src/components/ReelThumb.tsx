@@ -41,7 +41,8 @@ const ReelThumb = ({ reelUrl, category, index, playing, className = "" }: Props)
     return () => obs.disconnect();
   }, []);
 
-  const shouldMount = embed && inView && playing;
+  // Mount whenever in view so the Instagram thumbnail is visible; hover just adds emphasis.
+  const shouldMount = !!embed && inView;
 
   return (
     <div ref={wrapRef} className={`relative overflow-hidden bg-[#0a0a0a] ${className}`}>
