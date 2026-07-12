@@ -4,6 +4,7 @@ import { ArrowUpRight, Download } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import { usePrefersReducedMotion } from "@/hooks/useReveal";
 import { RESUME_URL } from "@/lib/links";
+import Hero3DEmblem from "@/components/Hero3DEmblem";
 
 const SERIF = "'Cormorant Garamond', 'Times New Roman', serif";
 
