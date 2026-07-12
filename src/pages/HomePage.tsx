@@ -5,6 +5,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import FreelanceSection from "@/components/FreelanceSection";
 import ServicesSection from "@/components/ServicesSection";
 import ResumeSection from "@/components/ResumeSection";
+import ContactSection from "@/components/ContactSection";
 import PageTransition from "@/components/PageTransition";
 
 const HomePage = () => {
@@ -17,8 +18,10 @@ const HomePage = () => {
       <FreelanceSection />
       <ServicesSection />
       <ResumeSection />
+      <ContactSection />
     </PageTransition>
   );
 };
 
 export default HomePage;
+
