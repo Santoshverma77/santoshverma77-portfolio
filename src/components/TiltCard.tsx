@@ -5,12 +5,16 @@ interface Props {
   children: ReactNode;
   className?: string;
   max?: number;
-  as?: "a" | "div";
+  as?: "a" | "div" | "button";
   href?: string;
   target?: string;
   rel?: string;
   referrerPolicy?: React.HTMLAttributeReferrerPolicy;
   style?: React.CSSProperties;
+  onClick?: React.MouseEventHandler;
+  onMouseEnter?: React.MouseEventHandler;
+  onMouseLeave?: React.MouseEventHandler;
+  type?: "button" | "submit";
 }
 
 const TiltCard = ({ children, className, max = 10, as = "div", style, ...rest }: Props) => {
