@@ -114,10 +114,10 @@ const Footer = () => {
             </div>
             <div className="mt-4 text-sm text-muted-foreground space-y-1">
               <a
-                href="mailto:santoshskv0007@gmail.com"
+                href="mailto:santoshskv2005@gmail.com"
                 className="block hover:text-primary transition-colors"
               >
-                santoshskv0007@gmail.com
+                santoshskv2005@gmail.com
               </a>
               <a
                 href="tel:+917319662244"
