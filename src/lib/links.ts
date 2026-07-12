@@ -10,7 +10,7 @@ export const SOCIALS = {
   instagramPersonal: "https://www.instagram.com/santoshverma_77/",
   github: "https://github.com/Santoshverma77",
   linkedin: "https://linkedin.com/in/santoshverma",
-  email: "santoshskv0007@gmail.com",
+  email: "santoshskv2005@gmail.com",
   phone: "+917319662244",
   phoneDisplay: "+91 73196 62244",
 };
