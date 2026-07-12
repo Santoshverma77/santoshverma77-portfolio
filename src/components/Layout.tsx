@@ -8,6 +8,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import ScrollToTop from "@/components/ScrollToTop";
 import SoundToggle from "@/components/SoundToggle";
 import BackgroundMusicPlayer from "@/components/BackgroundMusicPlayer";
+import Scene3DBackground from "@/components/Scene3DBackground";
 interface LayoutProps {
   children: ReactNode;
 }
@@ -30,6 +31,10 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="relative min-h-screen bg-background text-foreground overflow-hidden flex flex-col">
         {/* Subtle dark background */}
         <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(var(--primary)/0.06),_transparent_60%)] pointer-events-none" />
+
+        {/* Global 3D background */}
+        <Scene3DBackground />
+
 
         {/* Floating controls */}
         <ThemeToggle />
