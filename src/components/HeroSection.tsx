@@ -99,10 +99,16 @@ const HeroSection = () => {
             }`}
             style={{ transform: `translate3d(0, ${py(0.08)}px, 0)` }}
           >
-            <div className="relative">
-              {/* 3D emblem — orbits behind and around the portrait */}
+            <div className="relative flex items-center justify-center">
+              {/* 3D emblem — square, centered exactly behind the portrait */}
               {!reducedMotion && (
-                <Hero3DEmblem className="absolute -inset-24 md:-inset-32 z-0" />
+                <div
+                  aria-hidden
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0
+                             w-[420px] h-[420px] sm:w-[500px] sm:h-[500px] md:w-[620px] md:h-[620px]"
+                >
+                  <Hero3DEmblem className="absolute inset-0" />
+                </div>
               )}
               {/* Red glow disc */}
               <div
