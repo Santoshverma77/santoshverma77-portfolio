@@ -164,7 +164,7 @@ const FreelanceSection = () => {
             href={SOCIALS.instagramCreative}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-black text-sm hover:bg-white/90 transition-all"
+            className="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-primary-foreground text-sm shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.55)] transition-all"
           >
             <Instagram className="w-4 h-4" />
             @_insta.fx_

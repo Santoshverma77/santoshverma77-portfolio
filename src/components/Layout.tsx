@@ -41,7 +41,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Navbar />
 
         {/* Main content with room for left rail on desktop */}
-        <div className="relative z-10 flex-1 md:pl-24">
+        <div className="relative z-10 flex-1 md:pl-24 pb-28 md:pb-0">
           {children}
         </div>
 

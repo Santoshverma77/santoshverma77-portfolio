@@ -18,7 +18,7 @@ const ThemeToggle = () => {
   return (
     <motion.button
       onClick={() => setIsDark(!isDark)}
-      className="fixed top-24 right-4 z-50 w-12 h-12 rounded-full bg-card/80 backdrop-blur-sm border border-naruto-orange/30 flex items-center justify-center shadow-lg hover:shadow-naruto-orange/30 transition-all duration-300"
+      className="fixed top-6 right-4 z-50 w-11 h-11 rounded-full bg-black/70 backdrop-blur-xl border border-white/10 hover:border-primary/40 hover:shadow-[0_0_24px_hsl(var(--primary)/0.35)] flex items-center justify-center transition-all duration-300"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       aria-label="Toggle theme"
