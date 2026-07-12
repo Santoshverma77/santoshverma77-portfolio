@@ -1,12 +1,13 @@
 import { useRef, useState } from "react";
-import { ArrowUpRight, Github, Instagram, Linkedin, Mail, Send } from "lucide-react";
+import { ArrowUpRight, Github, Instagram, Linkedin, Mail, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import SectionHeader from "./SectionHeader";
 import { useReveal, revealStyle } from "@/hooks/useReveal";
 
 const socials = [
-  { name: "Email",     href: "mailto:santoshskv2005@gmail.com",             icon: Mail,      handle: "santoshskv2005@gmail.com" },
+  { name: "Email",     href: "mailto:santoshskv0007@gmail.com",             icon: Mail,      handle: "santoshskv0007@gmail.com" },
+  { name: "Phone",     href: "tel:+917319662244",                           icon: Phone,     handle: "+91 73196 62244" },
   { name: "GitHub",    href: "https://github.com/Santoshverma77",           icon: Github,    handle: "@Santoshverma77" },
   { name: "LinkedIn",  href: "https://linkedin.com/in/santoshverma77",      icon: Linkedin,  handle: "@santoshverma77" },
   { name: "Instagram", href: "https://www.instagram.com/santoshverma_77/",  icon: Instagram, handle: "@santoshverma_77" },

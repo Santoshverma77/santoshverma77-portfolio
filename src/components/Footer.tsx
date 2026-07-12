@@ -112,12 +112,18 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-            <div className="mt-4 text-sm text-muted-foreground">
-              <a 
-                href="mailto:santoshskv2005@gmail.com"
-                className="hover:text-primary transition-colors"
+            <div className="mt-4 text-sm text-muted-foreground space-y-1">
+              <a
+                href="mailto:santoshskv0007@gmail.com"
+                className="block hover:text-primary transition-colors"
               >
-                santoshskv2005@gmail.com
+                santoshskv0007@gmail.com
+              </a>
+              <a
+                href="tel:+917319662244"
+                className="block hover:text-primary transition-colors"
+              >
+                +91 73196 62244
               </a>
             </div>
           </div>
