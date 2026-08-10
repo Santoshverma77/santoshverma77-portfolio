@@ -19,6 +19,8 @@ import EducationPage from "./pages/EducationPage";
 import AwardsPage from "./pages/AwardsPage";
 import FreelancePage from "./pages/FreelancePage";
 import ResumePage from "./pages/ResumePage";
+import AuthPage from "./pages/AuthPage";
+import OAuthConsent from "./pages/OAuthConsent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
