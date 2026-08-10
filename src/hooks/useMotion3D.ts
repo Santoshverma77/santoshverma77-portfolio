@@ -1,12 +1,11 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 
 const KEY = "portfolio:motion-3d";
-const QUALITY_KEY = "portfolio:3d-quality";
 const GRAIN_KEY = "portfolio:3d-grain";
 const ABERRATION_KEY = "portfolio:3d-aberration";
 
-export type Quality3D = "low" | "medium" | "high";
-const QUALITIES: Quality3D[] = ["low", "medium", "high"];
+/** Rendering quality is locked to high. */
+export type Quality3D = "high";
 
 export const usePrefersReducedMotion = () => {
   const [reduced, setReduced] = useState<boolean>(() =>
@@ -29,7 +28,6 @@ export const usePrefersReducedMotion = () => {
 
 type State = {
   enabled: boolean;
-  quality: Quality3D;
   /** 0 – 100 film grain intensity */
   grain: number;
   /** 0 – 100 chromatic aberration intensity */
@@ -46,10 +44,9 @@ const readNumber = (key: string, fallback: number) => {
 
 const initial = (): State => {
   if (typeof window === "undefined")
-    return { enabled: true, quality: "high", grain: 35, aberration: 30 };
+    return { enabled: true, grain: 35, aberration: 30 };
   const stored = localStorage.getItem(KEY);
   const coarse = window.matchMedia("(pointer: coarse)").matches;
-  const storedQuality = localStorage.getItem(QUALITY_KEY) as Quality3D | null;
   return {
     enabled:
       stored === "off"
@@ -57,12 +54,6 @@ const initial = (): State => {
         : stored === "on"
         ? true
         : !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    quality:
-      storedQuality && QUALITIES.includes(storedQuality)
-        ? storedQuality
-        : coarse
-        ? "medium"
-        : "high",
     grain: readNumber(GRAIN_KEY, coarse ? 20 : 35),
     aberration: readNumber(ABERRATION_KEY, coarse ? 18 : 30),
   };
@@ -75,7 +66,6 @@ const setState = (patch: Partial<State>) => {
   state = { ...state, ...patch };
   if (typeof window !== "undefined") {
     localStorage.setItem(KEY, state.enabled ? "on" : "off");
-    localStorage.setItem(QUALITY_KEY, state.quality);
     localStorage.setItem(GRAIN_KEY, String(state.grain));
     localStorage.setItem(ABERRATION_KEY, String(state.aberration));
   }
@@ -98,10 +88,8 @@ export const useMotion3D = () => {
   return {
     enabled: snap.enabled,
     toggle: () => setState({ enabled: !state.enabled }),
-    quality: snap.quality,
-    setQuality: (q: Quality3D) => setState({ quality: q }),
-    cycleQuality: () =>
-      setState({ quality: QUALITIES[(QUALITIES.indexOf(state.quality) + 1) % QUALITIES.length] }),
+    /** Rendering is always high quality. */
+    quality: "high" as Quality3D,
     grain: snap.grain,
     setGrain: (v: number) => setState({ grain: clamp(v) }),
     aberration: snap.aberration,
