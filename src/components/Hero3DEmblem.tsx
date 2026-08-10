@@ -322,7 +322,7 @@ const Scene = ({ mobile, quality, still, orbitRadius, pointer, grain, aberration
       )}
 
       {/* Cinematic post-processing: grain + chromatic aberration + bloom + vignette */}
-      {quality !== "low" && (grain > 0.01 || aberration > 0.01 || true) && (
+      {quality !== "low" && (
         <EffectComposer multisampling={high ? 4 : 0} enableNormalPass={false}>
           <ChromaticAberration
             blendFunction={BlendFunction.NORMAL}
