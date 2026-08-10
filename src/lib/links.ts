@@ -23,8 +23,8 @@ export const RESUMES: ResumeVariant[] = [
     italic: "Full-Stack Developer",
     description:
       "Engineering resume: full-stack projects, languages, frameworks, open-source contributions, certifications and community leadership.",
-    url: fullStackResume.url,
-    previewUrl: `${fullStackResume.url}#view=FitH`,
+    url: FULLSTACK_RESUME,
+    previewUrl: `${FULLSTACK_RESUME}#view=FitH`,
     fileName: "Santosh-Verma-FullStack-Resume.pdf",
   },
   {
@@ -35,8 +35,8 @@ export const RESUMES: ResumeVariant[] = [
     italic: "Video Editor & Creator",
     description:
       "Creative resume: video editing, cinematography, motion graphics, content creation and the tools I work with day to day.",
-    url: videoResume.url,
-    previewUrl: `${videoResume.url}#view=FitH`,
+    url: VIDEO_RESUME,
+    previewUrl: `${VIDEO_RESUME}#view=FitH`,
     fileName: "Santosh-Verma-Video-Editing-Resume.pdf",
   },
 ];
