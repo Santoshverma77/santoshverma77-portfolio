@@ -119,14 +119,19 @@ const HeroSection = () => {
             style={{ transform: `translate3d(0, ${py(0.08)}px, 0)` }}
           >
             <div className="relative flex items-center justify-center">
-              {/* 3D emblem — square, centered exactly behind the portrait */}
-              {!reducedMotion && (
+              {/* 3D emblem — square, sized from the measured portrait */}
+              {motion3D && (
                 <div
                   aria-hidden
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0
-                             w-[420px] h-[420px] sm:w-[500px] sm:h-[500px] md:w-[620px] md:h-[620px]"
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
+                  style={{ width: portraitSize * 2.06, height: portraitSize * 2.06 }}
                 >
-                  <Hero3DEmblem className="absolute inset-0" />
+                  <Hero3DEmblem
+                    className="absolute inset-0"
+                    portraitSize={portraitSize}
+                    quality={quality}
+                    reducedMotion={reducedMotion}
+                  />
                 </div>
               )}
               {/* Red glow disc */}
@@ -139,7 +144,8 @@ const HeroSection = () => {
                 }}
               />
               {/* Circle frame */}
-              <div className="relative z-10 w-56 h-56 sm:w-64 sm:h-64 md:w-[300px] md:h-[300px] rounded-full overflow-hidden">
+              <div ref={portraitRef} className="relative z-10 w-56 h-56 sm:w-64 sm:h-64 md:w-[300px] md:h-[300px] rounded-full overflow-hidden">
+
 
                 <div
                   className="absolute inset-0 rounded-full"
