@@ -256,9 +256,12 @@ interface SceneProps {
   still: boolean;
   orbitRadius: number;
   pointer: React.MutableRefObject<Pointer>;
+  /** 0–1 normalized intensities */
+  grain: number;
+  aberration: number;
 }
 
-const Scene = ({ mobile, quality, still, orbitRadius, pointer }: SceneProps) => {
+const Scene = ({ mobile, quality, still, orbitRadius, pointer, grain, aberration }: SceneProps) => {
   const high = quality === "high";
   const medium = quality === "medium";
 
