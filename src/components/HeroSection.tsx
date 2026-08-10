@@ -30,7 +30,7 @@ const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const reducedMotion = usePrefersReducedMotion();
-  const { quality, enabled: motion3D } = useMotion3D();
+  const { quality, enabled: motion3D, grain, aberration } = useMotion3D();
 
   // Measure the portrait so the emblem always scales/orbits around the face
   const portraitRef = useRef<HTMLDivElement>(null);
@@ -131,6 +131,8 @@ const HeroSection = () => {
                     portraitSize={portraitSize}
                     quality={quality}
                     reducedMotion={reducedMotion}
+                    grain={grain}
+                    aberration={aberration}
                   />
                 </div>
               )}

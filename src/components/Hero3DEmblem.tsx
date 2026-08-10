@@ -256,9 +256,12 @@ interface SceneProps {
   still: boolean;
   orbitRadius: number;
   pointer: React.MutableRefObject<Pointer>;
+  /** 0–1 normalized intensities */
+  grain: number;
+  aberration: number;
 }
 
-const Scene = ({ mobile, quality, still, orbitRadius, pointer }: SceneProps) => {
+const Scene = ({ mobile, quality, still, orbitRadius, pointer, grain, aberration }: SceneProps) => {
   const high = quality === "high";
   const medium = quality === "medium";
 
@@ -323,12 +326,21 @@ const Scene = ({ mobile, quality, still, orbitRadius, pointer }: SceneProps) => 
         <EffectComposer multisampling={high ? 4 : 0} enableNormalPass={false}>
           <ChromaticAberration
             blendFunction={BlendFunction.NORMAL}
-            offset={new THREE.Vector2(high ? 0.0012 : 0.0007, high ? 0.0016 : 0.0009)}
+            offset={
+              new THREE.Vector2(
+                (high ? 0.0024 : 0.0014) * aberration,
+                (high ? 0.0032 : 0.0018) * aberration
+              )
+            }
             radialModulation
             modulationOffset={0.35}
           />
           <Bloom intensity={high ? 0.75 : 0.45} luminanceThreshold={0.22} luminanceSmoothing={0.85} mipmapBlur />
-          <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={high ? 0.35 : 0.22} />
+          <Noise
+            premultiply
+            blendFunction={BlendFunction.SOFT_LIGHT}
+            opacity={(high ? 0.7 : 0.45) * grain}
+          />
           <Vignette eskil={false} offset={0.25} darkness={0.75} />
         </EffectComposer>
       )}
@@ -342,6 +354,10 @@ interface Props {
   portraitSize?: number;
   quality?: Quality3D;
   reducedMotion?: boolean;
+  /** 0–100 film grain intensity */
+  grain?: number;
+  /** 0–100 chromatic aberration intensity */
+  aberration?: number;
 }
 
 const Hero3DEmblem = ({
@@ -349,6 +365,8 @@ const Hero3DEmblem = ({
   portraitSize = 300,
   quality = "high",
   reducedMotion = false,
+  grain = 35,
+  aberration = 30,
 }: Props) => {
   const mobile = useIsMobile();
   const pointer = useRef<Pointer>({ x: 0, y: 0 });
@@ -423,14 +441,17 @@ const Hero3DEmblem = ({
           still={reducedMotion}
           orbitRadius={orbitRadius}
           pointer={pointer}
+          grain={grain / 100}
+          aberration={aberration / 100}
         />
       </Canvas>
 
-      {/* Static film-grain overlay — always on for cinematic texture */}
+      {/* Static film-grain overlay — scales with the grain control */}
       <div
         aria-hidden
-        className="absolute inset-0 rounded-full mix-blend-overlay opacity-[0.18]"
+        className="absolute inset-0 rounded-full mix-blend-overlay"
         style={{
+          opacity: (grain / 100) * 0.34,
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.55'/></svg>\")",
           backgroundSize: "140px 140px",
