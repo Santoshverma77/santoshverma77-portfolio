@@ -170,12 +170,6 @@ const Scene3DBackground = () => {
                 className="w-full accent-primary cursor-pointer"
               />
             </label>
-
-            {quality === "low" && (
-              <p className="mt-3 text-[10px] leading-relaxed text-white/35">
-                Post-processing is off on Low quality — switch to Med/High to see these.
-              </p>
-            )}
           </div>
         )}
 
@@ -191,18 +185,6 @@ const Scene3DBackground = () => {
             {enabled ? <Sparkles className="w-4 h-4" /> : <SparklesIcon className="w-4 h-4 opacity-40" />}
           </button>
 
-          {/* HDRI / render quality */}
-          {enabled && (
-            <button
-              type="button"
-              onClick={cycleQuality}
-              aria-label={`3D quality: ${quality}. Click to change`}
-              title={`3D quality: ${quality}`}
-              className="h-9 px-3 rounded-full border border-white/15 bg-black/60 backdrop-blur-md text-[10px] tracking-[0.25em] uppercase text-white/70 hover:text-white hover:border-primary/50 transition-all shadow-lg"
-            >
-              {quality === "high" ? "High" : quality === "medium" ? "Med" : "Low"}
-            </button>
-          )}
 
           {/* Effects panel toggle */}
           {enabled && (
