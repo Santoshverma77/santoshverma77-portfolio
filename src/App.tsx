@@ -60,6 +60,8 @@ const AnimatedRoutes = () => {
           <Route path="/freelance" element={<FreelancePage />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
