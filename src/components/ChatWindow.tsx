@@ -141,7 +141,7 @@ const ChatWindow = ({ onClose }: { onClose: () => void }) => {
           e.preventDefault();
           ask(input);
         }}
-        className="flex items-end gap-2 border-t border-border/60 px-3 py-3"
+        className="flex items-end gap-2 border-t border-border/60 px-3 pb-24 pt-3 sm:pb-3"
       >
         <textarea
           ref={inputRef}
