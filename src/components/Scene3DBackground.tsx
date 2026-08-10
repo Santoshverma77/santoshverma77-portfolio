@@ -97,7 +97,7 @@ const Scene = ({ mobile }: { mobile: boolean }) => {
 
 const Scene3DBackground = () => {
   const mobile = useIsMobile();
-  const { enabled, toggle } = useMotion3D();
+  const { enabled, toggle, quality, cycleQuality } = useMotion3D();
 
   return (
     <>
@@ -114,18 +114,34 @@ const Scene3DBackground = () => {
         </div>
       )}
 
-      {/* Reduced-motion toggle */}
-      <button
-        type="button"
-        onClick={toggle}
-        aria-label={enabled ? "Disable 3D background" : "Enable 3D background"}
-        title={enabled ? "Disable 3D background" : "Enable 3D background"}
-        className="fixed bottom-4 left-4 z-50 w-9 h-9 rounded-full border border-white/15 bg-black/60 backdrop-blur-md text-white/70 hover:text-white hover:border-primary/50 transition-all flex items-center justify-center shadow-lg"
-      >
-        {enabled ? <Sparkles className="w-4 h-4" /> : <SparklesIcon className="w-4 h-4 opacity-40" />}
-      </button>
+      <div className="fixed bottom-4 left-4 z-50 flex items-center gap-2">
+        {/* Reduced-motion toggle */}
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={enabled ? "Disable 3D motion" : "Enable 3D motion"}
+          title={enabled ? "Disable 3D motion" : "Enable 3D motion"}
+          className="w-9 h-9 rounded-full border border-white/15 bg-black/60 backdrop-blur-md text-white/70 hover:text-white hover:border-primary/50 transition-all flex items-center justify-center shadow-lg"
+        >
+          {enabled ? <Sparkles className="w-4 h-4" /> : <SparklesIcon className="w-4 h-4 opacity-40" />}
+        </button>
+
+        {/* HDRI / render quality */}
+        {enabled && (
+          <button
+            type="button"
+            onClick={cycleQuality}
+            aria-label={`3D quality: ${quality}. Click to change`}
+            title={`3D quality: ${quality}`}
+            className="h-9 px-3 rounded-full border border-white/15 bg-black/60 backdrop-blur-md text-[10px] tracking-[0.25em] uppercase text-white/70 hover:text-white hover:border-primary/50 transition-all shadow-lg"
+          >
+            {quality === "high" ? "High" : quality === "medium" ? "Med" : "Low"}
+          </button>
+        )}
+      </div>
     </>
   );
 };
+
 
 export default Scene3DBackground;
