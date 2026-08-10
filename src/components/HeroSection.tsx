@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Download } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import { usePrefersReducedMotion } from "@/hooks/useReveal";
+import { useMotion3D } from "@/hooks/useMotion3D";
 import { RESUME_URL } from "@/lib/links";
 import Hero3DEmblem from "@/components/Hero3DEmblem";
 
