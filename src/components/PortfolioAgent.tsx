@@ -4,6 +4,13 @@ import { Bot, Loader2, Send, Sparkles, X } from "lucide-react";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
+/** The model answers in plain text; strip stray markdown emphasis/bullet syntax. */
+const clean = (text: string) =>
+  text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/^\s*[*-]\s+/gm, "• ")
+    .replace(/`{1,3}/g, "");
+
 const SUGGESTIONS = [
   "Summarise my full-stack experience for a recruiter",
   "Write a short bio for a video editing client",
@@ -142,7 +149,7 @@ const PortfolioAgent = () => {
                       : "mr-auto max-w-[92%] bg-muted/60 text-foreground"
                   }`}
                 >
-                  {m.content ||
+                  {(m.role === "assistant" ? clean(m.content) : m.content) ||
                     (loading && i === messages.length - 1 ? (
                       <Loader2 className="w-3.5 h-3.5 animate-spin" />
                     ) : null)}
