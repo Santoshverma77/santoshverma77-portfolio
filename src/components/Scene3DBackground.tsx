@@ -100,8 +100,6 @@ const Scene3DBackground = () => {
   const {
     enabled,
     toggle,
-    quality,
-    cycleQuality,
     grain,
     setGrain,
     aberration,
