@@ -3,7 +3,7 @@
 // supabase function: mcp
 // Bundled from src/lib/mcp/index.ts by @lovable.dev/mcp-js.
 // src/lib/mcp/index.ts
-import { defineMcp } from "npm:@lovable.dev/mcp-js@0.26.1";
+import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@0.26.1";
 
 // src/lib/mcp/tools/get-profile.ts
 import { defineTool } from "npm:@lovable.dev/mcp-js@0.26.1";
@@ -307,11 +307,16 @@ var search_portfolio_default = defineTool4({
 });
 
 // src/lib/mcp/index.ts
+var projectRef = "ncguszbdanzomkbgfzbh";
 var mcp_default = defineMcp({
   name: "personal-portfolio",
   title: "Personal Portfolio",
   version: "0.1.0",
-  instructions: "Public tools for Santosh Kumar Verma's portfolio. Use `get_profile` for a summary, education and awards; `get_resume` for the full-stack or video-editing resume track; `list_projects` for work samples per track; `search_portfolio` for free-text questions about skills, tools and projects. Use these to generate tailored answers (pitches, cover letters, project insights) grounded in this content.",
+  instructions: "Tools for Santosh Kumar Verma's portfolio. Use `get_profile` for a summary, education and awards; `get_resume` for the full-stack or video-editing resume track; `list_projects` for work samples per track; `search_portfolio` for free-text questions about skills, tools and projects. Use these to generate tailored answers (pitches, cover letters, project insights) grounded in this content.",
+  auth: auth.oauth.issuer({
+    issuer: `https://${projectRef}.supabase.co/auth/v1`,
+    acceptedAudiences: "authenticated"
+  }),
   tools: [get_profile_default, get_resume_default, list_projects_default, search_portfolio_default]
 });
 
