@@ -30,8 +30,26 @@ const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const reducedMotion = usePrefersReducedMotion();
+  const { quality, enabled: motion3D } = useMotion3D();
+
+  // Measure the portrait so the emblem always scales/orbits around the face
+  const portraitRef = useRef<HTMLDivElement>(null);
+  const [portraitSize, setPortraitSize] = useState(300);
 
   useEffect(() => { setMounted(true); }, []);
+
+  useEffect(() => {
+    const el = portraitRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      const w = entry.contentRect.width;
+      if (w) setPortraitSize(w);
+    });
+    ro.observe(el);
+    setPortraitSize(el.getBoundingClientRect().width || 300);
+    return () => ro.disconnect();
+  }, [mounted]);
+
 
   useEffect(() => {
     if (reducedMotion) return;
