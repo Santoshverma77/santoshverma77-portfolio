@@ -19,6 +19,8 @@ import EducationPage from "./pages/EducationPage";
 import AwardsPage from "./pages/AwardsPage";
 import FreelancePage from "./pages/FreelancePage";
 import ResumePage from "./pages/ResumePage";
+import AuthPage from "./pages/AuthPage";
+import OAuthConsent from "./pages/OAuthConsent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -58,6 +60,8 @@ const AnimatedRoutes = () => {
           <Route path="/freelance" element={<FreelancePage />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
