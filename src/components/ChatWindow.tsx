@@ -3,6 +3,8 @@ import { Loader2, Send, X } from "lucide-react";
 import { IDENTITY } from "@/data/santoshProfile";
 import ChatMessage, { ChatRole } from "@/components/ChatMessage";
 import SuggestedQuestions from "@/components/SuggestedQuestions";
+import QuickReplies from "@/components/QuickReplies";
+import AnswerFeedback from "@/components/AnswerFeedback";
 import brandMark from "@/assets/brand-mark.png";
 
 type Msg = { role: ChatRole; content: string };
@@ -131,10 +133,24 @@ const ChatWindow = ({ onClose }: { onClose: () => void }) => {
         )}
 
         {messages.map((m, i) =>
-          m.content ? <ChatMessage key={i} role={m.role} content={m.content} /> : null,
+          m.content ? (
+            <div key={i}>
+              <ChatMessage role={m.role} content={m.content} />
+              {m.role === "assistant" && !(loading && i === messages.length - 1) && (
+                <AnswerFeedback
+                  question={messages[i - 1]?.role === "user" ? messages[i - 1].content : ""}
+                  answer={m.content}
+                />
+              )}
+            </div>
+          ) : null,
         )}
         {streaming && <TypingIndicator />}
       </div>
+
+      <QuickReplies onSelect={ask} disabled={loading} />
+
+
 
       <form
         onSubmit={(e) => {
