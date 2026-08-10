@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "personal-portfolio",
+      "version": "0.1.0",
+      "title": "Personal Portfolio"
+    },
+    "tools": [
+      {
+        "name": "get_profile",
+        "title": "Get profile",
+        "description": "Get Santosh's profile summary: headline, contact links, education timeline, honors & awards, and the two available resume tracks.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_resume",
+        "title": "Get resume",
+        "description": "Get Santosh's resume details for a track — 'fullstack' (engineering) or 'video' (video editing & creative) — including focus, key skills and the downloadable PDF path.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "track": {
+              "type": "string",
+              "enum": [
+                "fullstack",
+                "video"
+              ],
+              "description": "Which resume track to fetch: fullstack or video."
+            }
+          },
+          "required": [
+            "track"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_projects",
+        "title": "List projects",
+        "description": "List Santosh's portfolio projects with descriptions, tech/tools and links. Filter by track: 'fullstack' for engineering work, 'video' for video editing & creative work.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "track": {
+              "type": "string",
+              "enum": [
+                "fullstack",
+                "video",
+                "all"
+              ],
+              "default": "all",
+              "description": "Which work track to list. Defaults to all."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_portfolio",
+        "title": "Search portfolio",
+        "description": "Free-text search across Santosh's projects, skills, education and awards. Use this to answer tailored questions like 'what React work has he done?' or 'what editing tools does he use?'.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Keywords to search for."
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
