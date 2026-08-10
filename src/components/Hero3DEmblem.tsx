@@ -262,17 +262,17 @@ interface SceneProps {
 }
 
 const Scene = ({ mobile, quality, still, orbitRadius, pointer, grain, aberration }: SceneProps) => {
-  const high = quality === "high";
-  const medium = quality === "medium";
+  const high = true;
+  const medium = false;
 
   return (
     <Suspense fallback={null}>
       {/* HDRI environment reflections — quality controlled */}
-      {quality !== "low" && (
+      {true && (
         <Environment preset={high ? "night" : "city"} resolution={high ? 256 : 64} />
       )}
 
-      <ambientLight intensity={quality === "low" ? 0.5 : 0.18} />
+      <ambientLight intensity={0.18} />
       {still ? (
         <spotLight
           position={[5, 4, 5]}
@@ -298,7 +298,7 @@ const Scene = ({ mobile, quality, still, orbitRadius, pointer, grain, aberration
 
         <OuterRing radius={orbitRadius * 0.96} tilt={0} color="#f87171" speed={0.08} still={still} />
         <OuterRing radius={orbitRadius * 1.1} tilt={0.4} color="#60a5fa" speed={-0.06} still={still} />
-        {quality !== "low" && (
+        {true && (
           <OuterRing radius={orbitRadius * 1.24} tilt={-0.3} color="#ffffff" speed={0.04} still={still} />
         )}
 
@@ -322,7 +322,7 @@ const Scene = ({ mobile, quality, still, orbitRadius, pointer, grain, aberration
       )}
 
       {/* Cinematic post-processing: grain + chromatic aberration + bloom + vignette */}
-      {quality !== "low" && (
+      {true && (
         <EffectComposer multisampling={high ? 4 : 0} enableNormalPass={false}>
           <ChromaticAberration
             blendFunction={BlendFunction.NORMAL}
@@ -409,7 +409,7 @@ const Hero3DEmblem = ({
   }, [portraitSize]);
 
   const dpr: [number, number] =
-    quality === "high" ? [1, 2] : quality === "medium" ? [1, 1.5] : [1, 1];
+    [1, 2] as [number, number];
 
   return (
     <div ref={host} className={`pointer-events-none ${className}`}>
@@ -427,9 +427,9 @@ const Hero3DEmblem = ({
         dpr={dpr}
         frameloop={reducedMotion ? "demand" : "always"}
         gl={{
-          antialias: quality === "high",
+          antialias: true,
           alpha: true,
-          powerPreference: quality === "low" ? "low-power" : "high-performance",
+          powerPreference: "high-performance",
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.15,
           outputColorSpace: THREE.SRGBColorSpace,
