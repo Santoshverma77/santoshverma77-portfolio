@@ -115,6 +115,14 @@ export const CONTACT = {
   linkedin: "https://www.linkedin.com/in/santoshverma77/",
 };
 
+/** Always-visible quick-reply chips above the composer. */
+export const QUICK_REPLIES: { label: string; question: string }[] = [
+  { label: "Skills", question: "What are Santosh's key skills?" },
+  { label: "Projects", question: "Tell me about his projects" },
+  { label: "Education", question: "What is his educational background?" },
+  { label: "Contact", question: "How can I contact or hire Santosh?" },
+];
+
 export const SUGGESTED_QUESTIONS = [
   "Who is Santosh?",
   "Show me his skills",
