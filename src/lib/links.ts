@@ -1,6 +1,6 @@
 // Centralized external links
-import fullStackResume from "@/assets/resume-fullstack.pdf.asset.json";
-import videoResume from "@/assets/resume-video-editing.pdf.asset.json";
+const FULLSTACK_RESUME = "/resume-fullstack.pdf";
+const VIDEO_RESUME = "/resume-video-editing.pdf";
 
 export type ResumeVariant = {
   id: "fullstack" | "video";
