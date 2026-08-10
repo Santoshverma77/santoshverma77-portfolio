@@ -1,8 +1,4 @@
 /** Mirror of src/data/santoshProfile.ts — edge functions cannot import from src/. */
- * NOTE: this file is mirrored to `supabase/functions/portfolio-agent/profile.ts`
- * (edge functions cannot import from `src/`). Update both when editing.
- */
-
 export const IDENTITY = {
   assistantName: "Santosh AI",
   assistantRole: "Portfolio Assistant",
