@@ -38,7 +38,9 @@ type State = {
 
 const readNumber = (key: string, fallback: number) => {
   if (typeof window === "undefined") return fallback;
-  const raw = Number(localStorage.getItem(key));
+  const stored = localStorage.getItem(key);
+  if (stored === null) return fallback;
+  const raw = Number(stored);
   return Number.isFinite(raw) && raw >= 0 && raw <= 100 ? raw : fallback;
 };
 
