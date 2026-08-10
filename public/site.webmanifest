@@ -1,0 +1,16 @@
+{
+  "name": "Santosh Kumar Verma | Portfolio",
+  "short_name": "Santosh V",
+  "description": "Portfolio of Santosh Kumar Verma — Full-Stack Developer, Video Editor, Content Creator, AI & Data Science enthusiast.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ]
+}
