@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Download } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import { usePrefersReducedMotion } from "@/hooks/useReveal";
+import { useMotion3D } from "@/hooks/useMotion3D";
 import { RESUME_URL } from "@/lib/links";
 import Hero3DEmblem from "@/components/Hero3DEmblem";
 
@@ -29,8 +30,26 @@ const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const reducedMotion = usePrefersReducedMotion();
+  const { quality, enabled: motion3D } = useMotion3D();
+
+  // Measure the portrait so the emblem always scales/orbits around the face
+  const portraitRef = useRef<HTMLDivElement>(null);
+  const [portraitSize, setPortraitSize] = useState(300);
 
   useEffect(() => { setMounted(true); }, []);
+
+  useEffect(() => {
+    const el = portraitRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      const w = entry.contentRect.width;
+      if (w) setPortraitSize(w);
+    });
+    ro.observe(el);
+    setPortraitSize(el.getBoundingClientRect().width || 300);
+    return () => ro.disconnect();
+  }, [mounted]);
+
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -100,14 +119,19 @@ const HeroSection = () => {
             style={{ transform: `translate3d(0, ${py(0.08)}px, 0)` }}
           >
             <div className="relative flex items-center justify-center">
-              {/* 3D emblem — square, centered exactly behind the portrait */}
-              {!reducedMotion && (
+              {/* 3D emblem — square, sized from the measured portrait */}
+              {motion3D && (
                 <div
                   aria-hidden
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0
-                             w-[420px] h-[420px] sm:w-[500px] sm:h-[500px] md:w-[620px] md:h-[620px]"
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
+                  style={{ width: portraitSize * 2.06, height: portraitSize * 2.06 }}
                 >
-                  <Hero3DEmblem className="absolute inset-0" />
+                  <Hero3DEmblem
+                    className="absolute inset-0"
+                    portraitSize={portraitSize}
+                    quality={quality}
+                    reducedMotion={reducedMotion}
+                  />
                 </div>
               )}
               {/* Red glow disc */}
@@ -120,7 +144,8 @@ const HeroSection = () => {
                 }}
               />
               {/* Circle frame */}
-              <div className="relative z-10 w-56 h-56 sm:w-64 sm:h-64 md:w-[300px] md:h-[300px] rounded-full overflow-hidden">
+              <div ref={portraitRef} className="relative z-10 w-56 h-56 sm:w-64 sm:h-64 md:w-[300px] md:h-[300px] rounded-full overflow-hidden">
+
 
                 <div
                   className="absolute inset-0 rounded-full"
