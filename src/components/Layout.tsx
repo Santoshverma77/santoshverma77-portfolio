@@ -42,6 +42,8 @@ const Layout = ({ children }: LayoutProps) => {
         <SoundToggle />
         <BackgroundMusicPlayer />
         <ScrollToTop />
+        <PortfolioAgent />
+
 
         {/* Navigation */}
         <Navbar />
