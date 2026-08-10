@@ -9,7 +9,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import SoundToggle from "@/components/SoundToggle";
 import BackgroundMusicPlayer from "@/components/BackgroundMusicPlayer";
 import Scene3DBackground from "@/components/Scene3DBackground";
-import PortfolioAgent from "@/components/PortfolioAgent";
+import PortfolioAI from "@/components/PortfolioAI";
 interface LayoutProps {
   children: ReactNode;
 }
@@ -42,7 +42,7 @@ const Layout = ({ children }: LayoutProps) => {
         <SoundToggle />
         <BackgroundMusicPlayer />
         <ScrollToTop />
-        <PortfolioAgent />
+        <PortfolioAI />
 
 
         {/* Navigation */}
