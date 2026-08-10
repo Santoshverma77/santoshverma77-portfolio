@@ -131,6 +131,8 @@ const HeroSection = () => {
                     portraitSize={portraitSize}
                     quality={quality}
                     reducedMotion={reducedMotion}
+                    grain={grain}
+                    aberration={aberration}
                   />
                 </div>
               )}
