@@ -441,14 +441,17 @@ const Hero3DEmblem = ({
           still={reducedMotion}
           orbitRadius={orbitRadius}
           pointer={pointer}
+          grain={grain / 100}
+          aberration={aberration / 100}
         />
       </Canvas>
 
-      {/* Static film-grain overlay — always on for cinematic texture */}
+      {/* Static film-grain overlay — scales with the grain control */}
       <div
         aria-hidden
-        className="absolute inset-0 rounded-full mix-blend-overlay opacity-[0.18]"
+        className="absolute inset-0 rounded-full mix-blend-overlay"
         style={{
+          opacity: (grain / 100) * 0.34,
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.55'/></svg>\")",
           backgroundSize: "140px 140px",
