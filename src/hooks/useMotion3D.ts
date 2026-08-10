@@ -98,10 +98,8 @@ export const useMotion3D = () => {
   return {
     enabled: snap.enabled,
     toggle: () => setState({ enabled: !state.enabled }),
-    quality: snap.quality,
-    setQuality: (q: Quality3D) => setState({ quality: q }),
-    cycleQuality: () =>
-      setState({ quality: QUALITIES[(QUALITIES.indexOf(state.quality) + 1) % QUALITIES.length] }),
+    /** Rendering is always high quality. */
+    quality: "high" as Quality3D,
     grain: snap.grain,
     setGrain: (v: number) => setState({ grain: clamp(v) }),
     aberration: snap.aberration,
