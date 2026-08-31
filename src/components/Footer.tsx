@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SOCIALS } from "@/lib/links";
+import profilePhoto from "@/assets/profile-photo.jpg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
