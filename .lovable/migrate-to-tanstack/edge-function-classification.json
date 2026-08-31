@@ -1,0 +1,22 @@
+{
+  "functions": [
+    {
+      "name": "mcp",
+      "classification": "MCP server",
+      "signal": "JSON-RPC MCP handler with OAuth 2.1 metadata endpoints; fixed public URL registered with agent clients",
+      "outcome": "left"
+    },
+    {
+      "name": "portfolio-agent",
+      "classification": "internal-only",
+      "signal": "invoked from src/ chat UI, but depends on LOVABLE_API_KEY bound as a Supabase function secret",
+      "outcome": "left"
+    },
+    {
+      "name": "send-contact-email",
+      "classification": "internal-only",
+      "signal": "invoked from the contact form, but depends on the RESEND_API_KEY secret bound to Supabase functions",
+      "outcome": "left"
+    }
+  ]
+}
