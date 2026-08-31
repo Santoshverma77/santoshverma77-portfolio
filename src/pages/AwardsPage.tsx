@@ -12,8 +12,8 @@ const awards = [
     description: "Awarded for exceptional contribution to event logistics and operations at DevFest Ranchi 2025.",
     fullDescription: "Awarded the Logistic Legend Award at DevFest Ranchi 2025 by Google Developer Groups (GDG) Ranchi in recognition of exceptional contribution to event logistics and operations. Played a key role in planning, coordination, and smooth execution of a large-scale developer conference, ensuring seamless participant experience and operational efficiency. This recognition highlights leadership, responsibility, teamwork, and execution skills in a high-impact community-driven tech event.",
     icon: "🏆",
-    gradient: "from-yellow-500 via-orange-500 to-red-500",
-    glowColor: "rgba(255,193,7,0.4)",
+    gradient: "from-primary via-primary/70 to-accent",
+    glowColor: "hsl(var(--primary) / 0.4)",
   },
   {
     title: "Winner – HACKED 3.0 Hackathon (1st Prize)",
@@ -24,8 +24,8 @@ const awards = [
     description: "Secured 1st Prize at HACKED 3.0, a 36-hour national-level hackathon.",
     fullDescription: "Secured 1st Prize at HACKED 3.0, a 36-hour national-level hackathon held at BML Munjal University, Gurgaon, as part of the 67th Milestone – Hero's Challenge 2025. Competed against 60+ teams and won a cash prize of ₹25,000 for building an innovative and impactful tech solution under strict time constraints. Demonstrated strong skills in problem-solving, teamwork, system design, and rapid prototyping.",
     icon: "🥇",
-    gradient: "from-primary via-orange-500 to-yellow-500",
-    glowColor: "rgba(255,107,0,0.4)",
+    gradient: "from-primary via-accent to-primary/50",
+    glowColor: "hsl(var(--primary) / 0.4)",
   },
   {
     title: "Second Prize – State-Level Gyan Vigyan Mela",
@@ -35,7 +35,7 @@ const awards = [
     description: "Secured Second Prize at the State-Level Science Exhibition.",
     fullDescription: "Secured Second Prize at the State-Level Gyan Vigyan Mela (Science Exhibition) organized by Vidya Vikas Samiti, Jharkhand. Represented Saraswati Shishu Vidya Mandir, Barkagaon (Hazaribagh district) and demonstrated scientific understanding, creativity, and presentation skills at the prantiya (state) level. This achievement reflects early aptitude in science, innovation, and competitive academic environments.",
     icon: "🥈",
-    gradient: "from-slate-400 via-gray-300 to-slate-500",
+    gradient: "from-foreground/40 via-foreground/20 to-primary/40",
     glowColor: "rgba(148,163,184,0.4)",
   },
 ];
@@ -199,7 +199,7 @@ const AwardsPage = () => {
                       onClick={() => setExpandedId(expandedId === index ? null : index)}
                       whileHover={{ 
                         scale: 1.03,
-                        borderColor: "rgba(255,107,0,0.5)",
+                        borderColor: "hsl(var(--primary) / 0.5)",
                       }}
                       animate={expandedId === index ? {
                         boxShadow: `0 0 40px ${award.glowColor}`
@@ -339,7 +339,7 @@ const AwardsPage = () => {
                     whileHover={{ 
                       scale: 1.1, 
                       y: -10,
-                      boxShadow: "0 20px 40px rgba(255,107,0,0.2)"
+                      boxShadow: "0 20px 40px hsl(var(--primary) / 0.2)"
                     }}
                     className="card-scroll rounded-2xl p-8 border-2 border-primary/20 text-center group cursor-default"
                   >

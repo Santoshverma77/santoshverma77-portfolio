@@ -12,7 +12,7 @@ const education = [
     description: "Pursuing a rigorous program in Data Science and Artificial Intelligence from one of India's premier institutions, focusing on computational thinking and data-driven problem solving.",
     current: true,
     icon: "🎓",
-    chakraColor: "from-primary to-orange-500",
+    chakraColor: "from-primary to-primary/40",
   },
   {
     institution: "S.M. Arya Public School",
@@ -22,7 +22,7 @@ const education = [
     activities: ["Cricket", "Chess", "Atal Tinkering Lab Project"],
     description: "Completed senior secondary education with a focus on Mathematics and Computer Science, actively participating in extracurricular activities and innovation projects.",
     icon: "📚",
-    chakraColor: "from-secondary to-blue-500",
+    chakraColor: "from-primary/80 to-accent",
   },
   {
     institution: "Saraswati Shishu Vidya Mandir",
@@ -32,7 +32,7 @@ const education = [
     grade: "A",
     description: "Built a strong academic foundation with excellent grades, developing early interest in science and technology.",
     icon: "🏫",
-    chakraColor: "from-accent to-green-500",
+    chakraColor: "from-accent to-primary/50",
   },
 ];
 
@@ -155,9 +155,9 @@ const EducationPage = () => {
                       className={`w-20 h-20 rounded-full bg-gradient-to-br ${edu.chakraColor} flex items-center justify-center text-4xl shadow-lg`}
                       animate={{ 
                         boxShadow: [
-                          "0 0 20px rgba(255,107,0,0.3)",
-                          "0 0 40px rgba(255,107,0,0.5)",
-                          "0 0 20px rgba(255,107,0,0.3)"
+                          "0 0 20px hsl(var(--primary) / 0.3)",
+                          "0 0 40px hsl(var(--primary) / 0.5)",
+                          "0 0 20px hsl(var(--primary) / 0.3)"
                         ]
                       }}
                       transition={{ duration: 2, repeat: Infinity }}
@@ -178,7 +178,7 @@ const EducationPage = () => {
                       className="relative card-scroll rounded-2xl p-8 border-2 border-primary/30 group overflow-hidden"
                       whileHover={{ 
                         scale: 1.02,
-                        borderColor: "rgba(255,107,0,0.6)"
+                        borderColor: "hsl(var(--primary) / 0.6)"
                       }}
                       transition={{ duration: 0.3 }}
                     >
@@ -219,7 +219,7 @@ const EducationPage = () => {
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-5">
                           <motion.div 
                             className="flex items-center gap-2 bg-muted/30 px-3 py-1.5 rounded-full"
-                            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,107,0,0.1)" }}
+                            whileHover={{ scale: 1.05, backgroundColor: "hsl(var(--primary) / 0.1)" }}
                           >
                             <Calendar className="w-4 h-4 text-primary" />
                             {edu.period}
@@ -334,7 +334,7 @@ const EducationPage = () => {
                     whileHover={{ 
                       scale: 1.05, 
                       y: -5,
-                      boxShadow: "0 20px 40px rgba(255,107,0,0.2)"
+                      boxShadow: "0 20px 40px hsl(var(--primary) / 0.2)"
                     }}
                     className="card-scroll rounded-xl p-5 border border-primary/20 flex items-center gap-4 cursor-default group"
                   >
