@@ -10,11 +10,28 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SplatRouteImport } from './routes/$'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AwardsRouteImport } from './routes/awards'
+import { Route as CertificationsRouteImport } from './routes/certifications'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EducationRouteImport } from './routes/education'
+import { Route as ExperienceRouteImport } from './routes/experience'
+import { Route as FreelanceRouteImport } from './routes/freelance'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as ResumeRouteImport } from './routes/resume'
+import { Route as SkillsRouteImport } from './routes/skills'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -22,31 +39,177 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AwardsRoute = AwardsRouteImport.update({
+  id: '/awards',
+  path: '/awards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CertificationsRoute = CertificationsRouteImport.update({
+  id: '/certifications',
+  path: '/certifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationRoute = EducationRouteImport.update({
+  id: '/education',
+  path: '/education',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienceRoute = ExperienceRouteImport.update({
+  id: '/experience',
+  path: '/experience',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FreelanceRoute = FreelanceRouteImport.update({
+  id: '/freelance',
+  path: '/freelance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeRoute = ResumeRouteImport.update({
+  id: '/resume',
+  path: '/resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SkillsRoute = SkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/awards': typeof AwardsRoute
+  '/certifications': typeof CertificationsRoute
+  '/contact': typeof ContactRoute
+  '/education': typeof EducationRoute
+  '/experience': typeof ExperienceRoute
+  '/freelance': typeof FreelanceRoute
+  '/projects': typeof ProjectsRoute
+  '/resume': typeof ResumeRoute
+  '/skills': typeof SkillsRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/awards': typeof AwardsRoute
+  '/certifications': typeof CertificationsRoute
+  '/contact': typeof ContactRoute
+  '/education': typeof EducationRoute
+  '/experience': typeof ExperienceRoute
+  '/freelance': typeof FreelanceRoute
+  '/projects': typeof ProjectsRoute
+  '/resume': typeof ResumeRoute
+  '/skills': typeof SkillsRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/awards': typeof AwardsRoute
+  '/certifications': typeof CertificationsRoute
+  '/contact': typeof ContactRoute
+  '/education': typeof EducationRoute
+  '/experience': typeof ExperienceRoute
+  '/freelance': typeof FreelanceRoute
+  '/projects': typeof ProjectsRoute
+  '/resume': typeof ResumeRoute
+  '/skills': typeof SkillsRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/$'
+    | '/about'
+    | '/auth'
+    | '/awards'
+    | '/certifications'
+    | '/contact'
+    | '/education'
+    | '/experience'
+    | '/freelance'
+    | '/projects'
+    | '/resume'
+    | '/skills'
+    | '/.lovable/oauth/consent'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | '/$'
+    | '/about'
+    | '/auth'
+    | '/awards'
+    | '/certifications'
+    | '/contact'
+    | '/education'
+    | '/experience'
+    | '/freelance'
+    | '/projects'
+    | '/resume'
+    | '/skills'
+    | '/.lovable/oauth/consent'
+  id:
+    | '__root__'
+    | '/'
+    | '/$'
+    | '/about'
+    | '/auth'
+    | '/awards'
+    | '/certifications'
+    | '/contact'
+    | '/education'
+    | '/experience'
+    | '/freelance'
+    | '/projects'
+    | '/resume'
+    | '/skills'
+    | '/.lovable/oauth/consent'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SplatRoute: typeof SplatRoute
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
+  AwardsRoute: typeof AwardsRoute
+  CertificationsRoute: typeof CertificationsRoute
+  ContactRoute: typeof ContactRoute
+  EducationRoute: typeof EducationRoute
+  ExperienceRoute: typeof ExperienceRoute
+  FreelanceRoute: typeof FreelanceRoute
+  ProjectsRoute: typeof ProjectsRoute
+  ResumeRoute: typeof ResumeRoute
+  SkillsRoute: typeof SkillsRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +221,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -65,12 +235,101 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/awards': {
+      id: '/awards'
+      path: '/awards'
+      fullPath: '/awards'
+      preLoaderRoute: typeof AwardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/certifications': {
+      id: '/certifications'
+      path: '/certifications'
+      fullPath: '/certifications'
+      preLoaderRoute: typeof CertificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education': {
+      id: '/education'
+      path: '/education'
+      fullPath: '/education'
+      preLoaderRoute: typeof EducationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experience': {
+      id: '/experience'
+      path: '/experience'
+      fullPath: '/experience'
+      preLoaderRoute: typeof ExperienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/freelance': {
+      id: '/freelance'
+      path: '/freelance'
+      fullPath: '/freelance'
+      preLoaderRoute: typeof FreelanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resume': {
+      id: '/resume'
+      path: '/resume'
+      fullPath: '/resume'
+      preLoaderRoute: typeof ResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/skills': {
+      id: '/skills'
+      path: '/skills'
+      fullPath: '/skills'
+      preLoaderRoute: typeof SkillsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SplatRoute: SplatRoute,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
+  AwardsRoute: AwardsRoute,
+  CertificationsRoute: CertificationsRoute,
+  ContactRoute: ContactRoute,
+  EducationRoute: EducationRoute,
+  ExperienceRoute: ExperienceRoute,
+  FreelanceRoute: FreelanceRoute,
+  ProjectsRoute: ProjectsRoute,
+  ResumeRoute: ResumeRoute,
+  SkillsRoute: SkillsRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
