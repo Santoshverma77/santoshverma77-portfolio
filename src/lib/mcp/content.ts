@@ -97,7 +97,24 @@ export type PortfolioProject = {
   track: Track;
 };
 
-export const PROJECTS: PortfolioProject[] = [
+export const PROJECTS: PortfolioProject[
+  {
+    title: "Pandit Studio",
+    description:
+      "Live client website — online pandit booking platform with service catalogue, booking flow and verified profiles.",
+    link: "https://panditstudio.in",
+    tech: ["React", "TypeScript", "Tailwind"],
+    track: "fullstack",
+  },
+  {
+    title: "0xStudio",
+    description:
+      "Live client website — design + engineering studio site with editorial typography, case-study grid and motion-first UI.",
+    link: "https://0xstudio.in",
+    tech: ["React", "TypeScript", "Motion"],
+    track: "fullstack",
+  },
+] = [
   {
     title: "COOKIE",
     description:

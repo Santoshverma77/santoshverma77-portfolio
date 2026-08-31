@@ -1,8 +1,34 @@
 import { useState } from "react";
-import { ArrowUpRight, Github, Instagram } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Github, Instagram } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import { useReveal, revealStyle } from "@/hooks/useReveal";
 import { SOCIALS } from "@/lib/links";
+import panditStudioShot from "@/assets/work-panditstudio.jpg";
+import zeroXStudioShot from "@/assets/work-0xstudio.jpg";
+
+const LIVE_SITES = [
+  {
+    title: "Pandit Studio",
+    category: "Booking & Services Platform",
+    year: "2026",
+    description:
+      "Online pandit booking platform — service catalogue, date/time booking flow, verified profiles and a warm traditional brand system.",
+    domain: "panditstudio.in",
+    url: "https://panditstudio.in",
+    image: panditStudioShot,
+  },
+  {
+    title: "0xStudio",
+    category: "Design & Engineering Studio",
+    year: "2026",
+    description:
+      "Studio site for a design + code agency — bold editorial typography, case-study grid, motion-first interactions and fast page loads.",
+    domain: "0xstudio.in",
+    url: "https://0xstudio.in",
+    image: zeroXStudioShot,
+  },
+];
+
 
 type Project = {
   title: string;
@@ -123,7 +149,77 @@ const ProjectsSection = () => {
       <div className="mx-auto w-full max-w-6xl px-6 md:px-12">
         <SectionHeader eyebrow="Projects" title="Selected" italic="works" visible={visible} />
 
+        {/* Live client websites — card grid */}
+        <div className="mb-16 md:mb-20" style={revealStyle(visible, 0, 80)}>
+          <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <h3
+              className="text-3xl md:text-4xl font-light text-white"
+              style={{ fontFamily: "'Cormorant Garamond', 'Times New Roman', serif" }}
+            >
+              Live <span className="italic">client websites</span>
+            </h3>
+            <p className="max-w-sm text-sm text-white/45 leading-relaxed">
+              Live products designed, built and shipped end to end — from brand and UI to
+              deployment.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {LIVE_SITES.map((s, i) => (
+              <a
+                key={s.title}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                referrerPolicy="no-referrer"
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-all duration-500 hover:border-primary/50 hover:bg-white/[0.04] hover:-translate-y-1"
+                style={revealStyle(visible, 1 + i, 80)}
+              >
+                <div className="relative m-3 overflow-hidden rounded-xl">
+                  <img
+                    src={s.image}
+                    alt={`${s.title} website preview`}
+                    loading="lazy"
+                    width={1280}
+                    height={800}
+                    className="w-full aspect-[16/10] object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1 text-[11px] text-white backdrop-blur">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                    Live Site
+                  </span>
+                </div>
+
+                <div className="flex flex-1 flex-col gap-3 p-5 pt-2">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="rounded-full border border-white/15 px-3 py-1 text-[11px] text-white/60">
+                      {s.category}
+                    </span>
+                    <span className="text-xs text-white/35 tabular-nums">{s.year}</span>
+                  </div>
+
+                  <h4
+                    className="flex items-center gap-2 text-2xl font-light text-white"
+                    style={{ fontFamily: "'Cormorant Garamond', 'Times New Roman', serif" }}
+                  >
+                    {s.title}
+                    <ArrowUpRight className="w-4 h-4 text-white/50 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
+                  </h4>
+
+                  <p className="text-sm leading-relaxed text-white/50">{s.description}</p>
+
+                  <span className="mt-auto inline-flex items-center gap-2 pt-2 font-mono text-xs text-primary/90">
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    {s.domain}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
         {/* Track switcher — matches the two resume tracks */}
+
         <div
           className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
           style={revealStyle(visible, 0, 80)}
