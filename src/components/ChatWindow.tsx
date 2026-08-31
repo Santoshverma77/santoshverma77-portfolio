@@ -172,7 +172,7 @@ const ChatWindow = ({ onClose }: { onClose: () => void }) => {
           }}
           placeholder="Ask about Santosh…"
           aria-label="Ask Santosh AI"
-          className="max-h-24 flex-1 resize-none bg-transparent py-1.5 text-xs outline-none placeholder:text-muted-foreground"
+          className="max-h-24 flex-1 resize-none bg-transparent py-1.5 text-xs outline-hidden placeholder:text-muted-foreground"
         />
         <button
           type="submit"

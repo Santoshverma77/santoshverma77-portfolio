@@ -204,7 +204,7 @@ var get_profile_default = defineTool({
 
 // src/lib/mcp/tools/get-resume.ts
 import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@0.26.1";
-import { z } from "npm:zod@^3.25.76";
+import { z } from "npm:zod@^3.24.2";
 var get_resume_default = defineTool2({
   name: "get_resume",
   title: "Get resume",
@@ -231,7 +231,7 @@ var get_resume_default = defineTool2({
 
 // src/lib/mcp/tools/list-projects.ts
 import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@0.26.1";
-import { z as z2 } from "npm:zod@^3.25.76";
+import { z as z2 } from "npm:zod@^3.24.2";
 var list_projects_default = defineTool3({
   name: "list_projects",
   title: "List projects",
@@ -256,7 +256,7 @@ var list_projects_default = defineTool3({
 
 // src/lib/mcp/tools/search-portfolio.ts
 import { defineTool as defineTool4 } from "npm:@lovable.dev/mcp-js@0.26.1";
-import { z as z3 } from "npm:zod@^3.25.76";
+import { z as z3 } from "npm:zod@^3.24.2";
 var search_portfolio_default = defineTool4({
   name: "search_portfolio",
   title: "Search portfolio",
