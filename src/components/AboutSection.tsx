@@ -29,12 +29,14 @@ const AboutSection = () => {
             className="md:col-span-4 flex flex-col items-start gap-6"
             style={revealStyle(visible, 0)}
           >
-            <div className="relative w-56 h-56 md:w-64 md:h-64 overflow-hidden rounded-sm ring-1 ring-white/10">
+            <div className="group relative w-56 h-56 md:w-64 md:h-64 overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.55)]">
               <img
                 src={profilePhoto}
                 alt="Santosh Kumar Verma"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-70" />
+              <div className="pointer-events-none absolute inset-0 mix-blend-soft-light bg-[radial-gradient(circle_at_25%_20%,hsl(var(--primary)/0.5),transparent_70%)]" />
             </div>
 
             <div className="space-y-3 text-sm">

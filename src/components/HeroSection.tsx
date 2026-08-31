@@ -136,37 +136,36 @@ const HeroSection = () => {
                   />
                 </div>
               )}
-              {/* Red glow disc */}
+              {/* Ambient glow disc */}
               <div
                 className="absolute inset-0 rounded-full blur-2xl z-0"
                 style={{
                   background:
-                    "radial-gradient(circle, rgba(220,38,38,0.55), rgba(120,20,30,0.35) 55%, transparent 75%)",
-                  transform: "scale(1.15)",
+                    "radial-gradient(circle, hsl(var(--primary) / 0.45), rgba(20,40,80,0.35) 55%, transparent 75%)",
+                  transform: "scale(1.18)",
                 }}
               />
               {/* Circle frame */}
-              <div ref={portraitRef} className="relative z-10 w-56 h-56 sm:w-64 sm:h-64 md:w-[300px] md:h-[300px] rounded-full overflow-hidden">
-
-
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 30% 30%, rgba(239,68,68,0.55), rgba(80,10,15,0.9) 70%, #1a0508 100%)",
-                  }}
-                />
+              <div ref={portraitRef} className="relative z-10 w-56 h-56 sm:w-64 sm:h-64 md:w-[300px] md:h-[300px] rounded-full overflow-hidden ring-1 ring-white/15">
                 <img
                   src={profilePhoto}
-                  alt="Santosh Kumar Verma"
-                  className="relative w-full h-full object-cover mix-blend-luminosity opacity-95"
+                  alt="Santosh Kumar Verma — developer and video editor"
+                  className="relative w-full h-full object-cover"
+                  style={{ filter: "contrast(1.06) saturate(1.05) brightness(1.02)" }}
+                />
+                {/* Cinematic grade */}
+                <div
+                  className="absolute inset-0 rounded-full mix-blend-soft-light"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 30% 25%, hsl(var(--primary) / 0.55), rgba(10,14,24,0.85) 80%)",
+                  }}
                 />
                 {/* Vignette edge */}
-                <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
                 <div
                   className="absolute inset-0 rounded-full"
                   style={{
-                    boxShadow: "inset 0 0 80px rgba(0,0,0,0.65)",
+                    boxShadow: "inset 0 0 60px rgba(0,0,0,0.55)",
                   }}
                 />
               </div>

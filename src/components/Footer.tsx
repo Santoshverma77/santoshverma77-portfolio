@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SOCIALS } from "@/lib/links";
+import profilePhoto from "@/assets/profile-photo.jpg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -65,17 +66,16 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-fire flex items-center justify-center">
-                <span className="font-naruto text-xl text-primary-foreground">S</span>
-              </div>
-              <span className="font-naruto text-2xl text-gradient-fire">SANTOSH VERMA</span>
+              <img
+                src={profilePhoto}
+                alt="Santosh Kumar Verma"
+                className="w-11 h-11 rounded-full object-cover ring-1 ring-primary/40"
+              />
+              <span className="font-naruto text-2xl text-foreground">SANTOSH VERMA</span>
             </div>
             <p className="text-muted-foreground text-sm">
-              Full Stack Developer & Tech Enthusiast following the Way of the Ninja 🍃
+              Full-Stack Developer · Video Editor · Data Science student at IIT Madras.
             </p>
-            <div className="text-sm text-muted-foreground">
-              <span className="text-primary">忍者の道</span> - The Way of the Ninja
-            </div>
           </div>
 
           {/* Quick Links */}
