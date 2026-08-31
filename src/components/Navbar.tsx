@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "@/lib/router-compat";
 import { Home, User, Briefcase, Code2, FolderKanban, Mail, FileText, Sparkles } from "lucide-react";
 import { useSounds } from "@/contexts/SoundContext";
 

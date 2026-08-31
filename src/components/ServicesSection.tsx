@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowUpRight, Video, Camera, Film, Sparkles, Megaphone, Palette } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import { useReveal, revealStyle } from "@/hooks/useReveal";
