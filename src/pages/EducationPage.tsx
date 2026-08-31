@@ -1,4 +1,5 @@
 import PageTransition from "@/components/PageTransition";
+import PageSEO from "@/components/PageSEO";
 import { GraduationCap, Calendar, MapPin, Award, BookOpen, Users, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -47,6 +48,11 @@ const achievements = [
 const EducationPage = () => {
   return (
     <PageTransition>
+      <PageSEO
+        title="Education — Santosh Kumar Verma | IIT Madras"
+        description="Academic timeline of Santosh Kumar Verma: BS in Data Science & AI at IIT Madras, plus schooling and academic achievements."
+        path="/education"
+      />
       <div className="pt-20 min-h-screen">
         <section className="relative py-20 overflow-hidden">
           {/* Animated background chakra effects */}
