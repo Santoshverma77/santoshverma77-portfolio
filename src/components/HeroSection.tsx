@@ -205,7 +205,7 @@ const HeroSection = () => {
                 <span className="not-italic text-white/50 tracking-[0.25em] text-xs md:text-sm uppercase">
                   Data Science · AI · Creator
                 </span>
-              </p>
+              </h1>
             </div>
 
             {/* Tabs row */}
