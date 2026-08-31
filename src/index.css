@@ -62,6 +62,33 @@
     --sidebar-ring: 217 91% 60%;
   }
 
+  /* Alternate palette: neutral monochrome "default" look */
+  .theme-classic {
+    --primary: 0 0% 92%;
+    --primary-foreground: 0 0% 6%;
+    --accent: 0 0% 70%;
+    --accent-foreground: 0 0% 6%;
+    --ring: 0 0% 70%;
+
+    --naruto-orange: 0 0% 92%;
+    --naruto-orange-glow: 0 0% 100%;
+    --naruto-red: 0 0% 92%;
+    --naruto-blue: 0 0% 80%;
+
+    --gradient-fire: linear-gradient(135deg, hsl(0 0% 92%), hsl(0 0% 55%));
+    --gradient-chakra: linear-gradient(135deg, hsl(0 0% 88%), hsl(0 0% 45%));
+    --gradient-sunset: linear-gradient(135deg, hsl(0 0% 85%), hsl(0 0% 40%), hsl(0 0% 10%));
+
+    --shadow-glow: 0 0 30px hsl(0 0% 100% / 0.18);
+    --shadow-fire: 0 0 60px hsl(0 0% 100% / 0.15), 0 0 100px hsl(0 0% 100% / 0.08);
+    --shadow-chakra: 0 0 40px hsl(0 0% 100% / 0.15);
+
+    --sidebar-primary: 0 0% 92%;
+    --sidebar-ring: 0 0% 70%;
+  }
+
+
+
   .light {
     --background: 40 30% 96%;
     --foreground: 220 20% 10%;
