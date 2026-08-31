@@ -187,7 +187,7 @@ const HeroSection = () => {
               }`}
               style={{ transform: `translate3d(0, ${py(-0.05)}px, 0)` }}
             >
-              <h1
+              <p
                 className="relative leading-[0.85] tracking-tight font-light text-white text-[64px] sm:text-[96px] md:text-[140px] lg:text-[176px]"
                 style={{ fontFamily: SERIF }}
               >
@@ -195,10 +195,10 @@ const HeroSection = () => {
                 <span className="absolute -top-2 md:-top-4 right-0 md:right-2 text-[14px] md:text-[20px] tracking-[0.3em] text-white/55 font-sans not-italic">
                   2025
                 </span>
-              </h1>
-              {/* subline name */}
-              <p
-                className="mt-2 md:mt-1 text-white/80 text-lg md:text-2xl italic"
+              </p>
+              {/* subline name — the page H1 (name-first for search indexing) */}
+              <h1
+                className="mt-2 md:mt-1 text-white/80 text-lg md:text-2xl italic font-normal"
                 style={{ fontFamily: SERIF }}
               >
                 Santosh Kumar Verma —{" "}
