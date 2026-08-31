@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://santoshverma77.vercel.app/sitemap.xml
+Sitemap: https://santoshverma.online/sitemap.xml
