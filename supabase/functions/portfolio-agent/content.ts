@@ -97,7 +97,7 @@ export type PortfolioProject = {
   track: Track;
 };
 
-export const PROJECTS: PortfolioProject[
+export const PROJECTS: PortfolioProject[] = [
   {
     title: "Pandit Studio",
     description:
@@ -114,7 +114,6 @@ export const PROJECTS: PortfolioProject[
     tech: ["React", "TypeScript", "Motion"],
     track: "fullstack",
   },
-] = [
   {
     title: "COOKIE",
     description:
