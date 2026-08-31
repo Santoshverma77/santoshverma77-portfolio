@@ -1,0 +1,19 @@
+{
+  "customizations": [
+    { "token": "--background/--foreground/--card/--popover core palette (dark)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--primary 217 91% 60% blue cinematic", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": ".theme-classic alternate palette", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": ".light palette", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--naruto-orange / -glow / -red / -blue / -gold / -dark / -darker", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--gradient-fire / --gradient-chakra / --gradient-sunset", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--shadow-glow / --shadow-fire / --shadow-chakra", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "sidebar-* tokens", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "font-naruto / font-body families", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "bg-gradient-fire / bg-gradient-chakra / bg-gradient-sunset utilities", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "text-gradient-* / glow-* / card-scroll / ninja-border components", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "animate-* utilities and keyframes (float, shimmer, leaf-fall, kunai-throw, seal-float, spark, hero-shimmer, hero-scroll-line, …)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "stagger-1..5 delays", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "scrollbar styling + ::selection", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "Google Fonts import (Bebas Neue, Chakra Petch)", "source": "src/index.css", "reappliedIn": "src/styles.css" }
+  ]
+}

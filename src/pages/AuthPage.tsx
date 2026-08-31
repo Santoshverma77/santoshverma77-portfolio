@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "@/lib/router-compat";
 import { supabase } from "@/integrations/supabase/client";
 
 /** Only same-origin relative paths may be used as a post-login redirect. */
@@ -64,7 +64,7 @@ const AuthPage = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           autoComplete="email"
-          className="w-full rounded-lg border border-border/60 bg-transparent px-3 py-2 text-sm outline-none focus:border-primary/60"
+          className="w-full rounded-lg border border-border/60 bg-transparent px-3 py-2 text-sm outline-hidden focus:border-primary/60"
         />
         <input
           type="password"
@@ -74,7 +74,7 @@ const AuthPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           autoComplete={mode === "signin" ? "current-password" : "new-password"}
-          className="w-full rounded-lg border border-border/60 bg-transparent px-3 py-2 text-sm outline-none focus:border-primary/60"
+          className="w-full rounded-lg border border-border/60 bg-transparent px-3 py-2 text-sm outline-hidden focus:border-primary/60"
         />
         {error && <p className="text-xs text-destructive">{error}</p>}
         {notice && <p className="text-xs text-muted-foreground">{notice}</p>}

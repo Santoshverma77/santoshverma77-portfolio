@@ -1,5 +1,4 @@
 import PageTransition from "@/components/PageTransition";
-import PageSEO from "@/components/PageSEO";
 import { Trophy, Calendar, Building2, Sparkles, Star, Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -53,11 +52,6 @@ const AwardsPage = () => {
 
   return (
     <PageTransition>
-      <PageSEO
-        title="Awards & Achievements — Santosh Kumar Verma"
-        description="Awards won by Santosh Kumar Verma: HACKED 3.0 Hackathon winner, Logistic Legend Award at DevFest Ranchi 2025 and more."
-        path="/awards"
-      />
       <div className="pt-20 min-h-screen">
         <section className="relative py-20 overflow-hidden">
           {/* Animated chakra background */}

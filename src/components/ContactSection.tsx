@@ -114,7 +114,7 @@ const ContactSection = () => {
                   onBlur={() => setFocus(null)}
                   placeholder={field.placeholder}
                   disabled={submitting}
-                  className={`w-full bg-transparent border-b py-2.5 text-white placeholder-white/25 outline-none transition-colors ${
+                  className={`w-full bg-transparent border-b py-2.5 text-white placeholder-white/25 outline-hidden transition-colors ${
                     focus === field.key ? "border-primary" : "border-white/15 hover:border-white/30"
                   }`}
                 />
@@ -133,7 +133,7 @@ const ContactSection = () => {
                 onBlur={() => setFocus(null)}
                 placeholder="Tell me about your project, timeline, and what success looks like."
                 disabled={submitting}
-                className={`w-full bg-transparent border-b py-2.5 text-white placeholder-white/25 outline-none resize-none transition-colors ${
+                className={`w-full bg-transparent border-b py-2.5 text-white placeholder-white/25 outline-hidden resize-none transition-colors ${
                   focus === "message" ? "border-primary" : "border-white/15 hover:border-white/30"
                 }`}
               />

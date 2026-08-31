@@ -7,16 +7,10 @@ import ServicesSection from "@/components/ServicesSection";
 import ResumeSection from "@/components/ResumeSection";
 import ContactSection from "@/components/ContactSection";
 import PageTransition from "@/components/PageTransition";
-import PageSEO from "@/components/PageSEO";
 
 const HomePage = () => {
   return (
     <PageTransition>
-      <PageSEO
-        title="Santosh Kumar Verma | Full-Stack Developer & Video Editor"
-        description="Portfolio of Santosh Kumar Verma — Full-Stack Developer, Video Editor, Content Creator and BS Data Science student at IIT Madras."
-        path="/"
-      />
       <HeroSection />
       <AboutSection />
       <SkillsSection />

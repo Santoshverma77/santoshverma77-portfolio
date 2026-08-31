@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { SOCIALS } from "@/lib/links";
 import profilePhoto from "@/assets/profile-photo.jpg";
 
