@@ -1,8 +1,34 @@
 import { useState } from "react";
-import { ArrowUpRight, Github, Instagram } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Github, Instagram } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import { useReveal, revealStyle } from "@/hooks/useReveal";
 import { SOCIALS } from "@/lib/links";
+import panditStudioShot from "@/assets/work-panditstudio.jpg";
+import zeroXStudioShot from "@/assets/work-0xstudio.jpg";
+
+const LIVE_SITES = [
+  {
+    title: "Pandit Studio",
+    category: "Booking & Services Platform",
+    year: "2026",
+    description:
+      "Online pandit booking platform — service catalogue, date/time booking flow, verified profiles and a warm traditional brand system.",
+    domain: "panditstudio.in",
+    url: "https://panditstudio.in",
+    image: panditStudioShot,
+  },
+  {
+    title: "0xStudio",
+    category: "Design & Engineering Studio",
+    year: "2026",
+    description:
+      "Studio site for a design + code agency — bold editorial typography, case-study grid, motion-first interactions and fast page loads.",
+    domain: "0xstudio.in",
+    url: "https://0xstudio.in",
+    image: zeroXStudioShot,
+  },
+];
+
 
 type Project = {
   title: string;
