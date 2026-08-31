@@ -99,7 +99,7 @@ const HeroSection = () => {
           <span className="italic">S</span>·<span className="italic">V</span>
         </div>
         <div
-          className={`text-[10px] tracking-[0.4em] uppercase text-white/40 transition-all duration-700 delay-100 ${
+          className={`text-[10px] tracking-[0.4em] uppercase text-white/55 transition-all duration-700 delay-100 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
           }`}
         >
@@ -111,7 +111,7 @@ const HeroSection = () => {
       <div className="relative z-10 min-h-screen flex items-center pt-24 md:pt-0">
         <div className="mx-auto w-full max-w-7xl px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
 
-          {/* Portrait — red vignette circle */}
+          {/* Portrait — cinematic blue vignette circle */}
           <div
             className={`md:col-span-4 flex justify-center md:justify-start transition-all duration-1000 delay-200 ${
               mounted ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-6"
@@ -158,7 +158,7 @@ const HeroSection = () => {
                   className="absolute inset-0 rounded-full mix-blend-soft-light"
                   style={{
                     background:
-                      "radial-gradient(circle at 30% 25%, hsl(var(--primary) / 0.55), rgba(10,14,24,0.85) 80%)",
+                      "radial-gradient(circle at 30% 25%, hsl(var(--primary) / 0.32), rgba(8,12,22,0.7) 82%)",
                   }}
                 />
                 {/* Vignette edge */}
@@ -192,7 +192,7 @@ const HeroSection = () => {
                 style={{ fontFamily: SERIF }}
               >
                 PORTFOLIO
-                <span className="absolute -top-2 md:-top-4 right-0 md:right-2 text-[14px] md:text-[20px] tracking-[0.3em] text-white/40 font-sans not-italic">
+                <span className="absolute -top-2 md:-top-4 right-0 md:right-2 text-[14px] md:text-[20px] tracking-[0.3em] text-white/55 font-sans not-italic">
                   2025
                 </span>
               </h1>
@@ -303,12 +303,12 @@ const HeroSection = () => {
 
       {/* Bottom press-start line */}
       <div
-        className="absolute bottom-6 md:bottom-8 left-6 md:left-24 right-6 md:right-12 flex items-center justify-between text-[10px] tracking-[0.4em] uppercase text-white/35"
+        className="absolute bottom-6 md:bottom-8 left-6 md:left-24 right-6 md:right-12 flex items-center justify-between text-[10px] tracking-[0.4em] uppercase text-white/50"
         style={{ opacity: fadeOut }}
       >
         <span>Scroll to enter</span>
         <span className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
           REC · LIVE
         </span>
       </div>

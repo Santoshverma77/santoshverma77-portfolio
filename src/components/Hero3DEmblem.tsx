@@ -39,7 +39,7 @@ const Core = ({ still }: { still: boolean }) => {
       <mesh ref={ref} scale={0.85}>
         <icosahedronGeometry args={[1, 6]} />
         <MeshDistortMaterial
-          color="#ef4444"
+          color="#3b82f6"
           emissive="#dc2626"
           emissiveIntensity={0.9}
           distort={still ? 0.25 : 0.5}
@@ -286,7 +286,7 @@ const Scene = ({ mobile, quality, still, orbitRadius, pointer, grain, aberration
       ) : (
         <ParallaxKeyLight pointer={pointer} />
       )}
-      <pointLight position={[-4, -2, -3]} intensity={2.8} color="#ef4444" distance={12} decay={2} />
+      <pointLight position={[-4, -2, -3]} intensity={2.8} color="#3b82f6" distance={12} decay={2} />
       <pointLight position={[3, -3, 2]} intensity={1.4} color="#3b82f6" distance={10} decay={2} />
       {high && (
         <pointLight position={[0, 5, -2]} intensity={0.9} color="#ffffff" distance={8} decay={2} />

@@ -1,81 +1,53 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+type Palette = "cinematic" | "classic";
+const STORAGE_KEY = "sv-palette";
+
+/** Simple palette switch: blue cinematic (default) vs neutral monochrome. */
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(true);
+  const [palette, setPalette] = useState<Palette>(() => {
+    if (typeof window === "undefined") return "cinematic";
+    return (localStorage.getItem(STORAGE_KEY) as Palette) || "cinematic";
+  });
 
   useEffect(() => {
     const root = document.documentElement;
-    if (isDark) {
-      root.classList.add("dark");
-      root.classList.remove("light");
-    } else {
-      root.classList.add("light");
-      root.classList.remove("dark");
-    }
-  }, [isDark]);
+    root.classList.add("dark");
+    root.classList.remove("light");
+    root.classList.toggle("theme-classic", palette === "classic");
+    localStorage.setItem(STORAGE_KEY, palette);
+  }, [palette]);
+
+  const next = palette === "cinematic" ? "classic" : "cinematic";
 
   return (
     <motion.button
-      onClick={() => setIsDark(!isDark)}
-      className="fixed top-6 right-4 z-50 w-11 h-11 rounded-full bg-black/70 backdrop-blur-xl border border-white/10 hover:border-primary/40 hover:shadow-[0_0_24px_hsl(var(--primary)/0.35)] flex items-center justify-center transition-all duration-300"
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      aria-label="Toggle theme"
+      onClick={() => setPalette(next)}
+      className="fixed top-6 right-4 z-50 h-11 pl-2 pr-3 gap-2 rounded-full bg-background/70 backdrop-blur-xl border border-border hover:border-primary/50 hover:shadow-[0_0_24px_hsl(var(--primary)/0.3)] flex items-center transition-all duration-300"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      aria-label={`Switch to ${next} theme`}
+      title={`Switch to ${next} theme`}
     >
-      <motion.div
-        initial={false}
-        animate={{ rotate: isDark ? 0 : 180 }}
-        transition={{ duration: 0.5, type: "spring" }}
-      >
-        {isDark ? (
-          // Moon/Sharingan for dark mode
-          <svg
-            viewBox="0 0 100 100"
-            className="w-7 h-7"
-            fill="none"
-          >
-            <circle cx="50" cy="50" r="40" className="fill-naruto-red" />
-            <circle cx="50" cy="50" r="12" className="fill-background" />
-            <g className="fill-background">
-              <ellipse cx="50" cy="20" rx="6" ry="10" />
-              <ellipse cx="76" cy="65" rx="6" ry="10" transform="rotate(120 76 65)" />
-              <ellipse cx="24" cy="65" rx="6" ry="10" transform="rotate(-120 24 65)" />
-            </g>
-            <circle cx="50" cy="50" r="40" className="stroke-naruto-red" strokeWidth="3" fill="none" />
-          </svg>
-        ) : (
-          // Sun/Kyuubi chakra for light mode
-          <svg
-            viewBox="0 0 100 100"
-            className="w-7 h-7"
-          >
-            <defs>
-              <radialGradient id="sunGradient" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" className="stop-color-[hsl(var(--naruto-gold))]" style={{ stopColor: "hsl(45 100% 55%)" }} />
-                <stop offset="100%" className="stop-color-[hsl(var(--naruto-orange))]" style={{ stopColor: "hsl(25 100% 55%)" }} />
-              </radialGradient>
-            </defs>
-            <circle cx="50" cy="50" r="25" fill="url(#sunGradient)" />
-            {[...Array(8)].map((_, i) => (
-              <motion.line
-                key={i}
-                x1="50"
-                y1="15"
-                x2="50"
-                y2="5"
-                stroke="hsl(25 100% 55%)"
-                strokeWidth="4"
-                strokeLinecap="round"
-                transform={`rotate(${i * 45} 50 50)`}
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.1 }}
-              />
-            ))}
-            <circle cx="50" cy="50" r="8" fill="hsl(25 100% 45%)" />
-          </svg>
-        )}
-      </motion.div>
+      <span className="relative flex items-center justify-center w-7 h-7 rounded-full border border-border overflow-hidden">
+        <motion.span
+          key={palette}
+          initial={{ scale: 0.4, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          className="absolute inset-0.5 rounded-full"
+          style={{
+            background:
+              palette === "cinematic"
+                ? "radial-gradient(circle at 30% 30%, hsl(var(--primary)), hsl(var(--primary) / 0.25))"
+                : "radial-gradient(circle at 30% 30%, hsl(0 0% 95%), hsl(0 0% 35%))",
+          }}
+        />
+      </span>
+      <span className="text-[9px] tracking-[0.25em] uppercase text-muted-foreground">
+        {palette === "cinematic" ? "Blue" : "Mono"}
+      </span>
     </motion.button>
   );
 };

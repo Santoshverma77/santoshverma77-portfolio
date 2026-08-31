@@ -7,7 +7,7 @@ const experiences = [
     duration: "Aug 2025 - Present",
     description: "Selected through a competitive national process to represent Google's AI and Gemini initiatives on campus. Planned and hosted AI-focused workshops, hands-on demos, and innovation discussions. Partnered with college fests, tech clubs, and student communities to drive awareness and adoption of AI tools.",
     icon: "🔍",
-    color: "from-blue-500 to-green-500",
+    color: "from-primary to-accent",
   },
   {
     title: "Volunteer & Head of Partnerships",
@@ -15,7 +15,7 @@ const experiences = [
     duration: "Jul 2025 - Present",
     description: "Leading sponsorship research, strategy, and partner relations for GDG Ranchi. Previously served as Sponsorship Coordinator, building strong relationships with sponsors and partners for community events.",
     icon: "🌟",
-    color: "from-red-500 to-yellow-500",
+    color: "from-primary to-accent",
   },
   {
     title: "Head of Sponsorship",
@@ -23,7 +23,7 @@ const experiences = [
     duration: "Sep 2025 - Present",
     description: "Managing sponsorship research, strategy, and executive sponsorship relations. Building partnerships and securing funding for developer community initiatives across India.",
     icon: "💼",
-    color: "from-purple-500 to-pink-500",
+    color: "from-primary to-accent",
   },
   {
     title: "Event & Sponsorship Coordinator",
@@ -31,7 +31,7 @@ const experiences = [
     duration: "Nov 2025 - Present",
     description: "Coordinating events and managing sponsorships. Handling event planning, sales, and communication with stakeholders for successful event execution.",
     icon: "🎯",
-    color: "from-cyan-500 to-blue-500",
+    color: "from-primary to-accent",
   },
   {
     title: "Event & Sponsorship Coordinator",
@@ -39,7 +39,7 @@ const experiences = [
     duration: "Nov 2025 - Present",
     description: "Leading event coordination and sponsorship efforts. Managing end-to-end event planning and building sponsor relationships for tech events.",
     icon: "⚡",
-    color: "from-orange-500 to-red-500",
+    color: "from-primary to-accent",
   },
   {
     title: "Tech Contributor",
@@ -47,7 +47,7 @@ const experiences = [
     duration: "Jul 2025 - Present",
     description: "Contributing to open source projects and collaborating with the developer community to build impactful solutions.",
     icon: "💻",
-    color: "from-green-500 to-teal-500",
+    color: "from-primary to-accent",
   },
   {
     title: "Team Contributor",
@@ -55,7 +55,7 @@ const experiences = [
     duration: "Jul 2025 - Present",
     description: "Contributing to open source projects as part of GirlScript Summer of Code, collaborating with developers worldwide on impactful projects.",
     icon: "👩‍💻",
-    color: "from-pink-500 to-purple-500",
+    color: "from-primary to-accent",
   },
   {
     title: "Member",
@@ -63,7 +63,7 @@ const experiences = [
     duration: "Jul 2025 - Present",
     description: "Active member of Web3JH community, exploring blockchain technologies and decentralized applications.",
     icon: "🔗",
-    color: "from-indigo-500 to-blue-500",
+    color: "from-primary to-accent",
   },
   {
     title: "SIGMA 7.0 Batch Student",
@@ -71,7 +71,7 @@ const experiences = [
     duration: "Mar 2025 - Present",
     description: "Learning DSA using Java and full stack web development. On the journey to becoming a skilled software developer with expertise in Java, JavaScript, and modern frameworks.",
     icon: "📚",
-    color: "from-yellow-500 to-orange-500",
+    color: "from-primary to-accent",
   },
   {
     title: "Marketing Manager",
@@ -79,7 +79,7 @@ const experiences = [
     duration: "Sep 2025 - Nov 2025",
     description: "Managed strategic marketing, operations, sales, and retail marketing initiatives. Led marketing campaigns and coordinated with teams for business growth.",
     icon: "📈",
-    color: "from-teal-500 to-green-500",
+    color: "from-primary to-accent",
   },
   {
     title: "Java Full Stack Developer Intern",
@@ -87,7 +87,7 @@ const experiences = [
     duration: "Mar 2025 - Apr 2025",
     description: "Completed intensive Java Full Stack training covering Core Java, React/Angular, Spring Boot, SQL/MySQL, RESTful APIs, Git, and DevOps practices.",
     icon: "☕",
-    color: "from-red-500 to-orange-500",
+    color: "from-primary to-accent",
   },
 ];
 
