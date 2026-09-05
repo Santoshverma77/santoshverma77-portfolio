@@ -134,13 +134,6 @@ const Footer = () => {
           <div className="text-sm text-muted-foreground">
             © {currentYear} Santosh Verma. All rights reserved.
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>Made with</span>
-            <span className="text-primary animate-pulse">❤️</span>
-            <span>and</span>
-            <span className="text-secondary">Chakra</span>
-            <span className="text-xl">🍃</span>
-          </div>
         </div>
       </div>
     </footer>
