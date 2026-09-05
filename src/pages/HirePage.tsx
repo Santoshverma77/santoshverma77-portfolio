@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Mail, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { sendContactEmail } from "@/lib/contact.functions";
 import { SOCIALS } from "@/lib/links";
 import { useReveal, revealStyle } from "@/hooks/useReveal";
 import SectionHeader from "@/components/SectionHeader";
