@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "@/lib/router-compat";
-import { Home, User, Briefcase, Code2, FolderKanban, Mail, FileText, Sparkles } from "lucide-react";
+import { Home, User, Briefcase, Code2, FolderKanban, Mail, FileText, Sparkles, Zap } from "lucide-react";
 import { useSounds } from "@/contexts/SoundContext";
 
 type NavItem = {
@@ -18,6 +18,7 @@ const navLinks: NavItem[] = [
   { href: "/freelance",  section: "freelance", label: "Freelance",  icon: Sparkles },
   { href: "/experience", section: "",          label: "Experience", icon: Briefcase },
   { href: "/resume",     section: "resume",    label: "Resume",     icon: FileText },
+  { href: "/hire",       section: "",          label: "Hire Me",    icon: Zap },
 ];
 
 const Navbar = () => {
