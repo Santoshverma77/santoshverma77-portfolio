@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { ArrowUpRight, Github, Instagram, Linkedin, Mail, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { sendContactEmail } from "@/lib/contact.functions";
 import SectionHeader from "./SectionHeader";
 import { useReveal, revealStyle } from "@/hooks/useReveal";
 
@@ -28,8 +28,7 @@ const ContactSection = () => {
     }
     setSubmitting(true);
     try {
-      const { error } = await supabase.functions.invoke("send-contact-email", { body: form });
-      if (error) throw error;
+      await sendContactEmail({ data: { ...form, subject: `New portfolio message from ${form.name}` } });
       toast.success("Message sent — I'll get back to you soon.");
       setForm({ name: "", email: "", message: "" });
     } catch (err) {
