@@ -49,10 +49,14 @@ const HirePage = () => {
       ]
         .filter((l) => l !== null)
         .join("\n");
-      const { error } = await supabase.functions.invoke("send-contact-email", {
-        body: { name: form.name, email: form.email, message },
+      await sendContactEmail({
+        data: {
+          name: form.name,
+          email: form.email,
+          message,
+          subject: `New project brief from ${form.name}`,
+        },
       });
-      if (error) throw error;
       toast.success("Brief sent — I'll get back to you within 24 hours.");
       setForm({ name: "", email: "", type: PROJECT_TYPES[0], budget: "", timeline: "", message: "" });
     } catch (err) {
