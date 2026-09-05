@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowUpRight, Instagram, Play } from "lucide-react";
+import { Link } from "@/lib/router-compat";
 import { useReveal, revealStyle } from "@/hooks/useReveal";
 import { SOCIALS } from "@/lib/links";
 import TiltCard from "./TiltCard";
@@ -180,6 +181,14 @@ const FreelanceSection = () => {
           className="mt-10 flex flex-wrap items-center gap-3"
           style={revealStyle(visible, works.length + 3, 80)}
         >
+          <Link
+            to="/hire"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold border transition-all hover:scale-[1.03]"
+            style={{ borderColor: LIME, color: LIME, background: `${LIME}0f` }}
+          >
+            Hire me for a project
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
           <a
             href={SOCIALS.instagramCreative}
             target="_blank"

@@ -12,6 +12,7 @@ const SERIF = "'Cormorant Garamond', 'Times New Roman', serif";
 const menu = [
   { label: "START",   target: "about",    kind: "scroll" as const },
   { label: "OPTIONS", target: "projects", kind: "scroll" as const },
+  { label: "HIRE ME", target: "/hire",    kind: "route"  as const },
   { label: "EXIT",    target: "/contact", kind: "route"  as const },
 ];
 
