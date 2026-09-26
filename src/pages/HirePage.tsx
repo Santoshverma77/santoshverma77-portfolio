@@ -103,7 +103,6 @@ const HirePage = () => {
 
   return (
     <PageTransition>
-      <div className="bg-aurora pointer-events-none fixed inset-0 opacity-70" />
       <PageHeader
         eyebrow="Hire me"
         title="Let's work together"
