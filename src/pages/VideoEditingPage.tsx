@@ -21,7 +21,10 @@ const VideoEditingPage = () => {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) return toast.error("Please fill in name, email and details");
+    if (!form.name || !form.email || !form.message) {
+      toast.error("Please fill in name, email and details");
+      return;
+    }
     setSending(true);
     try {
       await sendContactEmail({
