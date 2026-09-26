@@ -24,7 +24,7 @@ export default function HomePage() {
               <p className="font-mono-ui inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1.5 text-xs font-medium backdrop-blur">
                 <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint-deep opacity-60" /><span className="relative inline-flex h-2 w-2 rounded-full bg-mint-deep" /></span>
                 {PERSON.name} · {PERSON.role} · {PERSON.location}
-              </motion.p>
+              </p>
             </Reveal>
             <h1 className="font-display mt-6 text-[13vw] font-bold leading-[0.9] sm:text-7xl lg:text-[6.5rem]">
               <SplitHeading text="Developer." />
@@ -40,11 +40,11 @@ export default function HomePage() {
               <p className="mt-4 max-w-lg text-lg text-muted-foreground">{PERSON.intro}</p>
             </Reveal>
             <Reveal delay={0.55} className="mt-8 flex flex-wrap gap-3">
-              <Link to="/projects" className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-semibold text-background">
-                See my work <ArrowUpRight size={18} className="transition-transform group-hover:rotate-45" />
+              <Link to="/hire" className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-semibold text-background shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-glow">
+                Hire me <ArrowUpRight size={18} className="transition-transform group-hover:rotate-45" />
               </Link>
-              <Link to="/hire" className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-card px-6 py-3.5 font-semibold hover:bg-mint">
-                Start a project
+              <Link to="/projects" className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-card px-6 py-3.5 font-semibold hover:bg-mint">
+                See my work
               </Link>
             </Reveal>
           </motion.div>
