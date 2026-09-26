@@ -1,63 +1,20 @@
-import { ReactNode, useState, useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import LeafParticles from "@/components/LeafParticles";
-import NarutoEffects from "@/components/NarutoEffects";
-import LoadingScreen from "@/components/LoadingScreen";
-import ThemeToggle from "@/components/ThemeToggle";
-import ScrollToTop from "@/components/ScrollToTop";
-import SoundToggle from "@/components/SoundToggle";
-import BackgroundMusicPlayer from "@/components/BackgroundMusicPlayer";
-import Scene3DBackground from "@/components/Scene3DBackground";
+import type { ReactNode } from "react";
+import Loader from "@/components/site/Loader";
+import SiteNav from "@/components/site/SiteNav";
+import SiteFooter from "@/components/site/SiteFooter";
+import ScrollProgress from "@/components/site/ScrollProgress";
 import PortfolioAI from "@/components/PortfolioAI";
-interface LayoutProps {
-  children: ReactNode;
-}
 
-const Layout = ({ children }: LayoutProps) => {
-  const [showLoader, setShowLoader] = useState(true);
-
-  useEffect(() => {
-    // Hide loader after animation completes
-    const timer = setTimeout(() => {
-      setShowLoader(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+/** Global shell: intro loader, nav, scroll progress, page content, footer, AI chat. */
+export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      {showLoader && <LoadingScreen />}
-      <main className="relative min-h-screen bg-background text-foreground overflow-hidden flex flex-col">
-        {/* Subtle dark background */}
-        <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(var(--primary)/0.06),_transparent_60%)] pointer-events-none" />
-
-        {/* Global 3D background */}
-        <Scene3DBackground />
-
-
-        {/* Floating controls */}
-        <ThemeToggle />
-        <SoundToggle />
-        <BackgroundMusicPlayer />
-        <ScrollToTop />
-        <PortfolioAI />
-
-
-        {/* Navigation */}
-        <Navbar />
-
-        {/* Main content with room for left rail on desktop */}
-        <div className="relative z-10 flex-1 md:pl-24 pb-28 md:pb-0">
-          {children}
-        </div>
-
-        {/* Footer */}
-        <Footer />
-      </main>
+      <Loader />
+      <ScrollProgress />
+      <SiteNav />
+      <main className="relative min-h-screen overflow-x-clip bg-background text-foreground">{children}</main>
+      <SiteFooter />
+      <PortfolioAI />
     </>
   );
-};
-
-export default Layout;
+}
