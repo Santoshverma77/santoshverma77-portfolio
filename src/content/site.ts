@@ -133,3 +133,14 @@ export const TONE_BG: Record<Project["tone"], string> = {
   peach: "bg-peach",
   lilac: "bg-lilac",
 };
+
+/* ---------- Video editing packages (edit rates here) ---------- */
+export const VIDEO_PACKAGES = [
+  { name: "Reel Starter", tag: "Single reel", price: "₹999", unit: "per reel · up to 60s", featured: false,
+    features: ["Cuts, captions & music sync", "Basic color correction", "1 revision", "Delivery in 48 hours"] },
+  { name: "Creator Pack", tag: "Most popular", price: "₹4,499", unit: "5 reels per month", featured: true,
+    features: ["Everything in Starter", "Motion text & transitions", "Cinematic color grade", "2 revisions per reel", "Priority delivery"] },
+  { name: "Brand Film", tag: "Promo / cinematic", price: "₹7,999+", unit: "per video · up to 3 min", featured: false,
+    features: ["Story-led edit & sound design", "Advanced grading & VFX touches", "3 revisions", "Multiple aspect ratios"] },
+];
+export const VIDEO_ADDONS = ["Thumbnail design +₹299", "Rush 24h delivery +₹499", "Extra revision +₹199", "Subtitles in Hindi/English +₹199"];
