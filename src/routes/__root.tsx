@@ -7,12 +7,10 @@ import {
   Scripts,
   useRouterState,
 } from "@tanstack/react-router";
-import { AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
 
 import Layout from "@/components/Layout";
-import PageTransitionLoader from "@/components/PageTransitionLoader";
-import { SoundProvider } from "@/contexts/SoundContext";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -38,7 +36,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Santosh Kumar Verma, full-stack developer, video editor, content creator, social media manager, MERN stack, React developer, AI, data science, IIT Madras, GDG Ranchi, portfolio",
       },
       { name: "robots", content: "index, follow, max-image-preview:large" },
-      { name: "theme-color", content: "#0a0a0a" },
+      { name: "theme-color", content: "#F4FBF8" },
       {
         name: "google-site-verification",
         content: "P7-kyeLML4yq-B082PhgJNdSESRxB_vkpNCwO2IF-uo",
@@ -67,7 +65,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Bebas+Neue&family=Chakra+Petch:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap",
       },
     ],
     scripts: [
@@ -116,28 +114,21 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function AnimatedOutlet() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [displayPath, setDisplayPath] = useState(pathname);
-
   useEffect(() => {
-    if (pathname !== displayPath) setIsTransitioning(true);
-  }, [pathname, displayPath]);
-
-  const handleTransitionComplete = () => {
-    setIsTransitioning(false);
-    setDisplayPath(pathname);
-  };
-
+    window.scrollTo({ top: 0 });
+  }, [pathname]);
   return (
-    <>
-      <PageTransitionLoader
-        isLoading={isTransitioning}
-        onComplete={handleTransitionComplete}
-      />
-      <AnimatePresence mode="wait">
-        <Outlet key={pathname} />
-      </AnimatePresence>
-    </>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={pathname}
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -16 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <Outlet />
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
@@ -147,11 +138,11 @@ function RootComponent() {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <SoundProvider>
+        
           <Layout>
             <AnimatedOutlet />
           </Layout>
-        </SoundProvider>
+        
       </TooltipProvider>
     </RootDocument>
   );
