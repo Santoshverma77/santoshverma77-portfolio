@@ -1,5 +1,5 @@
 import { Instagram, Twitter, MapPin, Github } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profilePhoto from "@/assets/images/profile/img-profile-portrait.jpg";
 import SectionHeader from "./SectionHeader";
 import { useReveal, revealStyle } from "@/hooks/useReveal";
 

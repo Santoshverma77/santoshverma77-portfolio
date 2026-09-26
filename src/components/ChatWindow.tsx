@@ -5,7 +5,7 @@ import ChatMessage, { ChatRole } from "@/components/ChatMessage";
 import SuggestedQuestions from "@/components/SuggestedQuestions";
 import QuickReplies from "@/components/QuickReplies";
 import AnswerFeedback from "@/components/AnswerFeedback";
-import brandMark from "@/assets/brand-mark.png";
+import brandMark from "@/assets/images/brand/img-brand-mark.png";
 
 type Msg = { role: ChatRole; content: string };
 

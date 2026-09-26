@@ -1,73 +1,64 @@
-# Welcome to your Lovable project
+# Santosh Kumar Verma — Portfolio
 
-## Project info
+Multi-page portfolio · "Mint Future" pastel design · live at https://santoshverma.online
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Stack
+TanStack Start (React 19, file-based routing, SSR) · Tailwind CSS v4 · Framer Motion · Lovable Cloud (contact email via Resend).
 
-## How can I edit this code?
+## Pages
+| URL | File | What it shows |
+|---|---|---|
+| `/` | `src/pages/HomePage.tsx` | Hero, marquee, stats, selected work, services, rocket stack |
+| `/about` | `src/pages/AboutPage.tsx` | Story (scroll-lit text), services, education |
+| `/projects` | `src/pages/ProjectsPage.tsx` | Full project list |
+| `/skills` | `src/pages/SkillsPage.tsx` | Rocket lift-off with logos as stars + grouped tools |
+| `/experience` | `src/pages/ExperiencePage.tsx` | Timeline with scroll-drawn line |
+| `/contact` | `src/pages/ContactPage.tsx` | Contact cards + message form |
+| `/hire` | `src/pages/HirePage.tsx` | Project brief form |
+| `/freelance`, `/education`, `/certifications`, `/awards`, `/resume` | `src/pages/*` | Secondary pages |
+| anything else | `src/pages/NotFound.tsx` | Animated 404 |
 
-There are several ways of editing your application.
+Each URL's SEO title/description is in `src/routes/<name>.tsx`.
 
-**Use Lovable**
+## Editing content (no coding needed)
+Almost all text lives in **`src/content/site.ts`**: name, intro, nav, stats, services, projects, tech stack, experience, education, contact. Email/phone/social links are in `src/lib/links.ts`.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- **Add a project:** copy one object in `PROJECTS`, change the fields. `tone` = card colour (`mint`, `sky`, `peach`, `lilac`).
+- **Add a tech logo:** add to `STACK` with a `slug` from https://simpleicons.org, or a 2-letter `mono` if no logo exists.
+- **Images:** see `src/assets/README.md`.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Design system
+Colours are defined once in `src/styles.css` (`:root`). Change a value there and the whole site updates.
 
-**Use your preferred IDE**
+| Token | Hex | Use |
+|---|---|---|
+| background | #F4FBF8 | Page |
+| mint | #BFEBD9 | Primary accent, active nav |
+| sky | #D7E3FF | Secondary cards |
+| peach | #FFE8C7 | Highlights |
+| ink | #16241F | Text, buttons, dark panels |
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Fonts: Syne (headings), Manrope (body), JetBrains Mono (labels) — loaded in `src/routes/__root.tsx`.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Animations
+- `components/site/Loader.tsx` — intro counter, once per browser session
+- `components/site/Reveal.tsx` — `Reveal` (fade-up on scroll), `SplitHeading` (word mask), `PageHeader`
+- `components/site/RocketStack.tsx` — tech-stack launch
+- Page transitions in `src/routes/__root.tsx`
+- All motion respects the visitor's "reduce motion" setting.
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+## Run locally
+```bash
+bun install
+bun run dev      # http://localhost:8080
+bun run build
 ```
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Troubleshooting
+| Problem | Fix |
+|---|---|
+| Contact form says "couldn't send" | The `RESEND_API_KEY` secret is missing or invalid in Cloud settings |
+| A tech logo shows letters instead | The simpleicons slug is wrong or was removed — check simpleicons.org |
+| Image not showing | File name in `src/assets` doesn't match the import in `site.ts` |
+| Intro loader won't replay | It shows once per session — open a new tab |
+| Page 404 after adding a file | Route files must live in `src/routes/` and match the URL |

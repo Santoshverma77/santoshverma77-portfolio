@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/lib/router-compat";
 import { ArrowUpRight, Download } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profilePhoto from "@/assets/images/profile/img-profile-portrait.jpg";
 import { usePrefersReducedMotion } from "@/hooks/useReveal";
 import { useMotion3D } from "@/hooks/useMotion3D";
 import { RESUME_URL } from "@/lib/links";

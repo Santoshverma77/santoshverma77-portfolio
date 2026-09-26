@@ -1,0 +1,2 @@
+- All portfolio copy/data lives in `src/content/site.ts`; pages read from it. Why: single place for the owner to edit content.
+- New UI shell lives in `src/components/site/*` (nav, footer, loader, Reveal, RocketStack); legacy `src/components/*` sections are only used by secondary pages. Why: gradual replacement without breaking old routes.

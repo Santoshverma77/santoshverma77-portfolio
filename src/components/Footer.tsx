@@ -1,6 +1,6 @@
 import { Link } from "@/lib/router-compat";
 import { SOCIALS } from "@/lib/links";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profilePhoto from "@/assets/images/profile/img-profile-portrait.jpg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

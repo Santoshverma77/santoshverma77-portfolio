@@ -3,8 +3,8 @@ import { ArrowUpRight, ExternalLink, Github, Instagram } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import { useReveal, revealStyle } from "@/hooks/useReveal";
 import { SOCIALS } from "@/lib/links";
-import panditStudioShot from "@/assets/work-panditstudio.jpg";
-import zeroXStudioShot from "@/assets/work-0xstudio.jpg";
+import panditStudioShot from "@/assets/images/projects/img-project-panditstudio.jpg";
+import zeroXStudioShot from "@/assets/images/projects/img-project-0xstudio.jpg";
 
 const LIVE_SITES = [
   {
