@@ -6,6 +6,7 @@ import { SOCIALS } from "@/lib/links";
 import { Reveal, PageHeader } from "@/components/site/Reveal";
 import PageTransition from "@/components/PageTransition";
 import { PERSON } from "@/content/site";
+import { Link } from "@tanstack/react-router";
 
 const PROJECT_TYPES = [
   "Video Editing / Reels",
@@ -130,6 +131,17 @@ const HirePage = () => {
                 </li>
               ))}
             </ul>
+
+            <Link
+              to="/video-editing"
+              className="group flex items-center justify-between rounded-3xl border border-border bg-mint p-5 shadow-soft transition-all hover:-translate-y-0.5"
+            >
+              <span>
+                <span className="font-mono-ui block text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Video editing</span>
+                <span className="font-display text-lg font-bold text-foreground">See rates & packages</span>
+              </span>
+              <ArrowUpRight className="h-5 w-5 text-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Link>
 
             <div className="rounded-3xl border border-border bg-card p-5 shadow-soft">
               <p className="font-mono-ui mb-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
