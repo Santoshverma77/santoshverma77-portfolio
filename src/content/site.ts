@@ -144,3 +144,10 @@ export const VIDEO_PACKAGES = [
     features: ["Story-led edit & sound design", "Advanced grading & VFX touches", "3 revisions", "Multiple aspect ratios"] },
 ];
 export const VIDEO_ADDONS = ["Thumbnail design +₹299", "Rush 24h delivery +₹499", "Extra revision +₹199", "Subtitles in Hindi/English +₹199"];
+
+/* ---------- Video samples (shown on the Video Editing page). Add a `video` MP4 url later to swap to a native player. ---------- */
+export const VIDEO_SAMPLES = [
+  { title: "Cinematic Travel Reel", tag: "4K · Color graded", embed: "https://www.instagram.com/reel/DSBgbC2k66I/embed", link: "https://www.instagram.com/reel/DSBgbC2k66I/" },
+  { title: "Travel Vlog Series", tag: "B-roll · Sound design", embed: "https://www.instagram.com/reel/DZ_4y2CzfLa/embed", link: "https://www.instagram.com/reel/DZ_4y2CzfLa/" },
+  { title: "Promotional Brand Reel", tag: "Hook → CTA · 9:16", embed: "https://www.instagram.com/reel/DRG6u9lE9Hq/embed", link: "https://www.instagram.com/reel/DRG6u9lE9Hq/" },
+];

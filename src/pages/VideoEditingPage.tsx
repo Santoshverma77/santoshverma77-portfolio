@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { sendContactEmail } from "@/lib/contact.functions";
 import { Reveal, PageHeader } from "@/components/site/Reveal";
 import PageTransition from "@/components/PageTransition";
-import { VIDEO_PACKAGES, VIDEO_ADDONS } from "@/content/site";
+import { VIDEO_PACKAGES, VIDEO_ADDONS, VIDEO_SAMPLES } from "@/content/site";
 
 const input =
   "w-full rounded-xl border border-input bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-mint-deep focus:ring-2 focus:ring-mint-deep/20";
@@ -78,6 +78,31 @@ const VideoEditingPage = () => {
             ))}
           </div>
         </Reveal>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-8">
+        <Reveal>
+          <p className="font-mono-ui text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Sample work</p>
+          <h2 className="font-display mt-2 text-3xl font-bold md:text-4xl">Watch a few edits</h2>
+        </Reveal>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {VIDEO_SAMPLES.map((v, i) => (
+            <Reveal key={v.link} delay={i * 0.08}>
+              <div className="overflow-hidden rounded-[2rem] border border-border bg-card p-3 shadow-soft">
+                <div className="aspect-[9/16] overflow-hidden rounded-[1.4rem] bg-muted">
+                  <iframe src={v.embed} title={v.title} loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" className="h-full w-full" />
+                </div>
+                <div className="flex items-center justify-between px-2 pb-1 pt-3">
+                  <div>
+                    <p className="font-display font-bold">{v.title}</p>
+                    <p className="text-xs text-muted-foreground">{v.tag}</p>
+                  </div>
+                  <a href={v.link} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-mint-deep hover:underline">Instagram ↗</a>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       <section id="book" className="mx-auto max-w-3xl scroll-mt-28 px-5 pb-24 sm:px-8">
