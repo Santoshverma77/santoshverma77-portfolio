@@ -55,8 +55,16 @@
   --color-naruto-dark: hsl(var(--naruto-dark));
   --color-naruto-darker: hsl(var(--naruto-darker));
 
-  --font-naruto: "Bebas Neue", sans-serif;
-  --font-body: "Chakra Petch", system-ui, sans-serif;
+  --font-naruto: "Syne", sans-serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+  --font-display: "Syne", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-mint: hsl(var(--mint));
+  --color-mint-deep: hsl(var(--mint-deep));
+  --color-sky: hsl(var(--sky));
+  --color-peach: hsl(var(--peach));
+  --color-lilac: hsl(var(--lilac));
+  --color-ink: hsl(var(--ink));
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
@@ -76,138 +84,69 @@
   background-image: linear-gradient(135deg, hsl(var(--naruto-gold)), hsl(var(--naruto-orange)), hsl(var(--naruto-red)));
 }
 
-:root,
-.dark {
-  --background: 0 0% 4%;
-  --foreground: 0 0% 98%;
+/* ==========================================================================
+   MINT FUTURE — pastel design tokens (single source of truth for colour).
+   Palette: #F4FBF8 bg · #BFEBD9 mint · #D7E3FF sky · #FFE8C7 peach · #16241F ink
+   Legacy "naruto-*" names are kept so older sections still resolve.
+   ========================================================================== */
+:root {
+  --background: 156 50% 97%;
+  --foreground: 158 24% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 158 24% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 158 24% 11%;
 
-  --card: 0 0% 7%;
-  --card-foreground: 0 0% 98%;
+  --primary: 158 24% 11%;
+  --primary-foreground: 156 50% 97%;
+  --secondary: 222 100% 92%;
+  --secondary-foreground: 158 24% 11%;
+  --muted: 156 32% 92%;
+  --muted-foreground: 158 10% 38%;
+  --accent: 156 55% 84%;
+  --accent-foreground: 158 24% 11%;
+  --destructive: 0 72% 58%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 156 22% 86%;
+  --input: 156 22% 88%;
+  --ring: 158 40% 40%;
+  --radius: 1.25rem;
 
-  --popover: 0 0% 7%;
-  --popover-foreground: 0 0% 98%;
+  --mint: 156 55% 84%;
+  --mint-deep: 158 42% 38%;
+  --sky: 222 100% 92%;
+  --peach: 36 100% 89%;
+  --lilac: 262 70% 92%;
+  --ink: 158 24% 11%;
 
-  --primary: 217 91% 60%;
-  --primary-foreground: 0 0% 100%;
+  --naruto-orange: 158 42% 38%;
+  --naruto-orange-glow: 156 55% 60%;
+  --naruto-red: 158 42% 38%;
+  --naruto-blue: 222 70% 60%;
+  --naruto-gold: 36 90% 55%;
+  --naruto-dark: 156 32% 94%;
+  --naruto-darker: 156 32% 90%;
 
-  --secondary: 0 0% 12%;
-  --secondary-foreground: 0 0% 98%;
+  --gradient-fire: linear-gradient(135deg, hsl(156 55% 70%), hsl(222 90% 80%));
+  --gradient-chakra: linear-gradient(135deg, hsl(222 90% 80%), hsl(262 70% 82%));
+  --gradient-sunset: linear-gradient(135deg, hsl(36 100% 80%), hsl(156 55% 72%), hsl(222 90% 80%));
+  --gradient-aurora: radial-gradient(60% 50% at 20% 20%, hsl(156 55% 84% / .9), transparent 70%),
+    radial-gradient(50% 45% at 85% 15%, hsl(222 100% 92% / .9), transparent 70%),
+    radial-gradient(45% 40% at 60% 90%, hsl(36 100% 89% / .8), transparent 70%);
 
-  --muted: 0 0% 12%;
-  --muted-foreground: 0 0% 60%;
+  --shadow-glow: 0 10px 40px -12px hsl(158 40% 30% / 0.25);
+  --shadow-fire: 0 20px 60px -20px hsl(158 40% 30% / 0.3);
+  --shadow-chakra: 0 20px 60px -20px hsl(222 60% 50% / 0.25);
+  --shadow-soft: 0 1px 2px hsl(158 24% 11% / .04), 0 12px 32px -12px hsl(158 24% 11% / .12);
 
-  --accent: 217 91% 60%;
-  --accent-foreground: 0 0% 100%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-
-  --border: 0 0% 15%;
-  --input: 0 0% 12%;
-  --ring: 217 91% 60%;
-
-  --radius: 1rem;
-
-  --naruto-orange: 217 91% 60%;
-  --naruto-orange-glow: 217 91% 70%;
-  --naruto-red: 217 91% 60%;
-  --naruto-blue: 217 91% 60%;
-  --naruto-gold: 0 0% 80%;
-  --naruto-dark: 0 0% 6%;
-  --naruto-darker: 0 0% 3%;
-
-  --gradient-fire: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 45%));
-  --gradient-chakra: linear-gradient(135deg, hsl(217 91% 60%), hsl(240 80% 60%));
-  --gradient-sunset: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 50%), hsl(0 0% 10%));
-
-  --shadow-glow: 0 0 30px hsl(217 91% 60% / 0.35);
-  --shadow-fire: 0 0 60px hsl(217 91% 60% / 0.35), 0 0 100px hsl(217 91% 60% / 0.15);
-  --shadow-chakra: 0 0 40px hsl(217 91% 60% / 0.3);
-
-  --sidebar-background: 0 0% 4%;
-  --sidebar-foreground: 0 0% 98%;
-  --sidebar-primary: 217 91% 60%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 0 0% 10%;
-  --sidebar-accent-foreground: 0 0% 98%;
-  --sidebar-border: 0 0% 15%;
-  --sidebar-ring: 217 91% 60%;
-}
-
-/* Alternate palette: neutral monochrome "default" look */
-.theme-classic {
-  --primary: 0 0% 92%;
-  --primary-foreground: 0 0% 6%;
-  --accent: 0 0% 70%;
-  --accent-foreground: 0 0% 6%;
-  --ring: 0 0% 70%;
-
-  --naruto-orange: 0 0% 92%;
-  --naruto-orange-glow: 0 0% 100%;
-  --naruto-red: 0 0% 92%;
-  --naruto-blue: 0 0% 80%;
-
-  --gradient-fire: linear-gradient(135deg, hsl(0 0% 92%), hsl(0 0% 55%));
-  --gradient-chakra: linear-gradient(135deg, hsl(0 0% 88%), hsl(0 0% 45%));
-  --gradient-sunset: linear-gradient(135deg, hsl(0 0% 85%), hsl(0 0% 40%), hsl(0 0% 10%));
-
-  --shadow-glow: 0 0 30px hsl(0 0% 100% / 0.18);
-  --shadow-fire: 0 0 60px hsl(0 0% 100% / 0.15), 0 0 100px hsl(0 0% 100% / 0.08);
-  --shadow-chakra: 0 0 40px hsl(0 0% 100% / 0.15);
-
-  --sidebar-primary: 0 0% 92%;
-  --sidebar-ring: 0 0% 70%;
-}
-
-.light {
-  --background: 40 30% 96%;
-  --foreground: 220 20% 10%;
-
-  --card: 40 30% 98%;
-  --card-foreground: 220 20% 10%;
-
-  --popover: 40 30% 98%;
-  --popover-foreground: 220 20% 10%;
-
-  --primary: 25 100% 50%;
-  --primary-foreground: 40 100% 98%;
-
-  --secondary: 200 80% 50%;
-  --secondary-foreground: 40 100% 98%;
-
-  --muted: 40 20% 90%;
-  --muted-foreground: 220 15% 40%;
-
-  --accent: 0 70% 55%;
-  --accent-foreground: 40 100% 98%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 25 40% 80%;
-  --input: 40 20% 92%;
-  --ring: 25 100% 50%;
-
-  --naruto-orange: 25 100% 50%;
-  --naruto-orange-glow: 25 100% 55%;
-  --naruto-red: 0 70% 50%;
-  --naruto-blue: 200 80% 50%;
-  --naruto-gold: 40 100% 50%;
-  --naruto-dark: 40 20% 94%;
-  --naruto-darker: 40 15% 90%;
-
-  --shadow-glow: 0 0 30px hsl(25 100% 50% / 0.2);
-  --shadow-fire: 0 0 60px hsl(25 100% 50% / 0.3), 0 0 100px hsl(0 70% 55% / 0.1);
-  --shadow-chakra: 0 0 40px hsl(200 80% 60% / 0.2);
-
-  --sidebar-background: 40 30% 96%;
-  --sidebar-foreground: 220 20% 10%;
-  --sidebar-primary: 25 100% 50%;
-  --sidebar-primary-foreground: 40 100% 98%;
-  --sidebar-accent: 40 20% 92%;
-  --sidebar-accent-foreground: 220 20% 10%;
-  --sidebar-border: 25 40% 80%;
-  --sidebar-ring: 25 100% 50%;
+  --sidebar-background: 156 50% 97%;
+  --sidebar-foreground: 158 24% 11%;
+  --sidebar-primary: 158 24% 11%;
+  --sidebar-primary-foreground: 156 50% 97%;
+  --sidebar-accent: 156 32% 92%;
+  --sidebar-accent-foreground: 158 24% 11%;
+  --sidebar-border: 156 22% 86%;
+  --sidebar-ring: 158 40% 40%;
 }
 
 @layer base {
@@ -224,7 +163,7 @@
     color: hsl(var(--foreground));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Manrope', system-ui, sans-serif;
   }
 
   ::selection {
@@ -234,8 +173,8 @@
 }
 
 .font-naruto {
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 0.05em;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: -0.02em;
 }
 
 .text-gradient-fire {
@@ -623,4 +562,23 @@
   .hero-scroll-line {
     animation: none !important;
   }
+}
+
+/* ---------- Mint Future utilities ---------- */
+@utility font-display { font-family: "Syne", sans-serif; letter-spacing: -0.03em; }
+@utility font-mono-ui { font-family: "JetBrains Mono", ui-monospace, monospace; }
+@utility bg-aurora { background-image: var(--gradient-aurora); }
+@utility shadow-soft { box-shadow: var(--shadow-soft); }
+@utility grid-dots {
+  background-image: radial-gradient(hsl(var(--ink) / .08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+@keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+@utility animate-marquee { animation: marquee 32s linear infinite; }
+@keyframes twinkle { 0%,100% { opacity: .35; transform: scale(.8) } 50% { opacity: 1; transform: scale(1) } }
+@utility animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
+@keyframes blob { 0%,100% { transform: translate(0,0) scale(1) } 33% { transform: translate(30px,-40px) scale(1.08) } 66% { transform: translate(-20px,20px) scale(.95) } }
+@utility animate-blob { animation: blob 18s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
