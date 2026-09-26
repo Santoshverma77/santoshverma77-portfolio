@@ -11,7 +11,7 @@ export const PERSON = {
   name: "Santosh Kumar Verma",
   firstName: "Santosh",
   role: "Full-Stack Developer & Video Editor",
-  location: "Ranchi, India",
+  location: "New Delhi, India",
   tagline: "I build products that work and cut stories that move.",
   intro:
     "BS Data Science student at IIT Madras, creative technologist and Google Student Ambassador — shipping web products, AI experiments and scroll-stopping video edits.",
